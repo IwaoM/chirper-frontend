@@ -1,0 +1,61 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap" rel="stylesheet">
+
+<div class="chirp">
+
+  <div class="chirpAuthorPictureBox">
+    <img class="chirpAuthorPicture" [src]="author.picture" [alt]="author.username">
+  </div>
+
+  <div class="chirpBody">
+
+    <div class="chirpHeader">
+
+      <div class="chirpAuthorLine">
+        <div class="chirpUsername">
+          <p class="text-highlight">{{ author.username }}</p>
+        </div>
+        <div class="chirpHandle">
+          <p class="text-light">@{{ author.handle }}</p>
+        </div>
+        <div class="chirpTimestamp">
+          <p class="text-light">{{ timestamp }}</p>
+        </div>
+      </div>
+  
+      <div class="chirpDelete">
+        <a href="" class="text-normal">❌</a>
+      </div>
+  
+    </div>
+  
+    <div class="chirpContent">
+      <div class="chirpText">
+        <p class="text-normal">{{ text }}</p>
+      </div>
+      <div *ngIf="image" class="chirpImageBox"><img class="chirpImage" [src]="image"></div>
+    </div>
+  
+    <div class="chirpButtons">
+  
+      <div class="chirpStars">
+        <div class="chirpStarButton">
+          <a href="" class="text-small-light">⭐</a>
+        </div>
+        <div class="chirpStarCount">
+          <p class="text-small-light">{{ starCount }}</p>
+        </div>
+      </div>
+  
+      <div class="chirpAnswers">
+        <a href="" class="chirpAnswerButton text-small-light">💬</a>
+        <p class="chirpAnswerCount text-small-light">{{ answerCount }}</p>
+      </div>
+  
+    </div>
+
+  </div>
+
+
+</div>

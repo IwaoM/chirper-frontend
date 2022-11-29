@@ -1,1 +1,83 @@
-/* You can add global styles to this file, and also import other style files */
+// theme colors
+:root {
+  --theme-bg: #0F1311;
+  --theme-bg-hover: #1D211F;
+  --theme-bg-select: #2C302E;
+  --theme-text: #FFFFFF;
+  --theme-text-light: #A5A7A6;
+  --theme-border: #5A5D5B;
+
+  --theme-accent: #00DF77;
+  --theme-accent-hover: #00D270;
+  --theme-accent-variant: #00DFB0;
+}
+
+* {
+  font-family: 'Cabin', sans-serif;
+  color: var(--theme-text);
+  background-color: var(--theme-bg);
+  // outline: 1px solid var(--theme-border);
+}
+
+a {
+  text-decoration-line: none;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.text-highlight {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  
+  a:hover {
+    text-decoration-line: underline;
+  }
+}
+
+.text-normal {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+
+  a {
+    color: var(--theme-accent);
+  }
+  
+  a:hover {
+    color: var(--theme-accent-hover);
+    text-decoration-line: underline;
+  }
+}
+
+.text-light {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--theme-text-light);
+  
+  a:hover {
+    text-decoration-line: underline;
+  }
+}
+
+.text-small-light {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--theme-text-light);
+}
