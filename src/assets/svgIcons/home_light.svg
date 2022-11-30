@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg1573"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="home_light.svg">
+  <defs
+     id="defs1567" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#7f7f7f"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.313709"
+     inkscape:cx="7.113544"
+     inkscape:cy="13.522606"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="2560"
+     inkscape:window-height="1387"
+     inkscape:window-x="-8"
+     inkscape:window-y="162"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2223" />
+    <sodipodi:guide
+       position="2.1166667,10.583333"
+       orientation="1,0"
+       id="guide2225" />
+    <sodipodi:guide
+       position="10.583333,8.73125"
+       orientation="1,0"
+       id="guide2227" />
+    <sodipodi:guide
+       position="2.6458333,10.583333"
+       orientation="0,-1"
+       id="guide2229" />
+    <sodipodi:guide
+       position="10.31875,2.1166667"
+       orientation="0,-1"
+       id="guide2231" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1570">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#00df77;fill-opacity:1;stroke:none;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       id="path2237"
+       cx="-15.841928"
+       cy="3.4726562"
+       r="6.3499999" />
+    <path
+       sodipodi:nodetypes="cccccccccc"
+       id="path2233-7"
+       d="m 6.35,2.6458333 3.704167,3.175 L 9.7895833,6.35 h -0.79375 v 3.704167 H 3.7041667 L 3.7041512,6.3499852 H 2.9104015 L 2.6458175,5.8208051 Z"
+       style="fill:none;stroke:#0f1311;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="cccc"
+       id="path2235-8"
+       d="M 5.2916667,10.054167 V 6.8791667 h 2.1166666 v 3.1750003"
+       style="fill:none;fill-opacity:1;stroke:#0f1311;stroke-width:1.05833;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>
