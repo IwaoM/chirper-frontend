@@ -25,7 +25,9 @@
       </div>
   
       <div class="chirpDelete">
-        <a href="" class="text-normal">❌</a>
+        <object type="image/svg+xml">
+          <img class="svg-icon" src="assets/svgIcons/delete_dark.svg"/>
+        </object>
       </div>
   
     </div>
@@ -41,7 +43,9 @@
   
       <div class="chirpStars">
         <div class="chirpStarButton">
-          <a href="" class="text-small-light">⭐</a>
+          <object type="image/svg+xml">
+            <img class="svg-icon" src="assets/svgIcons/star_dark.svg"/>
+          </object>
         </div>
         <div class="chirpStarCount">
           <p class="text-small-light">{{ starCount }}</p>
@@ -49,8 +53,14 @@
       </div>
   
       <div class="chirpAnswers">
-        <a href="" class="chirpAnswerButton text-small-light">💬</a>
-        <p class="chirpAnswerCount text-small-light">{{ answerCount }}</p>
+        <div class="chirpAnswerButton">
+          <object type="image/svg+xml">
+            <img class="svg-icon" src="assets/svgIcons/answer_dark.svg"/>
+          </object>
+        </div>
+        <div class="chirpAnswerCount">
+          <p class="text-small-light">{{ answerCount }}</p>
+        </div>
       </div>
   
     </div>
