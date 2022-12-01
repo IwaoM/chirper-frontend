@@ -1,6 +1,7 @@
 //* theme colors
 :root {
   --theme-bg: #0F1311;
+  --theme-bg-transparent: rgba(15, 19, 17, 0.6);
   --theme-bg-hover: #1D211F;
   --theme-bg-select: #2C302E;
   --theme-text: #FFFFFF;
@@ -28,7 +29,7 @@ h1 {
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  margin: 0;
+  margin: 0 24px 0;
 }
 
 h2 {
@@ -86,7 +87,7 @@ p {
 
 //* Page containers
 html, body, app-root {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -95,8 +96,8 @@ body {
 }
 
 .verticalContainer {
-  width: 840px;
-  height: 100%;
+  max-width: 840px;
+  min-height: 100%;
   outline: 1px solid var(--theme-border);
   margin: auto;
 }

@@ -1,0 +1,17 @@
+* {
+  display: flex;
+}
+
+.titleBanner {
+  height: 64px;
+  min-height: 100%;
+  max-width: 840px;
+  margin: auto;
+
+  align-items: center;
+  
+  background-color: var(--theme-bg-transparent);
+  outline: 1px solid var(--theme-border);
+
+  backdrop-filter: blur(12px);
+}

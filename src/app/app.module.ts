@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ChirpComponent } from './chirp/chirp.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TitleBannerComponent } from './title-banner/title-banner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChirpComponent,
     TimelineComponent,
-    NavbarComponent
+    NavbarComponent,
+    TitleBannerComponent
   ],
   imports: [
     BrowserModule,
