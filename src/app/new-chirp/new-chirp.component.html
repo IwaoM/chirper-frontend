@@ -1,0 +1,36 @@
+<div class="newChirp">
+
+  <div class="newChirpAuthorPictureBox">
+    <!-- <img class="newChirpAuthorPicture" [src]="connectedUser.picture" [alt]="connectedUser.username"> -->
+    <img class="newChirpAuthorPicture" src="/assets/userPictures/1.png" alt="Iwao Meunier">
+  </div>
+
+  <div class="newChirpBody">
+  
+    <div class="newChirpContent">
+      <textarea autosize [minRows]="1" maxlength="400" placeholder="Quoi de neuf ?" class="newChirpText"></textarea>
+      <!-- <div *ngIf="image" class="newChirpImageBox"></div> -->
+      <div class="newChirpImageBlock">
+        <div class="newChirpImageBox">
+          <img class="newChirpImage" src="/assets/chirpImages/1.png">
+        </div>
+        <div class="removeImageButton">
+          <object type="image/svg+xml">
+            <img class="svg-icon" src="assets/svgIcons/x_dark.svg"/>
+          </object>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttonRow">
+      <button class="accentButton w48"></button>
+      <button class="accentButton w120"></button>
+    </div>
+  
+    <div class="newChirpButtons">
+  
+    </div>
+
+  </div>
+
+</div>

@@ -7,6 +7,9 @@ import { ChirpComponent } from './chirp/chirp.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TitleBannerComponent } from './title-banner/title-banner.component';
+import { NewChirpComponent } from './new-chirp/new-chirp.component';
+
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,13 @@ import { TitleBannerComponent } from './title-banner/title-banner.component';
     ChirpComponent,
     TimelineComponent,
     NavbarComponent,
-    TitleBannerComponent
+    TitleBannerComponent,
+    NewChirpComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AutosizeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

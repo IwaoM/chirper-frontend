@@ -1,0 +1,64 @@
+* {
+  display: flex;
+}
+
+.newChirp {
+  padding: 24px;
+  border: solid var(--theme-border);
+  border-width: 0 0 1px;
+}
+
+.newChirpAuthorPicture {
+  height: 48px;
+  width: 48px;
+}
+
+.newChirpBody {
+  margin-left: 24px;
+  flex-direction: column;
+  width: 100%;
+}
+
+.newChirpContent {
+  padding: 24px;
+  flex-direction: column;
+
+  border: 1px solid var(--theme-border);
+  border-radius: 24px;
+}
+
+.newChirpText {
+  height: 24px;
+  background-color: var(--theme-bg);
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 24px;
+  transition: 0.2s;
+}
+
+.newChirpImageBlock {
+  margin-top: 24px;
+}
+
+.newChirpImageBox {
+  width: 96px;
+  height: 96px;
+  border: 1px solid var(--theme-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.newChirpImage {
+  object-fit: cover;
+  max-width: 96px;
+  max-height: 96px;
+}
+
+.removeImageButton {
+  margin-left: 8px;
+  align-self: flex-end;
+}
+
