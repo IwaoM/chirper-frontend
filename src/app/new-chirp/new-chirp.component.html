@@ -1,8 +1,8 @@
 <div class="newChirp">
 
-  <div class="newChirpAuthorPictureBox">
+  <div class="chirpAuthorPictureBox">
     <!-- <img class="newChirpAuthorPicture" [src]="connectedUser.picture" [alt]="connectedUser.username"> -->
-    <img class="newChirpAuthorPicture" src="/assets/userPictures/1.png" alt="Iwao Meunier">
+    <img class="chirpAuthorPicture" src="/assets/userPictures/1.png" alt="Iwao Meunier">
   </div>
 
   <div class="newChirpBody">
@@ -16,15 +16,19 @@
         </div>
         <div class="removeImageButton">
           <object type="image/svg+xml">
-            <img class="svg-icon" src="assets/svgIcons/x_dark.svg"/>
+            <img class="miniIconButton" src="assets/svgIcons/x_dark.svg"/>
           </object>
         </div>
       </div>
     </div>
 
     <div class="buttonRow">
-      <button class="accentButton w48"></button>
-      <button class="accentButton w120"></button>
+      <button class="accentTextButton publishButton">Publier</button>
+      <button class="accentIconButton imageButton">
+        <object type="image/svg+xml">
+          <img src="assets/svgIcons/image.svg"/>
+        </object>
+      </button>
     </div>
   
     <div class="newChirpButtons">
