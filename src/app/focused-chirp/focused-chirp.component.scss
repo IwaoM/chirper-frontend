@@ -2,22 +2,11 @@
   display: flex;
 }
 
-.chirp {
-  padding: 24px;
+.focusedChirp {
+  padding: 24px 24px 0;
   border: solid var(--theme-border);
-  border-width: 0 0 1px;
-}
-
-.chirpAuthorPicture {
-  height: 48px;
-  width: 48px;
-  cursor: pointer;
-}
-
-.chirpBody {
-  margin-left: 24px;
+  border-width: 0;
   flex-direction: column;
-  width: 100%;
 }
 
 .chirpHeader {
@@ -25,25 +14,28 @@
   width: 100%;
 }
 
-.chirpHandle, .chirpTimestamp {
-  margin-left: 8px;
+.chirpAuthorNameBlock {
+  margin-left: 24px;
+  flex-direction: column;
 }
 
-.chirpText {
+.chirpContent {
+  flex-direction: column;
+  margin-top: 24px;
   width: 100%;
 }
 
 .chirpImageBox {
-  width: 144px;
-  height: 144px;
-  margin-left: 24px;
+  margin-top: 24px;
 }
 
 .chirpImage {
-  max-width: 144px;
-  max-height: 144px;
-  object-fit: cover;
+  width: 100%;
   border-radius: 24px;
+}
+
+.chirpTimestamp {
+  margin-top: 24px;
 }
 
 .chirpButtons {
@@ -60,4 +52,10 @@
 
 .chirpStarCount, .chirpAnswerCount {
   margin-left: 8px;
+}
+
+hr {
+  margin: 24px 0 0;
+  width: 100%;
+  color: var(--theme-border);
 }

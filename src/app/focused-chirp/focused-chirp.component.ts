@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-chirp',
-  templateUrl: './chirp.component.html',
-  styleUrls: ['./chirp.component.scss']
+  selector: 'app-focused-chirp',
+  templateUrl: './focused-chirp.component.html',
+  styleUrls: ['./focused-chirp.component.scss']
 })
-export class ChirpComponent {
-
+export class FocusedChirpComponent {
   author!: {
     username: string,
     handle: string,
@@ -27,7 +26,7 @@ export class ChirpComponent {
     this.timestamp = new Date();
     this.text = "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer";
     this.image = "";
-    // this.image = "assets/chirpImages/2.png";
+    // this.image = "assets/chirpImages/1.png";
     this.starCount = 89;
     this.answerCount = 52;
   }
