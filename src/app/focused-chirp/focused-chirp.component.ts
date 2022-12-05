@@ -38,6 +38,7 @@ export class FocusedChirpComponent {
     this.starCount = 89;
     this.answerHovered = false;
     this.answerCount = 52;
+    // todo : fetch data from the database instead
   }
 
   // Author pp, name or handle events

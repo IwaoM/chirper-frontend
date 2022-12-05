@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./title-banner.component.scss']
 })
 export class TitleBannerComponent {
+  title!: string;
 
+  ngOnInit() {
+    this.title = "Derniers chirps"
+    // todo : adapt the title based on the displayed page
+  }
 }

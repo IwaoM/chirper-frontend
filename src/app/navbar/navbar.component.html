@@ -1,30 +1,42 @@
 <header>
   <nav>
     <div class="iconGroup">
-      <div class="navbarLogo">
+      <div class="navbarLogo clickable">
         <object type="image/svg+xml">
           <img class="appLogo" src="assets/logo/text_accent.svg"/>
         </object>
       </div>
       <div class="navbarButton">
-        <object type="image/svg+xml">
+        <object *ngIf="currentPage === 'timeline'" type="image/svg+xml">
           <img class="iconButton" src="assets/svgIcons/home_filled_dark.svg"/>
+        </object>
+        <object *ngIf="currentPage !== 'timeline'" type="image/svg+xml">
+          <img class="iconButton" src="assets/svgIcons/home_dark.svg"/>
         </object>
       </div>
       <div class="navbarButton">
-        <object type="image/svg+xml">
+        <object *ngIf="currentPage === 'ownProfile'" type="image/svg+xml">
+          <img class="iconButton" src="assets/svgIcons/profile_filled_dark.svg"/>
+        </object>
+        <object *ngIf="currentPage !== 'ownProfile'" type="image/svg+xml">
           <img class="iconButton" src="assets/svgIcons/profile_dark.svg"/>
         </object>
       </div>
       <div class="navbarButton">
-        <object type="image/svg+xml">
+        <object *ngIf="currentPage === 'search'" type="image/svg+xml">
+          <img class="iconButton" src="assets/svgIcons/search_filled_dark.svg"/>
+        </object>
+        <object *ngIf="currentPage !== 'search'" type="image/svg+xml">
           <img class="iconButton" src="assets/svgIcons/search_dark.svg"/>
         </object>
       </div>
     </div>
     <div class="iconGroup">
       <div class="navbarButton">
-        <object type="image/svg+xml">
+        <object *ngIf="currentPage === 'settings'" type="image/svg+xml">
+          <img class="iconButton" src="assets/svgIcons/settings_filled_dark.svg"/>
+        </object>
+        <object *ngIf="currentPage !== 'settings'" type="image/svg+xml">
           <img class="iconButton" src="assets/svgIcons/settings_dark.svg"/>
         </object>
       </div>
