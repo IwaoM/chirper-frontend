@@ -14,7 +14,7 @@ export class PageChirpComponent {
   chirps!: Chirp[];
 
   ngOnInit() {
-    this.currentPage = "timeline";
+    this.currentPage = "singleChirp";
     this.chirps = this.chirpsService.chirps;
   }
 }
