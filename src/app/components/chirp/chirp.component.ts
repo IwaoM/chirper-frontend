@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ChirpsService } from 'src/app/services/chirps.service';
+import { Chirp } from '../../models/chirp.model';
 
 @Component({
   selector: 'app-chirp',
@@ -6,38 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./chirp.component.scss']
 })
 export class ChirpComponent {
+  constructor(private chirpsService: ChirpsService) {}
 
-  author!: {
-    username: string,
-    handle: string,
-    picture: string
-  };
-  timestamp!: Date;
+  @Input() chirp!: Chirp;
   deleteHovered!: boolean;
-  text!: string;
-  image!: string;
-  starred!: boolean;
   starHovered!: boolean;
-  starCount!: number;
   answerHovered!: boolean;
-  answerCount!: number;
 
   ngOnInit() {
-    this.author = {
-      username: "Iwao Meunier",
-      handle: "iwaoM_",
-      picture: "assets/userPictures/1.png"
-    }
-    this.timestamp = new Date();
     this.deleteHovered = false;
-    this.text = "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer";
-    this.image = "";
-    // this.image = "assets/chirpImages/2.png";
-    this.starred = false;
     this.starHovered = false;
-    this.starCount = 89;
     this.answerHovered = false;
-    this.answerCount = 52;
   }
 
   // Chirp box events
@@ -60,7 +41,7 @@ export class ChirpComponent {
   }
 
   onDeleteClick() {
-    // todo : delete the chirp (API)
+    // todo : service method to delete the chirp
   }
 
   // Star button events
@@ -73,9 +54,7 @@ export class ChirpComponent {
   }
 
   onStarClick() {
-    this.starred = !this.starred;
-    this.starred ? this.starCount++ : this.starCount--;
-    // todo : add a star to the chirp from the logged in user
+    this.chirpsService.starChirpById(this.chirp.id);
   }
 
   // Answer button events

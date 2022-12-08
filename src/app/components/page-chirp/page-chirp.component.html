@@ -1,12 +1,9 @@
 <div class="fixedBlock">
-  <app-navbar></app-navbar>
+  <app-navbar [currentPage]="currentPage"></app-navbar>
   <app-title-banner></app-title-banner>
 </div>
 <div class="verticalContainer">
   <div class="headerOffsetBlock"></div>
   <app-focused-chirp></app-focused-chirp>
-  <app-chirp></app-chirp>
-  <app-chirp></app-chirp>
-  <app-chirp></app-chirp>
-  <app-chirp></app-chirp>
+  <app-chirp *ngFor="let chirp of chirps" [chirp]="chirp"></app-chirp>
 </div>

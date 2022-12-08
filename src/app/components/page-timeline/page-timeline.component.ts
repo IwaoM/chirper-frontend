@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class PageTimelineComponent {
 
+  currentPage!: string
+
+  ngOnInit() {
+    this.currentPage = "singleChirp";
+  }
 }

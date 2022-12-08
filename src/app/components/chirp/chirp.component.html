@@ -7,7 +7,7 @@
     class="chirpAuthorPictureBox"
     (click)="onAuthorClick()"
   >
-    <img class="chirpAuthorPicture" [src]="author.picture" [alt]="author.username">
+    <img class="chirpAuthorPicture" [src]="chirp.author.picture" [alt]="chirp.author.username">
   </div>
 
   <div class="chirpBody">
@@ -19,16 +19,16 @@
           class="chirpUsername"
           (click)="onAuthorClick()"
         >
-          <p class="text-highlight">{{ author.username }}</p>
+          <p class="text-highlight">{{ chirp.author.username }}</p>
         </div>
         <div
           class="chirpHandle"
           (click)="onAuthorClick()"
         >
-          <p class="text-light">@{{ author.handle }}</p>
+          <p class="text-light">@{{ chirp.author.handle }}</p>
         </div>
         <div class="chirpTimestamp">
-          <p class="text-light">{{ timestamp }}</p>
+          <p class="text-light">{{ chirp.timestamp | date: "le d MMMM à HH:mm" }}</p>
         </div>
       </div>
   
@@ -50,10 +50,10 @@
   
     <div class="chirpContent">
       <div class="chirpText">
-        <p class="text-normal">{{ text }}</p>
+        <p class="text-normal">{{ chirp.text }}</p>
       </div>
-      <div *ngIf="image" class="chirpImageBox">
-        <img class="chirpImage" [src]="image">
+      <div *ngIf="chirp.image" class="chirpImageBox">
+        <img class="chirpImage" [src]="chirp.image">
       </div>
     </div>
   
@@ -66,21 +66,21 @@
           (mouseenter)="onStarMouseEnter()"
           (mouseleave)="onStarMouseLeave()"
         >
-          <object *ngIf="!starred && !starHovered" type="image/svg+xml">
+          <object *ngIf="!chirp.starred && !starHovered" type="image/svg+xml">
             <img class="miniIconButton" src="assets/svgIcons/star_dark.svg"/>
           </object>
-          <object *ngIf="!starred && starHovered" type="image/svg+xml">
+          <object *ngIf="!chirp.starred && starHovered" type="image/svg+xml">
             <img class="miniIconButton" src="assets/svgIcons/star_accent1.svg"/>
           </object>
-          <object *ngIf="starred" type="image/svg+xml">
+          <object *ngIf="chirp.starred" type="image/svg+xml">
             <img class="miniIconButton" src="assets/svgIcons/star_filled_accent1.svg"/>
           </object>
         </div>
         <div class="chirpStarCount">
           <p
             class="text-small-light"
-            [ngClass]="{ 'chirpStarredStarCount': starred }"
-          >{{ starCount }}</p>
+            [ngClass]="{ 'chirpStarredStarCount': chirp.starred }"
+          >{{ chirp.starCount }}</p>
         </div>
       </div>
   
@@ -99,7 +99,7 @@
           </object>
         </div>
         <div class="chirpAnswerCount">
-          <p class="text-small-light">{{ answerCount }}</p>
+          <p class="text-small-light">{{ chirp.replyCount }}</p>
         </div>
       </div>
   
