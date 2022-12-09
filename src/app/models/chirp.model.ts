@@ -3,15 +3,11 @@ export class Chirp {
   timestamp!: Date;
   text!: string;
   image?: string;
-  author!: {
-    id: number,
-    username: string,
-    handle: string,
-    picture: string
-  };
-  starred!: boolean;
-  starCount!: number;
-  replyCount!: number;
-  replyTo?: number;
-  replyToUser?: number;
+  author_id!: number;
+  reply_to_id?: number;
+  username!: string;
+  handle!: string;
+  picture!: string;
+  star_count!: number;
+  reply_count!: number;
 }

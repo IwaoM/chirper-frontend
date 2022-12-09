@@ -5,9 +5,9 @@
 
   <div
     class="chirpAuthorPictureBox"
-    (click)="onAuthorClick()"
+    (click)="onAuthorClick($event)"
   >
-    <img class="chirpAuthorPicture" [src]="chirp.author.picture" [alt]="chirp.author.username">
+    <img class="chirpAuthorPicture" [src]="chirp.picture === 'default' ? 'assets/userPictures/default.png' : chirp.picture" [alt]="chirp.username">
   </div>
 
   <div class="chirpBody">
@@ -17,24 +17,24 @@
       <div class="chirpAuthorLine">
         <div
           class="chirpUsername"
-          (click)="onAuthorClick()"
+          (click)="onAuthorClick($event)"
         >
-          <p class="text-highlight">{{ chirp.author.username }}</p>
+          <p class="text-highlight">{{ chirp.username }}</p>
         </div>
         <div
           class="chirpHandle"
-          (click)="onAuthorClick()"
+          (click)="onAuthorClick($event)"
         >
-          <p class="text-light">@{{ chirp.author.handle }}</p>
+          <p class="text-light">@{{ chirp.handle }}</p>
         </div>
         <div class="chirpTimestamp">
-          <p class="text-light">{{ chirp.timestamp | date: "le d MMMM à HH:mm" }}</p>
+          <p class="text-light">le {{ chirp.timestamp | date: "d MMMM à HH:mm" }}</p>
         </div>
       </div>
   
       <div
         class="chirpDeleteButton"
-        (click)="onDeleteClick()"
+        (click)="onDeleteClick($event)"
         (mouseenter)="onDeleteMouseEnter()"
         (mouseleave)="onDeleteMouseLeave()"
       >
@@ -62,32 +62,32 @@
       <div class="chirpStars">
         <div
           class="chirpStarButton"
-          (click)="onStarClick()"
+          (click)="onStarClick($event)"
           (mouseenter)="onStarMouseEnter()"
           (mouseleave)="onStarMouseLeave()"
         >
-          <object *ngIf="!chirp.starred && !starHovered" type="image/svg+xml">
+          <object *ngIf="!starred && !starHovered" type="image/svg+xml">
             <img class="miniIconButton" src="assets/svgIcons/star_dark.svg"/>
           </object>
-          <object *ngIf="!chirp.starred && starHovered" type="image/svg+xml">
+          <object *ngIf="!starred && starHovered" type="image/svg+xml">
             <img class="miniIconButton" src="assets/svgIcons/star_accent1.svg"/>
           </object>
-          <object *ngIf="chirp.starred" type="image/svg+xml">
+          <object *ngIf="starred" type="image/svg+xml">
             <img class="miniIconButton" src="assets/svgIcons/star_filled_accent1.svg"/>
           </object>
         </div>
         <div class="chirpStarCount">
           <p
             class="text-small-light"
-            [ngClass]="{ 'chirpStarredStarCount': chirp.starred }"
-          >{{ chirp.starCount }}</p>
+            [ngClass]="{ 'chirpStarredStarCount': starred }"
+          >{{ chirp.star_count }}</p>
         </div>
       </div>
   
       <div class="chirpAnswers">
         <div
           class="chirpAnswerButton"
-          (click)="onAnswerClick()"
+          (click)="onAnswerClick($event)"
           (mouseenter)="onAnswerMouseEnter()"
           (mouseleave)="onAnswerMouseLeave()"
         >
@@ -99,7 +99,7 @@
           </object>
         </div>
         <div class="chirpAnswerCount">
-          <p class="text-small-light">{{ chirp.replyCount }}</p>
+          <p class="text-small-light">{{ chirp.reply_count }}</p>
         </div>
       </div>
   

@@ -11,18 +11,21 @@ export class FocusedChirpComponent implements OnInit {
   constructor (private chirpsService: ChirpsService) {}
 
   @Input() chirp!: Chirp;
+  starred!: boolean;
   deleteHovered!: boolean;
   starHovered!: boolean;
   answerHovered!: boolean;
 
   ngOnInit () {
+    this.starred = false;
     this.deleteHovered = false;
     this.starHovered = false;
     this.answerHovered = false;
   }
 
   // Author pp, name or handle events
-  onAuthorClick () {
+  onAuthorClick (event: Event) {
+    event.stopPropagation();
     // todo : open author profile page
   }
 
@@ -35,7 +38,8 @@ export class FocusedChirpComponent implements OnInit {
     this.deleteHovered = false;
   }
 
-  onDeleteClick () {
+  onDeleteClick (event: Event) {
+    event.stopPropagation();
     // todo : delete the chirp (API)
   }
 
@@ -48,8 +52,10 @@ export class FocusedChirpComponent implements OnInit {
     this.starHovered = false;
   }
 
-  onStarClick () {
-    this.chirpsService.starChirpById(this.chirp.id);
+  onStarClick (event: Event) {
+    event.stopPropagation();
+    this.starred = !this.starred;
+    // this.chirpsService.starChirpById(this.chirp.id);
   }
 
   // Answer button events
@@ -61,7 +67,8 @@ export class FocusedChirpComponent implements OnInit {
     this.answerHovered = false;
   }
 
-  onAnswerClick () {
+  onAnswerClick (event: Event) {
+    event.stopPropagation();
     // todo : open chirp page and focus on the answer field
   }
 }

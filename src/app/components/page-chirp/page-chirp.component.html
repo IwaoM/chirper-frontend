@@ -1,10 +1,10 @@
 <div class="fixedBlock">
   <app-navbar [currentPage]="currentPage"></app-navbar>
-  <app-title-banner></app-title-banner>
+  <app-title-banner [currentTitle]="currentTitle"></app-title-banner>
 </div>
 <div class="verticalContainer">
   <div class="headerOffsetBlock"></div>
-  <app-focused-chirp [chirp]="focusedChirp"></app-focused-chirp>
+  <app-focused-chirp *ngIf="focusedChirp$ | async as focusedChirp" [chirp]="focusedChirp"></app-focused-chirp>
   <app-new-chirp></app-new-chirp>
   <app-chirp *ngFor="let chirp of replyChirps" [chirp]="chirp"></app-chirp>
 </div>

@@ -2,18 +2,19 @@ import { LOCALE_ID, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { registerLocaleData } from "@angular/common";
 import * as fr from "@angular/common/locales/fr";
+import { HttpClientModule } from "@angular/common/http";
+import { AutosizeModule } from "ngx-autosize";
 
-import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routing.module";
+import { PageChirpComponent } from "./components/page-chirp/page-chirp.component";
+import { FocusedChirpComponent } from "./components/focused-chirp/focused-chirp.component";
 import { ChirpComponent } from "./components/chirp/chirp.component";
 import { PageTimelineComponent } from "./components/page-timeline/page-timeline.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { TitleBannerComponent } from "./components/title-banner/title-banner.component";
 import { NewChirpComponent } from "./components/new-chirp/new-chirp.component";
 
-import { AutosizeModule } from "ngx-autosize";
-import { PageChirpComponent } from "./components/page-chirp/page-chirp.component";
-import { FocusedChirpComponent } from "./components/focused-chirp/focused-chirp.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FocusedChirpComponent } from "./components/focused-chirp/focused-chirp.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AutosizeModule
+    AutosizeModule,
+    HttpClientModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "fr-FR" }

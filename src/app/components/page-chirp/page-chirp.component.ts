@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { ChirpsService } from "src/app/services/chirps.service";
 import { Chirp } from "../../models/chirp.model";
 
@@ -15,13 +16,15 @@ export class PageChirpComponent implements OnInit {
   ) {}
 
   currentPage!: string;
-  focusedChirp!: Chirp;
+  currentTitle!: string;
+  focusedChirp$!: Observable<Chirp>;
   replyChirps!: Chirp[];
 
   ngOnInit () {
     const chirpId = +this.route.snapshot.params["id"];
     this.currentPage = "singleChirp";
-    this.focusedChirp = this.chirpsService.getChirpById(chirpId);
-    this.replyChirps = this.chirpsService.chirps;
+    this.currentTitle = "Chirp";
+    this.focusedChirp$ = this.chirpsService.getChirpById(chirpId);
+    this.replyChirps = [];
   }
 }

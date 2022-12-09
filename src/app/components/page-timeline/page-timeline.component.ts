@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
 import { Chirp } from "src/app/models/chirp.model";
 import { ChirpsService } from "src/app/services/chirps.service";
 
@@ -11,10 +12,12 @@ export class PageTimelineComponent implements OnInit {
   constructor (private chirpsService: ChirpsService) {}
 
   currentPage!: string;
-  chirps!: Chirp[];
+  currentTitle!: string;
+  chirps$!: Observable<Chirp[]>;
 
   ngOnInit () {
     this.currentPage = "timeline";
-    this.chirps = [...this.chirpsService.chirps, ...this.chirpsService.chirps, ...this.chirpsService.chirps];
+    this.currentTitle = "Derniers chirps";
+    this.chirps$ = this.chirpsService.getAllChirps();
   }
 }
