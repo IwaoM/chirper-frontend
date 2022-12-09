@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Chirp } from '../models/chirp.model';
+import { Injectable } from "@angular/core";
+import { Chirp } from "../models/chirp.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ChirpsService {
 
@@ -67,7 +67,7 @@ export class ChirpsService {
       starCount: 89,
       replyCount: 52
     },
-  ]
+  ];
 
   getAllChirps (): Chirp[] {
     return this.chirps;

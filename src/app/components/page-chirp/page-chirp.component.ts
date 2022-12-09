@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ChirpsService } from 'src/app/services/chirps.service';
-import { Chirp } from '../../models/chirp.model';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ChirpsService } from "src/app/services/chirps.service";
+import { Chirp } from "../../models/chirp.model";
 
 @Component({
-  selector: 'app-page-chirp',
-  templateUrl: './page-chirp.component.html',
-  styleUrls: ['./page-chirp.component.scss']
+  selector: "app-page-chirp",
+  templateUrl: "./page-chirp.component.html",
+  styleUrls: ["./page-chirp.component.scss"]
 })
 export class PageChirpComponent implements OnInit {
-  constructor(
+  constructor (
     private chirpsService: ChirpsService,
     private route: ActivatedRoute
   ) {}
@@ -18,7 +18,7 @@ export class PageChirpComponent implements OnInit {
   focusedChirp!: Chirp;
   replyChirps!: Chirp[];
 
-  ngOnInit() {
+  ngOnInit () {
     const chirpId = +this.route.snapshot.params["id"];
     this.currentPage = "singleChirp";
     this.focusedChirp = this.chirpsService.getChirpById(chirpId);

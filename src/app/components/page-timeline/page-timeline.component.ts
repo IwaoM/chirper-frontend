@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Chirp } from 'src/app/models/chirp.model';
-import { ChirpsService } from 'src/app/services/chirps.service';
+import { Component, OnInit } from "@angular/core";
+import { Chirp } from "src/app/models/chirp.model";
+import { ChirpsService } from "src/app/services/chirps.service";
 
 @Component({
-  selector: 'app-page-timeline',
-  templateUrl: './page-timeline.component.html',
-  styleUrls: ['./page-timeline.component.scss']
+  selector: "app-page-timeline",
+  templateUrl: "./page-timeline.component.html",
+  styleUrls: ["./page-timeline.component.scss"]
 })
 export class PageTimelineComponent implements OnInit {
-  constructor(private chirpsService: ChirpsService) {}
+  constructor (private chirpsService: ChirpsService) {}
 
-  currentPage!: string
+  currentPage!: string;
   chirps!: Chirp[];
 
-  ngOnInit() {
+  ngOnInit () {
     this.currentPage = "timeline";
     this.chirps = [...this.chirpsService.chirps, ...this.chirpsService.chirps, ...this.chirpsService.chirps];
   }

@@ -1,15 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ChirpsService } from 'src/app/services/chirps.service';
-import { Chirp } from '../../models/chirp.model';
+import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ChirpsService } from "src/app/services/chirps.service";
+import { Chirp } from "../../models/chirp.model";
 
 @Component({
-  selector: 'app-chirp',
-  templateUrl: './chirp.component.html',
-  styleUrls: ['./chirp.component.scss']
+  selector: "app-chirp",
+  templateUrl: "./chirp.component.html",
+  styleUrls: ["./chirp.component.scss"]
 })
 export class ChirpComponent implements OnInit {
-  constructor(
+  constructor (
     private chirpsService: ChirpsService,
     private router: Router
   ) {}
@@ -19,58 +19,58 @@ export class ChirpComponent implements OnInit {
   starHovered!: boolean;
   answerHovered!: boolean;
 
-  ngOnInit() {
+  ngOnInit () {
     this.deleteHovered = false;
     this.starHovered = false;
     this.answerHovered = false;
   }
 
   // Chirp box events
-  onChirpClick() {
+  onChirpClick () {
     this.router.navigateByUrl(`chirps/${this.chirp.id}`);
   }
 
   // Author pp, name or handle events
-  onAuthorClick() {
+  onAuthorClick () {
     // todo : open author profile page
   }
 
   // Delete button events
-  onDeleteMouseEnter() {
+  onDeleteMouseEnter () {
     this.deleteHovered = true;
   }
 
-  onDeleteMouseLeave() {
+  onDeleteMouseLeave () {
     this.deleteHovered = false;
   }
 
-  onDeleteClick() {
+  onDeleteClick () {
     // todo : service method to delete the chirp
   }
 
   // Star button events
-  onStarMouseEnter() {
+  onStarMouseEnter () {
     this.starHovered = true;
   }
 
-  onStarMouseLeave() {
+  onStarMouseLeave () {
     this.starHovered = false;
   }
 
-  onStarClick() {
+  onStarClick () {
     this.chirpsService.starChirpById(this.chirp.id);
   }
 
   // Answer button events
-  onAnswerMouseEnter() {
+  onAnswerMouseEnter () {
     this.answerHovered = true;
   }
 
-  onAnswerMouseLeave() {
+  onAnswerMouseLeave () {
     this.answerHovered = false;
   }
 
-  onAnswerClick() {
+  onAnswerClick () {
     // todo : open chirp page and focus on the answer field
   }
 }

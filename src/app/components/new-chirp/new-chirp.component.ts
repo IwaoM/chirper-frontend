@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-new-chirp',
-  templateUrl: './new-chirp.component.html',
-  styleUrls: ['./new-chirp.component.scss']
+  selector: "app-new-chirp",
+  templateUrl: "./new-chirp.component.html",
+  styleUrls: ["./new-chirp.component.scss"]
 })
 export class NewChirpComponent implements OnInit {
 
@@ -13,33 +13,33 @@ export class NewChirpComponent implements OnInit {
   };
   image!: string;
 
-  ngOnInit() {
+  ngOnInit () {
     this.connectedUser = {
       username: "Iwao Meunier",
       picture: "assets/userPictures/1.png"
-    }
+    };
     this.image = "";
   }
 
   // Connected user pp (next to the new tweet / new answer field)
-  onConnectedUserClick() {
+  onConnectedUserClick () {
     // todo : open own profile page
   }
 
   // Remove image button
-  onRemoveImageClick() {
+  onRemoveImageClick () {
     this.image = "";
     // todo : remove image from new chirp & delete saved
   }
 
   // Add image button
-  onAddImageClick() {
+  onAddImageClick () {
     this.image = "assets/chirpImages/2.png";
     // todo : open file chooser, save image once chosen, add image to chirp
   }
 
   // Publish chirp button
-  onPublishClick() {
-    // todo : publish chirp & go to that chirp's page
+  onPublishClick () {
+    // todo : publish chirp & go to that chirp"s page
   }
 }
