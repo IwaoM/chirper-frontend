@@ -5,7 +5,7 @@ import { PageTimelineComponent } from './components/page-timeline/page-timeline.
 
 const routes: Routes = [
   { path: "timeline", component: PageTimelineComponent },
-  { path: "chirp", component: PageChirpComponent }
+  { path: "chirps/:id", component: PageChirpComponent }
 ];
 
 @NgModule({

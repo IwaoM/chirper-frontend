@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ChirpsService } from 'src/app/services/chirps.service';
 import { Chirp } from '../../models/chirp.model';
 
@@ -7,14 +8,20 @@ import { Chirp } from '../../models/chirp.model';
   templateUrl: './page-chirp.component.html',
   styleUrls: ['./page-chirp.component.scss']
 })
-export class PageChirpComponent {
-  constructor(private chirpsService: ChirpsService) {}
+export class PageChirpComponent implements OnInit {
+  constructor(
+    private chirpsService: ChirpsService,
+    private route: ActivatedRoute
+  ) {}
 
   currentPage!: string;
-  chirps!: Chirp[];
+  focusedChirp!: Chirp;
+  replyChirps!: Chirp[];
 
   ngOnInit() {
+    const chirpId = +this.route.snapshot.params["id"];
     this.currentPage = "singleChirp";
-    this.chirps = this.chirpsService.chirps;
+    this.focusedChirp = this.chirpsService.getChirpById(chirpId);
+    this.replyChirps = this.chirpsService.chirps;
   }
 }

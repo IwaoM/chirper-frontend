@@ -1,44 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Chirp } from 'src/app/models/chirp.model';
+import { ChirpsService } from 'src/app/services/chirps.service';
 
 @Component({
   selector: 'app-focused-chirp',
   templateUrl: './focused-chirp.component.html',
   styleUrls: ['./focused-chirp.component.scss']
 })
-export class FocusedChirpComponent {
+export class FocusedChirpComponent implements OnInit {
+  constructor(private chirpsService: ChirpsService) {}
   
-  author!: {
-    username: string,
-    handle: string,
-    picture: string
-  };
-  timestamp!: Date;
+  @Input() chirp!: Chirp;
   deleteHovered!: boolean;
-  text!: string;
-  image!: string;
-  starred!: boolean;
   starHovered!: boolean;
-  starCount!: number;
   answerHovered!: boolean;
-  answerCount!: number;
 
   ngOnInit() {
-    this.author = {
-      username: "Iwao Meunier",
-      handle: "iwaoM_",
-      picture: "assets/userPictures/1.png"
-    }
-    this.timestamp = new Date();
     this.deleteHovered = false;
-    this.text = "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer";
-    this.image = "";
-    // this.image = "assets/chirpImages/1.png";
-    this.starred = false;
     this.starHovered = false;
-    this.starCount = 89;
     this.answerHovered = false;
-    this.answerCount = 52;
-    // todo : fetch data from the database instead
   }
 
   // Author pp, name or handle events
@@ -69,9 +49,7 @@ export class FocusedChirpComponent {
   }
 
   onStarClick() {
-    this.starred = !this.starred;
-    this.starred ? this.starCount++ : this.starCount--;
-    // todo : add a star to the chirp from the logged in user
+    this.chirpsService.starChirpById(this.chirp.id);
   }
 
   // Answer button events

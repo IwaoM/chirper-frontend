@@ -10,9 +10,10 @@ export class ChirpsService {
     {
       id: 1,
       timestamp: new Date(),
-      text: "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
+      text: "Chirp 1 - sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
       // image: "assets/chirpImages/2.png",
       author: {
+        id: 1,
         username: "Iwao Meunier",
         handle: "iwaoM_",
         picture: "assets/userPictures/1.png"
@@ -24,9 +25,10 @@ export class ChirpsService {
     {
       id: 2,
       timestamp: new Date(),
-      text: "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
+      text: "Chirp 2 - sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
       // image: "assets/chirpImages/2.png",
       author: {
+        id: 1,
         username: "Iwao Meunier",
         handle: "iwaoM_",
         picture: "assets/userPictures/1.png"
@@ -38,9 +40,10 @@ export class ChirpsService {
     {
       id: 3,
       timestamp: new Date(),
-      text: "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
+      text: "Chirp 3 - sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
       // image: "assets/chirpImages/2.png",
       author: {
+        id: 1,
         username: "Iwao Meunier",
         handle: "iwaoM_",
         picture: "assets/userPictures/1.png"
@@ -52,9 +55,10 @@ export class ChirpsService {
     {
       id: 4,
       timestamp: new Date(),
-      text: "sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
+      text: "Chirp 4 - sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer",
       // image: "assets/chirpImages/2.png",
       author: {
+        id: 1,
         username: "Iwao Meunier",
         handle: "iwaoM_",
         picture: "assets/userPictures/1.png"

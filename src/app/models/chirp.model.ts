@@ -4,6 +4,7 @@ export class Chirp {
   text!: string;
   image?: string;
   author!: {
+    id: number,
     username: string,
     handle: string,
     picture: string

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChirpsService } from 'src/app/services/chirps.service';
 import { Chirp } from '../../models/chirp.model';
 
@@ -7,8 +8,11 @@ import { Chirp } from '../../models/chirp.model';
   templateUrl: './chirp.component.html',
   styleUrls: ['./chirp.component.scss']
 })
-export class ChirpComponent {
-  constructor(private chirpsService: ChirpsService) {}
+export class ChirpComponent implements OnInit {
+  constructor(
+    private chirpsService: ChirpsService,
+    private router: Router
+  ) {}
 
   @Input() chirp!: Chirp;
   deleteHovered!: boolean;
@@ -23,7 +27,7 @@ export class ChirpComponent {
 
   // Chirp box events
   onChirpClick() {
-    // todo : open chirp page
+    this.router.navigateByUrl(`chirps/${this.chirp.id}`);
   }
 
   // Author pp, name or handle events
