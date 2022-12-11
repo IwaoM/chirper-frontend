@@ -27,6 +27,7 @@ nav {
 }
 
 .navbarLogo {
+  margin-left: 24px;
   height: 48px;
   width: 48px;
 
@@ -53,10 +54,20 @@ nav {
   transition: 0.1s;
 }
 
-.navbarButton:hover {
+.navbarButtonRight {
+  height: 48px;
+  width: 48px;
+  margin-right: 24px;
+
+  border-radius: 24px;
+
+  transition: 0.1s;
+}
+
+.navbarButton:hover, .navbarButtonRight:hover {
   background-color: var(--theme-bg-hover);
 }
 
-.navbarButton:active {
+.navbarButton:active, .navbarButtonRight:active {
   background-color: var(--theme-bg-select);
 }
