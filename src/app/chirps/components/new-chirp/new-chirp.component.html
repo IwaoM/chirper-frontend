@@ -1,0 +1,45 @@
+<div class="new-chirp">
+
+  <div class="profile-pic global__clickable">
+    <img
+      class="global__profile-pic"
+      [src]="connectedUser.picture"
+      [alt]="connectedUser.username"
+      (click)="onConnectedUserClick()"
+    >
+  </div>
+
+  <div class="body-block">
+  
+    <div class="content-block">
+      <textarea
+        autosize
+        [minRows]="1"
+        maxlength="400"
+        [placeholder]="placeholderText"
+        class="text-content"></textarea
+      >
+      <div *ngIf="image" class="content-image-block">
+        <div class="content-image-box">
+          <img class="content-image" src="/assets/chirpImages/1.png">
+        </div>
+        <div class="remove-image-button" (click)="onRemoveImageClick()">
+          <object type="image/svg+xml">
+            <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
+          </object>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-block">
+      <button class="global__accent-text-button publish-button" (click)="onPublishClick()">Publier</button>
+      <button class="global__accent-icon-button image-button" (click)="onAddImageClick()">
+        <object type="image/svg+xml">
+          <img src="assets/svgIcons/image.svg"/>
+        </object>
+      </button>
+    </div>
+
+  </div>
+
+</div>

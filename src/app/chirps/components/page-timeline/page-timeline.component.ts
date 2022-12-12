@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Chirp } from "src/app/models/chirp.model";
-import { ChirpsService } from "src/app/services/chirps.service";
+import { Chirp } from "src/app/core/models/chirp.model";
+import { ChirpsService } from "src/app/core/services/chirps.service";
 
 @Component({
   selector: "app-page-timeline",

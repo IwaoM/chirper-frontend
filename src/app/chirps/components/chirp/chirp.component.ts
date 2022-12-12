@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ChirpsService } from "src/app/services/chirps.service";
-import { Chirp } from "../../models/chirp.model";
+import { ChirpsService } from "src/app/core/services/chirps.service";
+import { Chirp } from "../../../core/models/chirp.model";
 
 @Component({
   selector: "app-chirp",
@@ -30,7 +30,7 @@ export class ChirpComponent implements OnInit {
 
   // Chirp box events
   onChirpClick () {
-    this.router.navigateByUrl(`chirps/${this.chirp.id}`);
+    this.router.navigateByUrl(`app/chirps/${this.chirp.id}`);
   }
 
   // Author pp, name or handle events

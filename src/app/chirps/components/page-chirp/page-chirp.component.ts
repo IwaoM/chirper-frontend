@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { ChirpsService } from "src/app/services/chirps.service";
-import { Chirp } from "../../models/chirp.model";
+import { ChirpsService } from "src/app/core/services/chirps.service";
+import { Chirp } from "../../../core/models/chirp.model";
 
 @Component({
   selector: "app-page-chirp",

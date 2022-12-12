@@ -2,19 +2,19 @@
   display: flex;
 }
 
-.newChirp {
+.new-chirp {
   padding: 24px;
   border: solid var(--theme-border);
   border-width: 0 0 1px;
 }
 
-.newChirpBody {
+.body-block {
   margin-left: 24px;
   flex-direction: column;
   width: 100%;
 }
 
-.newChirpContent {
+.content-block {
   padding: 24px;
   flex-direction: column;
 
@@ -22,7 +22,7 @@
   border-radius: 24px;
 }
 
-.newChirpText {
+.text-content {
   height: 24px;
   background-color: var(--theme-bg);
   border: none;
@@ -34,11 +34,11 @@
   transition: 0.2s;
 }
 
-.newChirpImageBlock {
+.content-image-block {
   margin-top: 24px;
 }
 
-.newChirpImageBox {
+.content-image-box {
   width: 96px;
   height: 96px;
   border: 1px solid var(--theme-border);
@@ -46,22 +46,22 @@
   overflow: hidden;
 }
 
-.newChirpImage {
+.content-image {
   object-fit: cover;
   max-width: 96px;
   max-height: 96px;
 }
 
-.removeImageButton {
+.remove-image-button {
   margin-left: 8px;
   align-self: flex-end;
 }
 
-.buttonRow {
+.button-block {
   margin-top: 24px;
   flex-direction: row-reverse;
 }
 
-.publishButton {
+.publish-button {
   margin-left: 24px;
 }

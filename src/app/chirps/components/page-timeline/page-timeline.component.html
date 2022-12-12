@@ -4,6 +4,6 @@
 </div>
 <div class="global__vertical-container">
   <div class="global__header-offset-block"></div>
-  <app-new-chirp></app-new-chirp>
+  <app-new-chirp [placeholderText]="'Quoi de neuf ?'"></app-new-chirp>
   <app-chirp [viewType]="'normal'" *ngFor="let chirp of chirps$ | async" [chirp]="chirp"></app-chirp>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-new-chirp",
@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class NewChirpComponent implements OnInit {
 
+  @Input() placeholderText!: string;
   connectedUser!: {
     username: string;
     picture: string
