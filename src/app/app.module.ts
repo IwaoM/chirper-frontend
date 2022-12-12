@@ -8,7 +8,6 @@ import { AutosizeModule } from "ngx-autosize";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { PageChirpComponent } from "./components/page-chirp/page-chirp.component";
-import { FocusedChirpComponent } from "./components/focused-chirp/focused-chirp.component";
 import { ChirpComponent } from "./components/chirp/chirp.component";
 import { PageTimelineComponent } from "./components/page-timeline/page-timeline.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
@@ -24,8 +23,7 @@ import { NewChirpComponent } from "./components/new-chirp/new-chirp.component";
     NavbarComponent,
     TitleBannerComponent,
     NewChirpComponent,
-    PageChirpComponent,
-    FocusedChirpComponent
+    PageChirpComponent
   ],
   imports: [
     BrowserModule,
