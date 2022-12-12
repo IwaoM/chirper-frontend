@@ -15,6 +15,7 @@ export class ChirpComponent implements OnInit {
   ) {}
 
   @Input() chirp!: Chirp;
+  @Input() viewType!: "normal" | "focused";
   starred!: boolean;
   deleteHovered!: boolean;
   starHovered!: boolean;

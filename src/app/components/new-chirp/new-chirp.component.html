@@ -1,8 +1,8 @@
 <div class="newChirp">
 
-  <div class="chirpAuthorPictureBox">
+  <div class="chirpAuthorPictureBox global__clickable">
     <img
-      class="chirpAuthorPicture clickable"
+      class="global__profile-pic"
       [src]="connectedUser.picture"
       [alt]="connectedUser.username"
       (click)="onConnectedUserClick()"
@@ -19,15 +19,15 @@
         </div>
         <div class="removeImageButton" (click)="onRemoveImageClick()">
           <object type="image/svg+xml">
-            <img class="miniIconButton" src="assets/svgIcons/x_dark.svg"/>
+            <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
           </object>
         </div>
       </div>
     </div>
 
     <div class="buttonRow">
-      <button class="accentTextButton publishButton" (click)="onPublishClick()">Publier</button>
-      <button class="accentIconButton imageButton" (click)="onAddImageClick()">
+      <button class="global__accent-text-button publishButton" (click)="onPublishClick()">Publier</button>
+      <button class="global__accent-icon-button imageButton" (click)="onAddImageClick()">
         <object type="image/svg+xml">
           <img src="assets/svgIcons/image.svg"/>
         </object>

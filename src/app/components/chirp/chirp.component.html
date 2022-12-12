@@ -1,105 +1,147 @@
 <div
-  class="chirp clickable"
+  class="chirp global__clickable"
+  [ngClass]="{ 'chirp--focused': viewType === 'focused' }"
   (click)="onChirpClick()"
 >
 
-  <div
-    class="chirpAuthorPictureBox"
-    (click)="onAuthorClick($event)"
-  >
-    <img class="chirpAuthorPicture" [src]="chirp.picture === 'default' ? 'assets/userPictures/default.png' : chirp.picture" [alt]="chirp.username">
+  <div class="profile-pic-box global__clickable" (click)="onAuthorClick($event)" *ngIf="viewType === 'normal'">
+    <img
+      class="global__profile-pic"
+      [src]="chirp.picture === 'default' ? 'assets/userPictures/default.png' : chirp.picture"
+      [alt]="chirp.username"
+    >
   </div>
 
-  <div class="chirpBody">
+  <div class="body-block">
 
-    <div class="chirpHeader">
+    <div class="header-block">
 
-      <div class="chirpAuthorLine">
-        <div
-          class="chirpUsername"
-          (click)="onAuthorClick($event)"
-        >
-          <p class="text-highlight">{{ chirp.username }}</p>
+      <div class="author-block">
+
+        <div class="profile-pic-box" (click)="onAuthorClick($event)" *ngIf="viewType === 'focused'">
+          <img
+            class="global__profile-pic"
+            [src]="chirp.picture === 'default' ? 'assets/userPictures/default.png' : chirp.picture"
+            [alt]="chirp.username"
+          >
         </div>
-        <div
-          class="chirpHandle"
-          (click)="onAuthorClick($event)"
-        >
-          <p class="text-light">@{{ chirp.handle }}</p>
+
+        <div class="name-block" [ngClass]="{ 'name-block--focused': viewType === 'focused' }">
+
+          <div class="username" (click)="onAuthorClick($event)">
+            <p class="global__text-highlight">{{ chirp.username }}</p>
+          </div>
+
+          <div class="handle" (click)="onAuthorClick($event)">
+            <p class="global__text-light">@{{ chirp.handle }}</p>
+          </div>
+
         </div>
-        <div class="chirpTimestamp">
-          <p class="text-light">le {{ chirp.timestamp | date: "d MMMM à HH:mm" }}</p>
+
+        <div *ngIf="viewType === 'normal'" class="timestamp">
+          <p class="global__text-light">le {{ chirp.timestamp | date: "d MMMM à HH:mm" }}</p>
         </div>
+
       </div>
-  
+
       <div
-        class="chirpDeleteButton"
+        class="delete-button"
         (click)="onDeleteClick($event)"
         (mouseenter)="onDeleteMouseEnter()"
         (mouseleave)="onDeleteMouseLeave()"
       >
         <object *ngIf="!deleteHovered" type="image/svg+xml">
-          <img class="miniIconButton" src="assets/svgIcons/delete_dark.svg"/>
+          <img class="global__mini-icon-button" src="assets/svgIcons/delete_dark.svg"/>
         </object>
+
         <object *ngIf="deleteHovered" type="image/svg+xml">
-          <img class="miniIconButton" src="assets/svgIcons/delete_accent1.svg"/>
+          <img class="global__mini-icon-button" src="assets/svgIcons/delete_accent1.svg"/>
         </object>
+
       </div>
   
     </div>
   
-    <div class="chirpContent">
-      <div class="chirpText">
-        <p class="text-normal">{{ chirp.text }}</p>
+    <div class="content-block" [ngClass]="{ 'content-block--focused': viewType === 'focused' }">
+
+      <div class="text-content">
+        <p
+          [ngClass]="{
+            'global__text-normal': viewType === 'normal',
+            'global__text-big': viewType === 'focused'
+          }"
+        >{{ chirp.text }}</p>
       </div>
-      <div *ngIf="chirp.image" class="chirpImageBox">
-        <img class="chirpImage" [src]="chirp.image">
+
+      <div
+        *ngIf="chirp.image"
+        [ngClass]="{
+          'image-content-box--normal': viewType === 'normal', 
+          'image-content-box--focused': viewType === 'focused'
+        }"
+      >
+        <img
+          class="image-content"
+          [ngClass]="{
+            'image-content--normal': viewType === 'normal',
+            'image-content--focused': viewType === 'focused'
+          }"
+          [src]="chirp.image"
+        >
+      </div>
+
+      <div
+        *ngIf="viewType === 'focused'"
+        class="timestamp"
+        [ngClass]="{ 'timestamp--focused': viewType === 'focused' }"
+      >
+        <p class="global__text-light">Le {{ chirp.timestamp | date: "d MMMM à HH:mm" }}</p>
       </div>
     </div>
   
-    <div class="chirpButtons">
+    <div class="button-block">
   
-      <div class="chirpStars">
+      <div class="star-block">
         <div
-          class="chirpStarButton"
+          class="star-button"
           (click)="onStarClick($event)"
           (mouseenter)="onStarMouseEnter()"
           (mouseleave)="onStarMouseLeave()"
         >
           <object *ngIf="!starred && !starHovered" type="image/svg+xml">
-            <img class="miniIconButton" src="assets/svgIcons/star_dark.svg"/>
+            <img class="global__mini-icon-button" src="assets/svgIcons/star_dark.svg"/>
           </object>
           <object *ngIf="!starred && starHovered" type="image/svg+xml">
-            <img class="miniIconButton" src="assets/svgIcons/star_accent1.svg"/>
+            <img class="global__mini-icon-button" src="assets/svgIcons/star_accent1.svg"/>
           </object>
           <object *ngIf="starred" type="image/svg+xml">
-            <img class="miniIconButton" src="assets/svgIcons/star_filled_accent1.svg"/>
+            <img class="global__mini-icon-button" src="assets/svgIcons/star_filled_accent1.svg"/>
           </object>
         </div>
-        <div class="chirpStarCount">
+        <div class="star-count">
           <p
-            class="text-small-light"
-            [ngClass]="{ 'chirpStarredStarCount': starred }"
+            class="global__text-small-light"
+            [ngClass]="{ 'star-count--starred': starred }"
           >{{ chirp.star_count }}</p>
         </div>
       </div>
   
-      <div class="chirpAnswers">
+      <div class="reply-block">
         <div
-          class="chirpAnswerButton"
+          class="reply-button"
           (click)="onAnswerClick($event)"
           (mouseenter)="onAnswerMouseEnter()"
           (mouseleave)="onAnswerMouseLeave()"
         >
           <object *ngIf="!answerHovered" type="image/svg+xml">
-            <img class="miniIconButton" src="assets/svgIcons/answer_dark.svg"/>
+            <img class="global__mini-icon-button" src="assets/svgIcons/answer_dark.svg"/>
           </object>
           <object *ngIf="answerHovered" type="image/svg+xml">
-            <img class="miniIconButton" src="assets/svgIcons/answer_accent1.svg"/>
+            <img class="global__mini-icon-button" src="assets/svgIcons/answer_accent1.svg"/>
           </object>
         </div>
-        <div class="chirpAnswerCount">
-          <p class="text-small-light">{{ chirp.reply_count }}</p>
+        <div class="reply-count">
+          <p class="global__text-small-light">{{ chirp.reply_count }}</p>
         </div>
       </div>
   

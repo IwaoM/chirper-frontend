@@ -1,9 +1,9 @@
-<div class="fixedBlock">
+<div class="global__fixed-block">
   <app-navbar [currentPage]="currentPage"></app-navbar>
   <app-title-banner [currentTitle]="currentTitle"></app-title-banner>
 </div>
-<div class="verticalContainer">
-  <div class="headerOffsetBlock"></div>
+<div class="global__vertical-container">
+  <div class="global__header-offset-block"></div>
   <app-new-chirp></app-new-chirp>
-  <app-chirp *ngFor="let chirp of chirps$ | async" [chirp]="chirp"></app-chirp>
+  <app-chirp [viewType]="'normal'" *ngFor="let chirp of chirps$ | async" [chirp]="chirp"></app-chirp>
 </div>
