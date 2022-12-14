@@ -1,0 +1,49 @@
+* {
+  display: flex;
+}
+
+@media only screen and (max-width: 840px) {
+  .global__centered-container {
+    outline: 0;
+    padding: 0;
+  }
+}
+
+@media only screen and (max-height: 576px) {
+  .global__centered-container {
+    outline: 0;
+    padding: 0;
+  }
+}
+
+.main-logo-box {
+  width: 144px;
+  height: 144px;
+  margin: auto;
+}
+
+.main-logo {
+  width: 144px;
+  height: 144px;
+}
+
+.form-fields-block {
+  width: 408px;
+  flex-direction: column;
+}
+
+.text-input {
+  margin-top: 24px;
+  height: 48px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 24px;
+  outline: 2px solid var(--theme-border);
+  outline-offset: -2px;
+  background-color: var(--theme-bg);
+}
+
+.login-page-button {
+  margin-top: 24px;
+  width: 100%
+}

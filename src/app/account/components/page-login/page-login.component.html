@@ -1,0 +1,13 @@
+<div class="global__centered-container">
+  <div class="global__form-container">
+    <div class="main-logo-box">
+      <img class="main-logo" src="assets/logo/full_logo_accent.svg"/>
+    </div>
+    <form [formGroup]="loginForm" class="form-fields-block" (ngSubmit)="onLoginButton()">
+      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email">
+      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe">
+      <button class="global__accent-button login-page-button" type="submit">Connexion</button>
+      <button class="global__accent-button login-page-button" (click)="onSignupButton()">S'inscrire</button>
+    </form>
+  </div>
+</div>

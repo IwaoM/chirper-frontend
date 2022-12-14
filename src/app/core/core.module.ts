@@ -2,8 +2,6 @@ import { LOCALE_ID, NgModule } from "@angular/core";
 import * as fr from "@angular/common/locales/fr";
 import { CommonModule, registerLocaleData } from "@angular/common";
 import { SharedModule } from "../shared/shared.module";
-import { HttpClientModule } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
 
 
 
@@ -11,9 +9,7 @@ import { RouterModule } from "@angular/router";
   declarations: [],
   imports: [
     CommonModule,
-    SharedModule,
-    HttpClientModule,
-    RouterModule
+    SharedModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "fr-FR" }

@@ -99,8 +99,22 @@ p {
   color: var(--theme-text-light);
 }
 
+::placeholder {
+  color: var(--theme-border);
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: var(--theme-border);
+}
+
+::-ms-input-placeholder {
+  color: var(--theme-border);
+}
+
 
 //* Page containers
+
 html, body, app-root {
   min-height: 100vh;
 }
@@ -108,12 +122,35 @@ html, body, app-root {
 body {
   margin: 0;
   background-color: var(--theme-bg);
+  overflow-x: hidden;
+}
+
+.global__centered-container {
+  width: 840px;
+  max-width: 100vw;
+  outline: 2px solid var(--theme-border);
+  border-radius: 24px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 72px 0;
+}
+
+.global__form-container {
+  max-width: 80vw;
+  width: 408px;
+  margin: auto;
+  overflow: hidden;
+  flex-direction: column;
 }
 
 .global__vertical-container {
   max-width: 840px;
   min-height: 100vh;
-  outline: 1px solid var(--theme-border);
+  outline: 2px solid var(--theme-border);
   margin: auto;
 }
 
@@ -133,9 +170,10 @@ button {
   cursor: pointer;
 }
 
-.global__accent-text-button {
+.global__accent-button {
   height: 48px;
   padding: 12px 24px;
+  justify-content: center;
   font-size: 16px;
   font-weight: bold;
   line-height: 24px;
