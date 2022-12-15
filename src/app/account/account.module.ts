@@ -4,14 +4,14 @@ import { AccountRoutingModule } from "./account-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { PageLoginComponent } from "./components/page-login/page-login.component";
-import { SignupComponent } from "./components/signup/signup.component";
+import { PageSignupComponent } from "./components/page-signup/page-signup.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
     PageLoginComponent,
-    SignupComponent,
+    PageSignupComponent,
     SettingsComponent
   ],
   imports: [

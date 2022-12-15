@@ -10,11 +10,11 @@ export class ChirpsService {
   constructor (private http: HttpClient) {}
 
   getAllChirps (): Observable<Chirp[]> {
-    return this.http.get<Chirp[]>("http://localhost:3000/api/chirps");
+    return this.http.get<Chirp[]>("https://localhost:3000/api/chirps");
   }
 
   getChirpById (chirpId: number): Observable<Chirp> {
-    return this.http.get<Chirp[]>(`http://localhost:3000/api/chirps/${chirpId}`).pipe(
+    return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}`).pipe(
       map(entries => entries[0])
     );
   }

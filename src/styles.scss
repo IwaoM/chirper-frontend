@@ -143,7 +143,6 @@ body {
   max-width: 80vw;
   width: 408px;
   margin: auto;
-  overflow: hidden;
   flex-direction: column;
 }
 
@@ -164,7 +163,7 @@ body {
   height: 144px;
 }
 
-//* buttons
+//* buttons & form items
 
 button {
   cursor: pointer;
@@ -220,6 +219,17 @@ button {
   width: 16px;
   height: 16px;
   cursor: pointer;
+}
+
+textarea {
+  background-color: var(--theme-bg);
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 24px;
+  transition: 0.2s;
 }
 
 //* other clickable items

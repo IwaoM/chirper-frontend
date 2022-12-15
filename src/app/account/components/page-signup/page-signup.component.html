@@ -1,0 +1,26 @@
+<div class="global__centered-container">
+  <div class="global__form-container">
+    <div class="title-box">
+      <h2>Inscription</h2>
+    </div>
+    <form class="form-fields-block" (ngSubmit)="onSignupButton()">
+      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email" required>
+      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe" required>
+      <input type="password" class="text-input global__text-normal" formControlName="password2" placeholder="Répétez le mot de passe" required>
+      <input type="text" class="text-input global__text-normal" formControlName="handle" placeholder="Nom d'utilisateur (commençant par @)" pattern="^@[A-Za-z0-9_]{1,15}$" required>
+      <input type="text" class="text-input global__text-normal" formControlName="username" placeholder="Nom d'affichage" required>
+      <div class="form-items-row">
+        <div class="profile-pic-box">
+          <img src="assets/svgIcons/picture_dark.svg"/>
+        </div>
+        <div class="textarea-box">
+          <textarea placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
+        </div>
+      </div>
+      <div class="form-items-row">
+        <button class="global__accent-button signup-page-button" type="submit">S'inscrire</button>
+        <button class="global__accent-button signup-page-button" (click)="onCancelButton()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>

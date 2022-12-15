@@ -4,8 +4,8 @@
       <img class="main-logo" src="assets/logo/full_logo_accent.svg"/>
     </div>
     <form [formGroup]="loginForm" class="form-fields-block" (ngSubmit)="onLoginButton()">
-      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email">
-      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe">
+      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email" required>
+      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe" required>
       <button class="global__accent-button login-page-button" type="submit">Connexion</button>
       <button class="global__accent-button login-page-button" (click)="onSignupButton()">S'inscrire</button>
     </form>

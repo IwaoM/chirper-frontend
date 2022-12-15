@@ -4,32 +4,37 @@ import { Router } from "@angular/router";
 import { AccountService } from "src/app/core/services/account.service";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./page-login.component.html",
-  styleUrls: ["./page-login.component.scss"]
+  selector: "app-signup",
+  templateUrl: "./page-signup.component.html",
+  styleUrls: ["./page-signup.component.scss"]
 })
-export class PageLoginComponent implements OnInit {
+export class PageSignupComponent implements OnInit {
   constructor (
     private router: Router,
     private formBuilder: FormBuilder,
     private accountService: AccountService
   ) {}
 
-  loginForm!: FormGroup;
+  signupForm!: FormGroup;
 
   ngOnInit (): void {
-    this.loginForm = this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       email: [null],
       password: [null],
+      password2: [null],
+      handle: [null],
+      username: [null],
+      bio: [null],
     });
   }
 
-  onLoginButton (): void {
+  onSignupButton (): void {
+    // todo: create account
     this.accountService.login();
     this.router.navigateByUrl("app/timeline");
   }
 
-  onSignupButton (): void {
-    this.router.navigateByUrl("account/signup");
+  onCancelButton (): void {
+    this.router.navigateByUrl("account/login");
   }
 }
