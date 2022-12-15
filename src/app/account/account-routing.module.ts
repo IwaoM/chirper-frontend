@@ -5,10 +5,12 @@ import { PageLoginComponent } from "./components/page-login/page-login.component
 import { SignupComponent } from "./components/signup/signup.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 
+import { AccountGuard } from "../core/guards/account.guard";
+
 const routes: Routes = [
   { path: "login", component: PageLoginComponent },
   { path: "signup", component: SignupComponent },
-  { path: "settings", component: SettingsComponent },
+  { path: "settings", component: SettingsComponent, canActivate: [AccountGuard] },
 ];
 
 @NgModule({

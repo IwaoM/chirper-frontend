@@ -2,48 +2,28 @@
   <nav>
     <div class="iconGroup">
       <div class="navbarLogo">
-        <object type="image/svg+xml">
-          <img class="appLogo" src="assets/logo/text_accent.svg"/>
-        </object>
+        <img class="appLogo" src="assets/logo/text_accent.svg"/>
       </div>
       <div class="navbarButton" routerLink="app/timeline">
-        <object *ngIf="currentPage === 'timeline'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/home_filled_dark.svg"/>
-        </object>
-        <object *ngIf="currentPage !== 'timeline'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/home_dark.svg"/>
-        </object>
+        <img *ngIf="currentPage === 'timeline'" class="global__icon-button" src="assets/svgIcons/home_filled_dark.svg"/>
+        <img *ngIf="currentPage !== 'timeline'" class="global__icon-button" src="assets/svgIcons/home_dark.svg"/>
       </div>
       <div class="navbarButton">
-        <object *ngIf="currentPage === 'ownProfile'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/profile_filled_dark.svg"/>
-        </object>
-        <object *ngIf="currentPage !== 'ownProfile'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/profile_dark.svg"/>
-        </object>
+        <img *ngIf="currentPage === 'ownProfile'" class="global__icon-button" src="assets/svgIcons/profile_filled_dark.svg"/>
+        <img *ngIf="currentPage !== 'ownProfile'" class="global__icon-button" src="assets/svgIcons/profile_dark.svg"/>
       </div>
       <div class="navbarButton">
-        <object *ngIf="currentPage === 'search'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/search_filled_dark.svg"/>
-        </object>
-        <object *ngIf="currentPage !== 'search'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/search_dark.svg"/>
-        </object>
+        <img *ngIf="currentPage === 'search'" class="global__icon-button" src="assets/svgIcons/search_filled_dark.svg"/>
+        <img *ngIf="currentPage !== 'search'" class="global__icon-button" src="assets/svgIcons/search_dark.svg"/>
       </div>
     </div>
     <div class="iconGroup">
       <div class="navbarButtonRight">
-        <object *ngIf="currentPage === 'settings'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/settings_filled_dark.svg"/>
-        </object>
-        <object *ngIf="currentPage !== 'settings'" type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/settings_dark.svg"/>
-        </object>
+        <img *ngIf="currentPage === 'settings'" class="global__icon-button" src="assets/svgIcons/settings_filled_dark.svg"/>
+        <img *ngIf="currentPage !== 'settings'" class="global__icon-button" src="assets/svgIcons/settings_dark.svg"/>
       </div>
-      <div class="navbarButtonRight">
-        <object type="image/svg+xml">
-          <img class="global__icon-button" src="assets/svgIcons/signout_dark.svg"/>
-        </object>
+      <div class="navbarButtonRight" (click)="onLogoutButton()">
+        <img class="global__icon-button" src="assets/svgIcons/logout_dark.svg"/>
       </div>
     </div>
   </nav>
