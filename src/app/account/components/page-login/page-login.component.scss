@@ -41,6 +41,11 @@
   outline: 2px solid var(--theme-border);
   outline-offset: -2px;
   background-color: var(--theme-bg);
+  transition: 0.2s;
+
+  &.ng-invalid.ng-touched {
+    outline: 2px solid var(--theme-red);
+  }
 }
 
 .login-page-button {

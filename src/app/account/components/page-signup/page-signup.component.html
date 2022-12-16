@@ -3,14 +3,39 @@
     <div class="title-box">
       <h2>Inscription</h2>
     </div>
-    <form class="form-fields-block" (ngSubmit)="onSignupButton()">
-      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email" required>
-      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe" required>
-      <input type="password" class="text-input global__text-normal" formControlName="password2" placeholder="Répétez le mot de passe" required>
-      <input type="text" class="text-input global__text-normal" formControlName="handle" placeholder="Nom d'utilisateur (commençant par @)" pattern="^@[A-Za-z0-9_]{1,15}$" required>
-      <input type="text" class="text-input global__text-normal" formControlName="username" placeholder="Nom d'affichage" required>
+    <form [formGroup]="signupForm" class="form-fields-block" (ngSubmit)="onSignupButton()">
+      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email *">
+      <p
+        *ngIf="signupForm.get('email')?.invalid && 
+          signupForm.get('email')?.touched"
+        class="global__form-error"
+      >{{ getFormControlErrorText(signupForm.get('email')) }}</p>
+      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe *">
+      <p
+        *ngIf="signupForm.get('password')?.invalid && 
+          signupForm.get('password')?.touched"
+        class="global__form-error"
+      >{{ getFormControlErrorText(signupForm.get('password')) }}</p>
+      <input type="password" class="text-input global__text-normal" formControlName="password2" placeholder="Répétez le mot de passe *">
+      <p
+        *ngIf="signupForm.get('password2')?.invalid && 
+          signupForm.get('password2')?.touched"
+        class="global__form-error"
+      >{{ getFormControlErrorText(signupForm.get('password2')) }}</p>
+      <p
+        *ngIf="signupForm.hasError('passwordsMismatch')"
+        class="global__form-error"
+      >{{ getFormControlErrorText(signupForm) }}</p>
+      <input type="text" class="text-input global__text-normal" formControlName="handle" placeholder="Nom d'utilisateur *" pattern="[A-Za-z0-9_]{1,15}$">
+      <p
+        *ngIf="signupForm.get('handle')?.invalid && 
+          signupForm.get('handle')?.touched"
+        class="global__form-error"
+      >{{ getFormControlErrorText(signupForm.get('handle')) }}</p>
+      <input type="text" class="text-input global__text-normal" formControlName="username" placeholder="Nom d'affichage">
       <div class="form-items-row">
         <div class="profile-pic-box">
+          <input class="profile-pic-field" type="file" accept=".png, .jpg" (change)="onProfilePicSelect($event)" formControlName="profilePic">
           <img src="assets/svgIcons/picture_dark.svg"/>
         </div>
         <div class="textarea-box">
@@ -18,7 +43,7 @@
         </div>
       </div>
       <div class="form-items-row">
-        <button class="global__accent-button signup-page-button" type="submit">S'inscrire</button>
+        <button class="global__accent-button signup-page-button" type="submit" [disabled]="signupForm.invalid">S'inscrire</button>
         <button class="global__accent-button signup-page-button" (click)="onCancelButton()">Annuler</button>
       </div>
     </form>

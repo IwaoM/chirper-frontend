@@ -35,6 +35,11 @@
   outline: 2px solid var(--theme-border);
   outline-offset: -2px;
   background-color: var(--theme-bg);
+  transition: 0.2s;
+
+  &.ng-invalid.ng-touched {
+    outline: 2px solid var(--theme-red);
+  }
 }
 
 .form-items-row {
@@ -52,6 +57,25 @@
   overflow: hidden;
   border-radius: 60px;
   margin-right: 24px;
+  background-color: var(--theme-bg);
+  transition: 0.1s;
+
+  &:hover {
+    background-color: var(--theme-bg-hover);
+  }
+
+  &:active {
+    background-color: var(--theme-bg-select);
+  }
+}
+
+.profile-pic-field {
+  position: absolute;
+  min-height: 120px;
+  height: 120px;
+  min-width: 120px;
+  width: 120px;
+  opacity: 0;
 }
 
 .textarea-box {
