@@ -35,16 +35,20 @@
       <input type="text" class="text-input global__text-normal" formControlName="username" placeholder="Nom d'affichage">
       <div class="form-items-row">
         <div class="profile-pic-box">
-          <input class="profile-pic-field" type="file" accept=".png, .jpg" (change)="onProfilePicSelect($event)" formControlName="profilePic">
-          <img src="assets/svgIcons/picture_dark.svg"/>
+          <input class="profile-pic-field" type="file" accept=".png" (change)="onProfilePicSelect($event)">
+          <img *ngIf="profilePicPreview" [src]="profilePicPreview" class="profile-pic-preview">
+          <img *ngIf="!profilePicPreview" src="assets/svgIcons/picture_dark.svg"/>
         </div>
         <div class="textarea-box">
           <textarea placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
         </div>
       </div>
+      <div *ngIf="profilePicPreview" class="remove-image-button" (click)="onProfilePicRemove()">
+        <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
+      </div>
       <div class="form-items-row">
         <button class="global__accent-button signup-page-button" type="submit" [disabled]="signupForm.invalid">S'inscrire</button>
-        <button class="global__accent-button signup-page-button" (click)="onCancelButton()">Annuler</button>
+        <button class="global__accent-button signup-page-button" type="button" (click)="onCancelButton()">Annuler</button>
       </div>
     </form>
   </div>

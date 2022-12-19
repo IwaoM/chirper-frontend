@@ -31,6 +31,7 @@
             "style": "kebab-case"
           }
         ],
+        "@typescript-eslint/no-explicit-any": "off",
         "arrow-spacing": ["warn", { "before": true, "after": true }],
         "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
         "comma-spacing": "error",

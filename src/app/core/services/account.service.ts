@@ -34,4 +34,8 @@ export class AccountService {
       map(result => result[0].handle_taken)
     );
   }
+
+  createAccount (data: FormData): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/users`, data);
+  }
 }

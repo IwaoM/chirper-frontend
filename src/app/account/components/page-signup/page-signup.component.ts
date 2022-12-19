@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { map, Observable, of } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { AccountService } from "src/app/core/services/account.service";
 
 @Component({
@@ -17,11 +17,14 @@ export class PageSignupComponent implements OnInit {
   ) {}
 
   signupForm!: FormGroup;
-  profilePicFilename = "";
+  signupFormData!: FormData;
+  profilePicPreview!: string;
 
   //* Init stuff
   ngOnInit (): void {
     this.initForm();
+    this.signupFormData = new FormData();
+    this.profilePicPreview = "";
   }
 
   private initForm (): void {
@@ -51,7 +54,6 @@ export class PageSignupComponent implements OnInit {
       username: new FormControl("", [
         Validators.maxLength(40)
       ]),
-      profilePic: new FormControl(""),
       bio: new FormControl("", [
         Validators.maxLength(400)
       ]),
@@ -63,8 +65,13 @@ export class PageSignupComponent implements OnInit {
 
   //* Event handlers
   onSignupButton (): void {
-    // todo: create account
     console.log(this.signupForm.value);
+    for (const field in this.signupForm.value) {
+      this.signupFormData.append(field, this.signupForm.value[field]);
+    }
+    this.accountService.createAccount(this.signupFormData).pipe(
+      tap(res => console.log(res))
+    ).subscribe();
     // this.accountService.login();
     // this.router.navigateByUrl("app/timeline");
   }
@@ -74,10 +81,28 @@ export class PageSignupComponent implements OnInit {
   }
 
   onProfilePicSelect (event: any): void {
-    // WIP
-    const file: File = event?.target?.files[0];
-    this.profilePicFilename = file.name;
-    console.log(file);
+    if (event?.target?.files[0]) {
+      const file: File = event.target.files[0];
+
+      // add picture to formData
+      if (this.signupFormData.has("profilePic")) {
+        this.signupFormData.delete("profilePic");
+      }
+      this.signupFormData.append("profilePic", file, "profilePic.png");
+
+      // update the src for the preview image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profilePicPreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onProfilePicRemove (): void {
+    this.profilePicPreview = "";
+    this.signupForm.get("profilePic")?.setValue(null);
+    this.signupFormData.delete("profilePic");
   }
 
   //* Validators
@@ -99,7 +124,9 @@ export class PageSignupComponent implements OnInit {
 
   uniqueHandleValidator (): AsyncValidatorFn {
     return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.accountService.getHandleUsed(control.value) ? of({ handleAlreadyInUse: true }) : of(null);
+      return this.accountService.getHandleUsed(control.value).pipe(
+        map(result => result ? { handleAlreadyInUse: true } : null)
+      );
     };
   }
 
