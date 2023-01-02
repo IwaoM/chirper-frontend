@@ -21,7 +21,7 @@
         <div class="profile-pic-box" (click)="onAuthorClick($event)" *ngIf="viewType === 'focused'">
           <img
             class="global__profile-pic"
-            [src]="chirp.picture === 'default' ? 'assets/userPictures/default.png' : chirp.picture"
+            [src]="authorProfilePic$ | async"
             [alt]="chirp.username"
           >
         </div>
