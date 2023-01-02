@@ -72,6 +72,14 @@ export class PageSignupComponent implements OnInit {
     this.accountService.createAccount(this.signupFormData).pipe(
       tap(res => console.log(res))
     ).subscribe();
+
+    this.signupFormData.delete("email");
+    this.signupFormData.delete("password");
+    this.signupFormData.delete("password2");
+    this.signupFormData.delete("handle");
+    this.signupFormData.delete("username");
+    this.signupFormData.delete("bio");
+
     // this.accountService.login();
     // this.router.navigateByUrl("app/timeline");
   }

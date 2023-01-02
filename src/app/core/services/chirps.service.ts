@@ -1,16 +1,29 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { SafeUrl } from "@angular/platform-browser";
 import { map, Observable } from "rxjs";
 import { Chirp } from "../models/chirp.model";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Injectable({
   providedIn: "root"
 })
 export class ChirpsService {
-  constructor (private http: HttpClient) {}
+  ppFolder = "../../assets/userPictures";
+
+  constructor (
+    private http: HttpClient,
+    private sanitizer: DomSanitizer
+  ) {}
 
   getAllChirps (): Observable<Chirp[]> {
     return this.http.get<Chirp[]>("https://localhost:3000/api/chirps");
+  }
+
+  getUserProfilePic (authorId: number): Observable<SafeUrl> {
+    return this.http.get(`https://localhost:3000/api/users/${authorId}/picture`, { responseType: "blob" }).pipe(
+      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
+    );
   }
 
   getChirpById (chirpId: number): Observable<Chirp> {

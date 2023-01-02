@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { Chirp } from "../../../core/models/chirp.model";
+
 
 @Component({
   selector: "app-chirp",
@@ -16,12 +19,14 @@ export class ChirpComponent implements OnInit {
 
   @Input() chirp!: Chirp;
   @Input() viewType!: "normal" | "focused";
+  authorProfilePic$!: Observable<SafeUrl>;
   starred!: boolean;
   deleteHovered!: boolean;
   starHovered!: boolean;
   answerHovered!: boolean;
 
   ngOnInit () {
+    this.authorProfilePic$ = this.chirpsService.getUserProfilePic(this.chirp.author_id);
     this.starred = false;
     this.deleteHovered = false;
     this.starHovered = false;
