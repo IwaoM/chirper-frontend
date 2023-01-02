@@ -2,7 +2,7 @@ export class Chirp {
   id!: number;
   timestamp!: Date;
   text!: string;
-  image?: string;
+  image!: boolean;
   author_id!: number;
   reply_to_id?: number;
   username!: string;

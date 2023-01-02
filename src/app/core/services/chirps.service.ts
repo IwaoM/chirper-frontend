@@ -32,6 +32,12 @@ export class ChirpsService {
     );
   }
 
+  getChirpImage (chirpId: number): Observable<SafeUrl> {
+    return this.http.get(`https://localhost:3000/api/chirps/${chirpId}/image`, { responseType: "blob" }).pipe(
+      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
+    );
+  }
+
   // starChirpById (chirpId: number): void {
   //   const chirp = this.chirps.find(ch => ch.id === chirpId);
   //   if (chirp) {

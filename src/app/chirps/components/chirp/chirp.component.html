@@ -7,7 +7,7 @@
   <div class="profile-pic-box global__clickable" (click)="onAuthorClick($event)" *ngIf="viewType === 'normal'">
     <img
       class="global__profile-pic"
-      [src]="authorProfilePic$ | async"
+      [src]="authorProfilePicUrl$ | async"
       [alt]="chirp.username"
     >
   </div>
@@ -21,7 +21,7 @@
         <div class="profile-pic-box" (click)="onAuthorClick($event)" *ngIf="viewType === 'focused'">
           <img
             class="global__profile-pic"
-            [src]="authorProfilePic$ | async"
+            [src]="authorProfilePicUrl$ | async"
             [alt]="chirp.username"
           >
         </div>
@@ -86,7 +86,7 @@
             'image-content--normal': viewType === 'normal',
             'image-content--focused': viewType === 'focused'
           }"
-          [src]="chirp.image"
+          [src]="chirpImageUrl$ | async"
         >
       </div>
 

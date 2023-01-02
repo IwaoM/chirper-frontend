@@ -19,14 +19,18 @@ export class ChirpComponent implements OnInit {
 
   @Input() chirp!: Chirp;
   @Input() viewType!: "normal" | "focused";
-  authorProfilePic$!: Observable<SafeUrl>;
+  authorProfilePicUrl$!: Observable<SafeUrl>;
+  chirpImageUrl$?: Observable<SafeUrl>;
   starred!: boolean;
   deleteHovered!: boolean;
   starHovered!: boolean;
   answerHovered!: boolean;
 
   ngOnInit () {
-    this.authorProfilePic$ = this.chirpsService.getUserProfilePic(this.chirp.author_id);
+    this.authorProfilePicUrl$ = this.chirpsService.getUserProfilePic(this.chirp.author_id);
+    if (this.chirp.image) {
+      this.chirpImageUrl$ = this.chirpsService.getChirpImage(this.chirp.id);
+    }
     this.starred = false;
     this.deleteHovered = false;
     this.starHovered = false;
