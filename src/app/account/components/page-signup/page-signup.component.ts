@@ -65,12 +65,11 @@ export class PageSignupComponent implements OnInit {
 
   //* Event handlers
   onSignupButton (): void {
-    console.log(this.signupForm.value);
     for (const field in this.signupForm.value) {
       this.signupFormData.append(field, this.signupForm.value[field]);
     }
     this.accountService.createAccount(this.signupFormData).pipe(
-      tap(res => console.log(res))
+      tap(() => this.router.navigateByUrl("account/login"))
     ).subscribe();
 
     this.signupFormData.delete("email");
@@ -79,9 +78,6 @@ export class PageSignupComponent implements OnInit {
     this.signupFormData.delete("handle");
     this.signupFormData.delete("username");
     this.signupFormData.delete("bio");
-
-    // this.accountService.login();
-    // this.router.navigateByUrl("app/timeline");
   }
 
   onCancelButton (): void {

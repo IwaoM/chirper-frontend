@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -10,8 +10,10 @@ export class AccountService {
 
   private token!: string;
 
-  login (): void {
-    this.token = "fakeToken";
+  login (data: FormData): Observable<{ userId: number, token: string }> {
+    return this.http.post<{ userId: number, token: string }>(`https://localhost:3000/api/users/login`, data).pipe(
+      tap(result => this.token = result.token)
+    );
   }
 
   logout (): void {
@@ -36,6 +38,6 @@ export class AccountService {
   }
 
   createAccount (data: FormData): Observable<number> {
-    return this.http.post<number>(`https://localhost:3000/api/users`, data);
+    return this.http.post<number>(`https://localhost:3000/api/users/signup`, data);
   }
 }
