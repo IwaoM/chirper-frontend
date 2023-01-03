@@ -6,14 +6,12 @@
     <form [formGroup]="signupForm" class="form-fields-block" (ngSubmit)="onSignupButton()">
       <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email *">
       <p
-        *ngIf="signupForm.get('email')?.invalid && 
-          signupForm.get('email')?.touched"
+        *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
         class="global__form-error"
       >{{ getFormControlErrorText(signupForm.get('email')) }}</p>
       <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe *">
       <p
-        *ngIf="signupForm.get('password')?.invalid && 
-          signupForm.get('password')?.touched"
+        *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
         class="global__form-error"
       >{{ getFormControlErrorText(signupForm.get('password')) }}</p>
       <input type="password" class="text-input global__text-normal" formControlName="password2" placeholder="Répétez le mot de passe *">

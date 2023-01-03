@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
@@ -21,8 +21,12 @@ export class PageLoginComponent implements OnInit {
 
   ngOnInit (): void {
     this.loginForm = this.formBuilder.group({
-      email: [null],
-      password: [null],
+      email: new FormControl("", [
+        Validators.required,
+      ]),
+      password: new FormControl("", [
+        Validators.required,
+      ]),
     });
     this.loginFormData = new FormData();
   }
@@ -37,6 +41,7 @@ export class PageLoginComponent implements OnInit {
 
     this.loginFormData.delete("email");
     this.loginFormData.delete("password");
+    this.loginForm.reset();
   }
 
   onSignupButton (): void {

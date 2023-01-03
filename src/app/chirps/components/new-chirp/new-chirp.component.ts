@@ -1,4 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { SafeUrl } from "@angular/platform-browser";
+import { Observable } from "rxjs";
+import { AuthService } from "src/app/core/services/auth.service";
+import { ChirpsService } from "src/app/core/services/chirps.service";
 
 @Component({
   selector: "app-new-chirp",
@@ -6,18 +10,24 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./new-chirp.component.scss"]
 })
 export class NewChirpComponent implements OnInit {
+  constructor (
+    private authService: AuthService,
+    private chirpsService: ChirpsService
+  ) {}
 
   @Input() placeholderText!: string;
   connectedUser!: {
-    username: string;
-    picture: string
+    id: number,
+    username: string,
+    pictureUrl$: Observable<SafeUrl>
   };
   image!: string;
 
   ngOnInit () {
     this.connectedUser = {
-      username: "Iwao Meunier",
-      picture: "assets/userPictures/1.png"
+      id: this.authService.getConnectedUserId(),
+      username: this.authService.getConnectedUserUsername(),
+      pictureUrl$: this.chirpsService.getUserProfilePic(this.authService.getConnectedUserId())
     };
     this.image = "";
   }

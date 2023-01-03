@@ -4,7 +4,7 @@
   (click)="onChirpClick()"
 >
 
-  <div class="profile-pic-box global__clickable" (click)="onAuthorClick($event)" *ngIf="viewType === 'normal'">
+  <div class="global__profile-pic-box global__clickable" (click)="onAuthorClick($event)" *ngIf="viewType === 'normal'">
     <img
       class="global__profile-pic"
       [src]="authorProfilePicUrl$ | async"
@@ -18,7 +18,7 @@
 
       <div class="author-block">
 
-        <div class="profile-pic-box" (click)="onAuthorClick($event)" *ngIf="viewType === 'focused'">
+        <div class="global__profile-pic-box" (click)="onAuthorClick($event)" *ngIf="viewType === 'focused'">
           <img
             class="global__profile-pic"
             [src]="authorProfilePicUrl$ | async"

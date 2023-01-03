@@ -9,13 +9,15 @@ export class AuthService {
   constructor (private http: HttpClient) {}
 
   private token = "";
+  private connectedUserUsername = "";
   private connectedUserId = 0;
 
-  login (data: FormData): Observable<{ userId: number, token: string }> {
-    return this.http.post<{ userId: number, token: string }>(`https://localhost:3000/api/auth/login`, data).pipe(
+  login (data: FormData): Observable<{ userId: number, username: string, token: string }> {
+    return this.http.post<{ userId: number, username: string, token: string }>(`https://localhost:3000/api/auth/login`, data).pipe(
       tap(result => {
         this.token = result.token;
         this.connectedUserId = result.userId;
+        this.connectedUserUsername = result.username;
       })
     );
   }
@@ -23,6 +25,7 @@ export class AuthService {
   logout (): void {
     this.token = "";
     this.connectedUserId = 0;
+    this.connectedUserUsername = "";
   }
 
   getToken (): string {
@@ -31,6 +34,10 @@ export class AuthService {
 
   getConnectedUserId (): number {
     return this.connectedUserId;
+  }
+
+  getConnectedUserUsername (): string {
+    return this.connectedUserUsername;
   }
 
   //* API requests

@@ -1,9 +1,9 @@
 <div class="new-chirp">
 
-  <div class="profile-pic global__clickable">
+  <div class="global__profile-pic-box global__clickable">
     <img
       class="global__profile-pic"
-      [src]="connectedUser.picture"
+      [src]="connectedUser.pictureUrl$ | async"
       [alt]="connectedUser.username"
       (click)="onConnectedUserClick()"
     >
