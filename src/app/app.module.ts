@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { CoreModule } from "./core/core.module";
-import { AccountModule } from "./account/account.module";
+import { AuthModule } from "./auth/auth.module";
 import { ChirpsModule } from "./chirps/chirps.module";
 import { SharedModule } from "./shared/shared.module";
 
@@ -23,7 +23,7 @@ import { SharedModule } from "./shared/shared.module";
     CoreModule,
     SharedModule,
     ChirpsModule,
-    AccountModule
+    AuthModule
   ],
   bootstrap: [AppComponent]
 })

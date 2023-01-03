@@ -3,14 +3,10 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { PageLoginComponent } from "./components/page-login/page-login.component";
 import { PageSignupComponent } from "./components/page-signup/page-signup.component";
-import { SettingsComponent } from "./components/settings/settings.component";
-
-import { AccountGuard } from "../core/guards/account.guard";
 
 const routes: Routes = [
   { path: "login", component: PageLoginComponent },
   { path: "signup", component: PageSignupComponent },
-  { path: "settings", component: SettingsComponent, canActivate: [AccountGuard] },
 ];
 
 @NgModule({
@@ -21,4 +17,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class AccountRoutingModule {}
+export class AuthRoutingModule {}

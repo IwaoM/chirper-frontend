@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { tap } from "rxjs";
-import { AccountService } from "src/app/core/services/account.service";
+import { AuthService } from "src/app/core/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -13,7 +13,7 @@ export class PageLoginComponent implements OnInit {
   constructor (
     private router: Router,
     private formBuilder: FormBuilder,
-    private accountService: AccountService
+    private authService: AuthService
   ) {}
 
   loginForm!: FormGroup;
@@ -31,7 +31,7 @@ export class PageLoginComponent implements OnInit {
     for (const field in this.loginForm.value) {
       this.loginFormData.append(field, this.loginForm.value[field]);
     }
-    this.accountService.login(this.loginFormData).pipe(
+    this.authService.login(this.loginFormData).pipe(
       tap(() => this.router.navigateByUrl("app/timeline"))
     ).subscribe();
 
@@ -40,6 +40,6 @@ export class PageLoginComponent implements OnInit {
   }
 
   onSignupButton (): void {
-    this.router.navigateByUrl("account/signup");
+    this.router.navigateByUrl("auth/signup");
   }
 }

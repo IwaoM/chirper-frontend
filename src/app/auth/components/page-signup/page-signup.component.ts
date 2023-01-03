@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { map, Observable, tap } from "rxjs";
-import { AccountService } from "src/app/core/services/account.service";
+import { AuthService } from "src/app/core/services/auth.service";
 
 @Component({
   selector: "app-signup",
@@ -13,7 +13,7 @@ export class PageSignupComponent implements OnInit {
   constructor (
     private router: Router,
     private formBuilder: FormBuilder,
-    private accountService: AccountService
+    private authService: AuthService
   ) {}
 
   signupForm!: FormGroup;
@@ -68,8 +68,8 @@ export class PageSignupComponent implements OnInit {
     for (const field in this.signupForm.value) {
       this.signupFormData.append(field, this.signupForm.value[field]);
     }
-    this.accountService.createAccount(this.signupFormData).pipe(
-      tap(() => this.router.navigateByUrl("account/login"))
+    this.authService.createAccount(this.signupFormData).pipe(
+      tap(() => this.router.navigateByUrl("auth/login"))
     ).subscribe();
 
     this.signupFormData.delete("email");
@@ -81,7 +81,7 @@ export class PageSignupComponent implements OnInit {
   }
 
   onCancelButton (): void {
-    this.router.navigateByUrl("account/login");
+    this.router.navigateByUrl("auth/login");
   }
 
   onProfilePicSelect (event: any): void {
@@ -112,7 +112,7 @@ export class PageSignupComponent implements OnInit {
   //* Validators
   uniqueEmailValidator (): AsyncValidatorFn {
     return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.accountService.getEmailUsed(control.value).pipe(
+      return this.authService.getEmailUsed(control.value).pipe(
         map(result => result ? { emailAlreadyInUse: true } : null)
       );
     };
@@ -128,7 +128,7 @@ export class PageSignupComponent implements OnInit {
 
   uniqueHandleValidator (): AsyncValidatorFn {
     return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.accountService.getHandleUsed(control.value).pipe(
+      return this.authService.getHandleUsed(control.value).pipe(
         map(result => result ? { handleAlreadyInUse: true } : null)
       );
     };

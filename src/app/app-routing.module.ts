@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   { path: "app", loadChildren: () => import("./chirps/chirps.module").then(m => m.ChirpsModule) },
-  { path: "account", loadChildren: () => import("./account/account.module").then(m => m.AccountModule) },
+  { path: "auth", loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) },
   { path: "**", redirectTo: "app/timeline" }
 ];
 

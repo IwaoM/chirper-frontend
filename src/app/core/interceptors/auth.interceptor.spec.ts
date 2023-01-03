@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AccountInterceptor } from './account.interceptor';
+import { AccountInterceptor } from './auth.interceptor';
 
 describe('AccountInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({

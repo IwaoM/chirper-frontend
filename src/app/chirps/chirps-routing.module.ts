@@ -4,11 +4,11 @@ import { RouterModule, Routes } from "@angular/router";
 import { PageChirpComponent } from "./components/page-chirp/page-chirp.component";
 import { PageTimelineComponent } from "./components/page-timeline/page-timeline.component";
 
-import { AccountGuard } from "../core/guards/account.guard";
+import { AuthGuard } from "../core/guards/auth.guard";
 
 const routes: Routes = [
-  { path: "timeline", component: PageTimelineComponent, canActivate: [AccountGuard] },
-  { path: "chirps/:id", component: PageChirpComponent, canActivate: [AccountGuard] },
+  { path: "timeline", component: PageTimelineComponent, canActivate: [AuthGuard] },
+  { path: "chirps/:id", component: PageChirpComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
