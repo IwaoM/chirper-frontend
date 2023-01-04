@@ -36,7 +36,9 @@
 .content-image {
   object-fit: cover;
   max-width: 96px;
+  width: 96px;
   max-height: 96px;
+  height: 96px;
 }
 
 .remove-image-button {
@@ -47,6 +49,30 @@
 .button-block {
   margin-top: 24px;
   flex-direction: row-reverse;
+}
+
+.image-box {
+  min-height: 48px;
+  height: 48px;
+  min-width: 48px;
+  width: 48px;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: var(--theme-accent);
+
+  &:hover {
+    background-color: var(--theme-accent-hover);
+  }
+}
+
+.image-field {
+  position: absolute;
+  min-height: 48px;
+  height: 48px;
+  min-width: 48px;
+  width: 48px;
+  border-radius: 24px;
+  opacity: 0;
 }
 
 .publish-button {

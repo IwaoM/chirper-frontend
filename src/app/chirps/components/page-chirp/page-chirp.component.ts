@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { Chirp } from "../../../core/models/chirp.model";
@@ -12,19 +12,35 @@ import { Chirp } from "../../../core/models/chirp.model";
 export class PageChirpComponent implements OnInit {
   constructor (
     private chirpsService: ChirpsService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        this.onNavigationToChirpPage();
+      }
+    });
+  }
 
   currentPage!: string;
   currentTitle!: string;
+  chirpId!: number;
   focusedChirp$!: Observable<Chirp>;
-  replyChirps!: Chirp[];
+  replyChirps$!: Observable<Chirp[]>;
 
   ngOnInit () {
-    const chirpId = +this.route.snapshot.params["id"];
+    this.onNavigationToChirpPage();
+  }
+
+  onNavigationToChirpPage () {
+    this.chirpId = +this.route.snapshot.params["id"];
     this.currentPage = "singleChirp";
     this.currentTitle = "Chirp";
-    this.focusedChirp$ = this.chirpsService.getChirpById(chirpId);
-    this.replyChirps = [];
+    this.focusedChirp$ = this.chirpsService.getChirpById(this.chirpId);
+    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
+  }
+
+  onNewReply () {
+    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
   }
 }

@@ -39,12 +39,12 @@
         </div>
 
         <div *ngIf="viewType === 'normal'" class="timestamp">
-          <p class="global__text-light">le {{ chirp.timestamp | date: "d MMMM à HH:mm" }}</p>
+          <p class="global__text-light">le {{ chirp.timestamp | date: "d MMMM YYYY à HH:mm" }}</p>
         </div>
 
       </div>
 
-      <div
+      <div *ngIf="connectedUser.id === chirp.author_id"
         class="delete-button"
         (click)="onDeleteClick($event)"
         (mouseenter)="onDeleteMouseEnter()"
@@ -55,7 +55,7 @@
         </object>
 
         <object *ngIf="deleteHovered" type="image/svg+xml">
-          <img class="global__mini-icon-button" src="assets/svgIcons/delete_accent1.svg"/>
+          <img class="global__mini-icon-button" src="assets/svgIcons/delete_warning.svg"/>
         </object>
 
       </div>
@@ -95,7 +95,7 @@
         class="timestamp"
         [ngClass]="{ 'timestamp--focused': viewType === 'focused' }"
       >
-        <p class="global__text-light">Le {{ chirp.timestamp | date: "d MMMM à HH:mm" }}</p>
+        <p class="global__text-light">Le {{ chirp.timestamp | date: "d MMMM YYYY à HH:mm" }}</p>
       </div>
     </div>
   
