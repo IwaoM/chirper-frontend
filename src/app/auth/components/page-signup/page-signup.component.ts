@@ -105,7 +105,6 @@ export class PageSignupComponent implements OnInit {
 
   onProfilePicRemove (): void {
     this.profilePicPreview = "";
-    this.signupForm.get("profilePic")?.setValue(null);
     this.signupFormData.delete("profilePic");
   }
 

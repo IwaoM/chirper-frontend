@@ -8,6 +8,7 @@ import { PageChirpComponent } from "./components/page-chirp/page-chirp.component
 import { PageTimelineComponent } from "./components/page-timeline/page-timeline.component";
 import { ChirpsRoutingModule } from "./chirps-routing.module";
 import { SharedModule } from "../shared/shared.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 
@@ -22,7 +23,8 @@ import { SharedModule } from "../shared/shared.module";
     CommonModule,
     SharedModule,
     ChirpsRoutingModule,
-    AutosizeModule
+    AutosizeModule,
+    ReactiveFormsModule
   ]
 })
 export class ChirpsModule { }

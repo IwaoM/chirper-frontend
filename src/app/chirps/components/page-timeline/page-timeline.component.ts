@@ -20,4 +20,8 @@ export class PageTimelineComponent implements OnInit {
     this.currentTitle = "Derniers chirps";
     this.chirps$ = this.chirpsService.getAllChirps();
   }
+
+  onNewChirp () {
+    this.chirps$ = this.chirpsService.getAllChirps();
+  }
 }

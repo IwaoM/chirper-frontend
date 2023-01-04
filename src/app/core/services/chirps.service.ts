@@ -16,8 +16,13 @@ export class ChirpsService {
     private sanitizer: DomSanitizer
   ) {}
 
+  // GET requests
   getAllChirps (): Observable<Chirp[]> {
     return this.http.get<Chirp[]>("https://localhost:3000/api/chirps");
+  }
+
+  getRepliesTo (chirpId: number): Observable<Chirp[]> {
+    return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}/replies`);
   }
 
   getUserProfilePic (authorId: number): Observable<SafeUrl> {
@@ -36,6 +41,11 @@ export class ChirpsService {
     return this.http.get(`https://localhost:3000/api/chirps/${chirpId}/image`, { responseType: "blob" }).pipe(
       map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
     );
+  }
+
+  // POST requests
+  createChirp (data: FormData): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/chirps`, data);
   }
 
   // starChirpById (chirpId: number): void {

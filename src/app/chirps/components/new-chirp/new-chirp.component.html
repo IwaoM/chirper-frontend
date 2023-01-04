@@ -9,19 +9,19 @@
     >
   </div>
 
-  <div class="body-block">
+  <form [formGroup]="newChirpForm" class="body-block" (ngSubmit)="onPublishClick()">
   
     <div class="content-block">
       <textarea
         autosize
         [minRows]="1"
-        maxlength="400"
         [placeholder]="placeholderText"
-        class="text-content"></textarea
+        class="text-content"
+        formControlName="chirpText"></textarea
       >
-      <div *ngIf="image" class="content-image-block">
+      <div *ngIf="imagePreview" class="content-image-block">
         <div class="content-image-box">
-          <img class="content-image" src="/assets/chirpImages/1.png">
+          <img class="content-image" [src]="imagePreview">
         </div>
         <div class="remove-image-button" (click)="onRemoveImageClick()">
           <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
@@ -30,14 +30,13 @@
     </div>
 
     <div class="button-block">
-      <button class="global__accent-button publish-button" (click)="onPublishClick()">Publier</button>
-      <button class="global__accent-icon-button image-button" (click)="onAddImageClick()">
-        <object type="image/svg+xml">
-          <img src="assets/svgIcons/image.svg"/>
-        </object>
-      </button>
+      <button class="global__accent-button publish-button" type="submit" [disabled]="newChirpForm.invalid">Publier</button>
+      <div class="image-box">
+        <input class="image-field global__clickable" type="file" accept=".png" (change)="onImageSelect($event)">
+        <img src="assets/svgIcons/image.svg"/>
+      </div>
     </div>
 
-  </div>
+  </form>
 
 </div>

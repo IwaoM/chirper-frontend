@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { Chirp } from "../../../core/models/chirp.model";
 
@@ -13,6 +14,7 @@ import { Chirp } from "../../../core/models/chirp.model";
 })
 export class ChirpComponent implements OnInit {
   constructor (
+    private authService: AuthService,
     private chirpsService: ChirpsService,
     private router: Router
   ) {}
@@ -21,6 +23,11 @@ export class ChirpComponent implements OnInit {
   @Input() viewType!: "normal" | "focused";
   authorProfilePicUrl$!: Observable<SafeUrl>;
   chirpImageUrl$?: Observable<SafeUrl>;
+
+  connectedUser!: {
+    id: number
+  };
+
   starred!: boolean;
   deleteHovered!: boolean;
   starHovered!: boolean;
@@ -31,6 +38,11 @@ export class ChirpComponent implements OnInit {
     if (this.chirp.image) {
       this.chirpImageUrl$ = this.chirpsService.getChirpImage(this.chirp.id);
     }
+
+    this.connectedUser = {
+      id: this.authService.getConnectedUserId()
+    };
+
     this.starred = false;
     this.deleteHovered = false;
     this.starHovered = false;
