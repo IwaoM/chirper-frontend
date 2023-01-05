@@ -29,17 +29,17 @@
         <div class="name-block" [ngClass]="{ 'name-block--focused': viewType === 'focused' }">
 
           <div class="username" (click)="onAuthorClick($event)">
-            <p class="global__text-highlight">{{ chirp.username }}</p>
+            <a class="global__text-highlight">{{ chirp.username }}</a>
           </div>
 
           <div class="handle" (click)="onAuthorClick($event)">
-            <p class="global__text-light">@{{ chirp.handle }}</p>
+            <p class="global__text-light">&nbsp;@{{ chirp.handle }}</p>
           </div>
 
         </div>
 
         <div *ngIf="viewType === 'normal'" class="timestamp">
-          <p class="global__text-light">le {{ chirp.timestamp | date: "d MMMM YYYY à HH:mm" }}</p>
+          <p class="global__text-light">&nbsp;-&nbsp;le {{ chirp.timestamp | date: "d MMMM YYYY à HH:mm" }}</p>
         </div>
 
       </div>
@@ -65,6 +65,12 @@
     <div class="content-block" [ngClass]="{ 'content-block--focused': viewType === 'focused' }">
 
       <div class="text-content">
+        <p *ngIf="chirp.reply_to_id" class="global__text-light">
+          En réponse au&nbsp;
+          <a (click)="onRepliedToChirpClick($event)">chirp</a>
+          &nbsp;de&nbsp;
+          <a (click)="onRepliedToAuthorClick($event)">@{{ (repliedToChirp$ | async)?.handle }}</a>
+        </p>
         <p
           [ngClass]="{
             'global__text-normal': viewType === 'normal',

@@ -25,6 +25,7 @@ export class ChirpComponent implements OnInit {
 
   authorProfilePicUrl$!: Observable<SafeUrl>;
   chirpImageUrl$?: Observable<SafeUrl>;
+  repliedToChirp$?: Observable<Chirp>;
 
   connectedUser!: {
     id: number
@@ -45,6 +46,10 @@ export class ChirpComponent implements OnInit {
       id: this.authService.getConnectedUserId()
     };
 
+    if (this.chirp.reply_to_id) {
+      this.repliedToChirp$ = this.chirpsService.getChirpById(this.chirp.reply_to_id);
+    }
+
     this.starred = false;
     this.deleteHovered = false;
     this.starHovered = false;
@@ -54,6 +59,16 @@ export class ChirpComponent implements OnInit {
   // Chirp box events
   onChirpClick () {
     this.router.navigateByUrl(`app/chirps/${this.chirp.id}`);
+  }
+
+  onRepliedToChirpClick (event: Event) {
+    event.stopPropagation();
+    this.router.navigateByUrl(`app/chirps/${this.chirp.reply_to_id}`);
+  }
+
+  onRepliedToAuthorClick (event: Event) {
+    event.stopPropagation();
+    // navigate to replied chirp author profile page
   }
 
   // Author pp, name or handle events

@@ -29,10 +29,6 @@
   }
 }
 
-.username, .handle {
-  margin-right: 8px;
-}
-
 .timestamp {
   &--focused {
     margin-top: 24px;
@@ -48,6 +44,7 @@
 
 .text-content {
   width: 100%;
+  flex-direction: column;
 }
 
 .image-content-box {
