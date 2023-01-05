@@ -114,21 +114,21 @@
           (mouseenter)="onStarMouseEnter()"
           (mouseleave)="onStarMouseLeave()"
         >
-          <object *ngIf="!starred && !starHovered" type="image/svg+xml">
+          <object *ngIf="!localStarred && !starHovered" type="image/svg+xml">
             <img class="global__mini-icon-button" src="assets/svgIcons/star_dark.svg"/>
           </object>
-          <object *ngIf="!starred && starHovered" type="image/svg+xml">
+          <object *ngIf="!localStarred && starHovered" type="image/svg+xml">
             <img class="global__mini-icon-button" src="assets/svgIcons/star_accent1.svg"/>
           </object>
-          <object *ngIf="starred" type="image/svg+xml">
+          <object *ngIf="localStarred" type="image/svg+xml">
             <img class="global__mini-icon-button" src="assets/svgIcons/star_filled_accent1.svg"/>
           </object>
         </div>
         <div class="star-count">
           <p
             class="global__text-small-light"
-            [ngClass]="{ 'star-count--starred': starred }"
-          >{{ chirp.star_count }}</p>
+            [ngClass]="{ 'star-count--starred': localStarred }"
+          >{{ localStarcount }}</p>
         </div>
       </div>
   

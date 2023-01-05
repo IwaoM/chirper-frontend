@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterContentInit, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { ChirpsService } from "src/app/core/services/chirps.service";
@@ -9,7 +9,7 @@ import { Chirp } from "../../../core/models/chirp.model";
   templateUrl: "./page-chirp.component.html",
   styleUrls: ["./page-chirp.component.scss"]
 })
-export class PageChirpComponent implements OnInit {
+export class PageChirpComponent implements OnInit, AfterContentInit {
   constructor (
     private chirpsService: ChirpsService,
     private route: ActivatedRoute,
@@ -30,6 +30,12 @@ export class PageChirpComponent implements OnInit {
 
   ngOnInit () {
     this.onNavigationToChirpPage();
+  }
+
+  ngAfterContentInit () {
+    if (this.route.snapshot.queryParams["action"] === "reply") {
+      document.getElementById("chirpTextArea")?.focus();
+    }
   }
 
   onNavigationToChirpPage () {

@@ -26,31 +26,39 @@ export class ChirpComponent implements OnInit {
   authorProfilePicUrl$!: Observable<SafeUrl>;
   chirpImageUrl$?: Observable<SafeUrl>;
   repliedToChirp$?: Observable<Chirp>;
+  starred$!: Observable<boolean>;
+
+  localStarcount!: number;
+  localStarred!: boolean;
 
   connectedUser!: {
     id: number
   };
 
-  starred!: boolean;
   deleteHovered!: boolean;
   starHovered!: boolean;
   answerHovered!: boolean;
 
   ngOnInit () {
-    this.authorProfilePicUrl$ = this.chirpsService.getUserProfilePic(this.chirp.author_id);
-    if (this.chirp.image) {
-      this.chirpImageUrl$ = this.chirpsService.getChirpImage(this.chirp.id);
-    }
-
     this.connectedUser = {
       id: this.authService.getConnectedUserId()
     };
+
+    this.starred$ = this.chirpsService.getChirpStarredByUser(this.chirp.id, this.connectedUser.id).pipe(
+      tap(value => this.localStarred = value)
+    );
+    this.starred$.subscribe();
+    this.localStarcount = this.chirp.star_count;
 
     if (this.chirp.reply_to_id) {
       this.repliedToChirp$ = this.chirpsService.getChirpById(this.chirp.reply_to_id);
     }
 
-    this.starred = false;
+    this.authorProfilePicUrl$ = this.chirpsService.getUserProfilePic(this.chirp.author_id);
+    if (this.chirp.image) {
+      this.chirpImageUrl$ = this.chirpsService.getChirpImage(this.chirp.id);
+    }
+
     this.deleteHovered = false;
     this.starHovered = false;
     this.answerHovered = false;
@@ -68,13 +76,13 @@ export class ChirpComponent implements OnInit {
 
   onRepliedToAuthorClick (event: Event) {
     event.stopPropagation();
-    // navigate to replied chirp author profile page
+    // todo: navigate to replied chirp author profile page
   }
 
   // Author pp, name or handle events
   onAuthorClick (event: Event) {
     event.stopPropagation();
-    // todo : open author profile page
+    // todo: open author profile page
   }
 
   // Delete button events
@@ -104,8 +112,10 @@ export class ChirpComponent implements OnInit {
 
   onStarClick (event: Event) {
     event.stopPropagation();
-    this.starred = !this.starred;
-    // this.chirpsService.starChirpById(this.chirp.id);
+    // update displayed values without reloading the whole list
+    this.localStarred = !this.localStarred;
+    this.localStarred ? this.localStarcount++ : this.localStarcount--;
+    this.chirpsService.starChirpById(this.chirp.id, this.connectedUser.id, this.localStarred).subscribe();
   }
 
   // Answer button events
@@ -119,6 +129,6 @@ export class ChirpComponent implements OnInit {
 
   onAnswerClick (event: Event) {
     event.stopPropagation();
-    // todo : open chirp page and focus on the answer field
+    this.router.navigateByUrl(`app/chirps/${this.chirp.id}?action=reply`);
   }
 }

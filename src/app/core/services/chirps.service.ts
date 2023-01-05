@@ -43,23 +43,19 @@ export class ChirpsService {
     );
   }
 
-  // POST requests
+  getChirpStarredByUser (chirpId: number, userId: number) {
+    return this.http.get<boolean>(`https://localhost:3000/api/chirps/${chirpId}/stars/${userId}`);
+  }
+
+  // POST / DELETE requests
   createChirp (data: FormData): Observable<number> {
     return this.http.post<number>(`https://localhost:3000/api/chirps`, data);
   }
 
-  // starChirpById (chirpId: number): void {
-  //   const chirp = this.chirps.find(ch => ch.id === chirpId);
-  //   if (chirp) {
-  //     chirp.starred = !chirp.starred;
-  //     chirp.starred ? chirp.starCount++ : chirp.starCount--;
-  //   } else {
-  //     throw new Error("Chirp does not exist");
-  //   }
-  //   // todo add api call to /api/chirps/:id/star (post/delete)
-  // }
+  starChirpById (chirpId: number, userId: number, starred: boolean): Observable<boolean> {
+    return this.http.post<boolean>(`https://localhost:3000/api/chirps/${chirpId}/stars/${userId}`, { starred });
+  }
 
-  // DELETE requests
   deleteChirp (chirpId: number): Observable<number> {
     return this.http.delete<number>(`https://localhost:3000/api/chirps/${chirpId}`);
   }
