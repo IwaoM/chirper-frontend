@@ -14,17 +14,24 @@
         *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
         class="global__form-error"
       >{{ getFormControlErrorText(signupForm.get('password')) }}</p>
-      <input type="password" class="text-input global__text-normal" formControlName="password2" placeholder="Répétez le mot de passe *">
+      <input
+        type="password"
+        class="text-input global__text-normal"
+        formControlName="password2"
+        placeholder="Répétez le mot de passe *"
+        [ngClass]="{ 'invalid-pw2': signupForm.hasError('passwordsMismatch') }"
+      >
       <p
         *ngIf="signupForm.get('password2')?.invalid && 
           signupForm.get('password2')?.touched"
         class="global__form-error"
       >{{ getFormControlErrorText(signupForm.get('password2')) }}</p>
       <p
-        *ngIf="signupForm.hasError('passwordsMismatch')"
+        *ngIf="signupForm.get('password2')?.touched &&
+          signupForm.hasError('passwordsMismatch')"
         class="global__form-error"
       >{{ getFormControlErrorText(signupForm) }}</p>
-      <input type="text" class="text-input global__text-normal" formControlName="handle" placeholder="Nom d'utilisateur *" pattern="[A-Za-z0-9_]{1,15}$">
+      <input type="text" class="text-input global__text-normal" formControlName="handle" placeholder="Nom d'utilisateur *">
       <p
         *ngIf="signupForm.get('handle')?.invalid && 
           signupForm.get('handle')?.touched"

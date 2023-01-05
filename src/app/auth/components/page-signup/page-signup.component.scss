@@ -40,6 +40,10 @@
   &.ng-invalid.ng-touched {
     outline: 2px solid var(--theme-red);
   }
+
+  &.invalid-pw2.ng-touched {
+    outline: 2px solid var(--theme-red);
+  }
 }
 
 .form-items-row {

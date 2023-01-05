@@ -47,7 +47,7 @@ export class PageSignupComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(20),
-        Validators.pattern("^[a-zA-Z0-9_-]*$"),
+        Validators.pattern("^[a-zA-Z0-9_-]{1,15}$"),
       ], [
         this.uniqueHandleValidator()
       ]),
