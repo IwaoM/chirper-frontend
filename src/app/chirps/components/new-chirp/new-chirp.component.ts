@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SafeUrl } from "@angular/platform-browser";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 
@@ -19,7 +19,7 @@ export class NewChirpComponent implements OnInit {
 
   @Input() placeholderText!: string;
   @Input() replyToId!: number | null;
-  @Output() newChirp = new EventEmitter<string>();
+  @Output() newChirp = new EventEmitter<null>();
 
   connectedUser!: {
     id: number,
@@ -90,7 +90,9 @@ export class NewChirpComponent implements OnInit {
     this.newChirpFormData.append("authorId", this.connectedUser.id.toString());
     this.newChirpFormData.append("replyToId", this.replyToId?.toString() || "");
 
-    this.chirpsService.createChirp(this.newChirpFormData).subscribe();
+    this.chirpsService.createChirp(this.newChirpFormData).pipe(
+      tap(() => this.newChirp.emit())
+    ).subscribe();
 
     this.newChirpFormData.delete("chirpText");
     this.newChirpFormData.delete("timestamp");
@@ -99,7 +101,6 @@ export class NewChirpComponent implements OnInit {
     this.newChirpFormData.delete("image");
     this.imagePreview = "";
 
-    this.newChirp.emit();
     this.newChirpForm.reset();
   }
 }

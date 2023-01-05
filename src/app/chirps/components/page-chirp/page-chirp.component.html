@@ -4,7 +4,7 @@
 </div>
 <div class="global__vertical-container">
   <div class="global__header-offset-block"></div>
-  <app-chirp [viewType]="'focused'" *ngIf="focusedChirp$ | async as focusedChirp" [chirp]="focusedChirp"></app-chirp>
+  <app-chirp [viewType]="'focused'" *ngIf="focusedChirp$ | async as focusedChirp" [chirp]="focusedChirp" (deleteChirp)="onDeleteChirp()"></app-chirp>
   <app-new-chirp [placeholderText]="'Votre réponse...'" [replyToId]="chirpId" (newChirp)="onNewReply()"></app-new-chirp>
-  <app-chirp [viewType]="'normal'" *ngFor="let chirp of replyChirps$ | async" [chirp]="chirp"></app-chirp>
+  <app-chirp [viewType]="'normal'" *ngFor="let chirp of replyChirps$ | async" [chirp]="chirp" (deleteChirp)="onDeleteReply()"></app-chirp>
 </div>

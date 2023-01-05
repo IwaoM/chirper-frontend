@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { Chirp } from "../../../core/models/chirp.model";
@@ -21,6 +21,8 @@ export class ChirpComponent implements OnInit {
 
   @Input() chirp!: Chirp;
   @Input() viewType!: "normal" | "focused";
+  @Output() deleteChirp = new EventEmitter<null>();
+
   authorProfilePicUrl$!: Observable<SafeUrl>;
   chirpImageUrl$?: Observable<SafeUrl>;
 
@@ -71,7 +73,9 @@ export class ChirpComponent implements OnInit {
 
   onDeleteClick (event: Event) {
     event.stopPropagation();
-    // todo : service method to delete the chirp
+    this.chirpsService.deleteChirp(this.chirp.id).pipe(
+      tap(() => this.deleteChirp.emit())
+    ).subscribe();
   }
 
   // Star button events

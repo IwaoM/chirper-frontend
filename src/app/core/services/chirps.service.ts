@@ -59,4 +59,9 @@ export class ChirpsService {
   //   // todo add api call to /api/chirps/:id/star (post/delete)
   // }
 
+  // DELETE requests
+  deleteChirp (chirpId: number): Observable<number> {
+    return this.http.delete<number>(`https://localhost:3000/api/chirps/${chirpId}`);
+  }
+
 }

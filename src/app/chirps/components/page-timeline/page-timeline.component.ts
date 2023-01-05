@@ -24,4 +24,8 @@ export class PageTimelineComponent implements OnInit {
   onNewChirp () {
     this.chirps$ = this.chirpsService.getAllChirps();
   }
+
+  onDeleteChirp () {
+    this.chirps$ = this.chirpsService.getAllChirps();
+  }
 }

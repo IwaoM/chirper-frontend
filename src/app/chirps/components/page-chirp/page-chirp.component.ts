@@ -43,4 +43,12 @@ export class PageChirpComponent implements OnInit {
   onNewReply () {
     this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
   }
+
+  onDeleteChirp () {
+    this.router.navigateByUrl(`app/chirps`);
+  }
+
+  onDeleteReply () {
+    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
+  }
 }
