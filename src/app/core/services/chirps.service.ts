@@ -21,6 +21,10 @@ export class ChirpsService {
     return this.http.get<Chirp[]>("https://localhost:3000/api/chirps");
   }
 
+  getAllStarredByUser (userId: number): Observable<{ chirp_id: number }[]> {
+    return this.http.get<{ chirp_id: number }[]>(`https://localhost:3000/api/chirps/stars/${userId}`);
+  }
+
   getRepliesTo (chirpId: number): Observable<Chirp[]> {
     return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}/replies`);
   }
@@ -41,10 +45,6 @@ export class ChirpsService {
     return this.http.get(`https://localhost:3000/api/chirps/${chirpId}/image`, { responseType: "blob" }).pipe(
       map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
     );
-  }
-
-  getChirpStarredByUser (chirpId: number, userId: number) {
-    return this.http.get<boolean>(`https://localhost:3000/api/chirps/${chirpId}/stars/${userId}`);
   }
 
   // POST / DELETE requests

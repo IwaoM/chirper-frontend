@@ -5,5 +5,11 @@
 <div class="global__vertical-container">
   <div class="global__header-offset-block"></div>
   <app-new-chirp [placeholderText]="'Quoi de neuf ?'" [replyToId]="null" (newChirp)="onNewChirp()"></app-new-chirp>
-  <app-chirp [viewType]="'normal'" *ngFor="let chirp of chirps$ | async" [chirp]="chirp" (deleteChirp)="onDeleteChirp()"></app-chirp>
+  <app-chirp
+    *ngFor="let chirp of chirps$ | async"
+    [viewType]="'normal'"
+    [chirp]="chirp"
+    [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+    (deleteChirp)="onDeleteChirp()"
+  ></app-chirp>
 </div>

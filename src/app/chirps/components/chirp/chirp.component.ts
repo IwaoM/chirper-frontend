@@ -19,14 +19,15 @@ export class ChirpComponent implements OnInit {
     private router: Router
   ) {}
 
-  @Input() chirp!: Chirp;
   @Input() viewType!: "normal" | "focused";
+  @Input() chirp!: Chirp;
+  @Input() chirpsStarredByConnectedUser!: number[];
   @Output() deleteChirp = new EventEmitter<null>();
 
   authorProfilePicUrl$!: Observable<SafeUrl>;
   chirpImageUrl$?: Observable<SafeUrl>;
   repliedToChirp$?: Observable<Chirp>;
-  starred$!: Observable<boolean>;
+  starred!: boolean;
 
   localStarcount!: number;
   localStarred!: boolean;
@@ -40,14 +41,13 @@ export class ChirpComponent implements OnInit {
   answerHovered!: boolean;
 
   ngOnInit () {
+    this.starred = this.chirpsStarredByConnectedUser.includes(this.chirp.id);
+    this.localStarred = this.starred;
+
     this.connectedUser = {
       id: this.authService.getConnectedUserId()
     };
 
-    this.starred$ = this.chirpsService.getChirpStarredByUser(this.chirp.id, this.connectedUser.id).pipe(
-      tap(value => this.localStarred = value)
-    );
-    this.starred$.subscribe();
     this.localStarcount = this.chirp.star_count;
 
     if (this.chirp.reply_to_id) {

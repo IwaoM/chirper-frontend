@@ -4,7 +4,19 @@
 </div>
 <div class="global__vertical-container">
   <div class="global__header-offset-block"></div>
-  <app-chirp [viewType]="'focused'" *ngIf="focusedChirp$ | async as focusedChirp" [chirp]="focusedChirp" (deleteChirp)="onDeleteChirp()"></app-chirp>
+  <app-chirp
+    *ngIf="focusedChirp$ | async as focusedChirp"
+    [viewType]="'focused'"
+    [chirp]="focusedChirp"
+    [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+    (deleteChirp)="onDeleteChirp()"
+  ></app-chirp>
   <app-new-chirp [placeholderText]="'Votre réponse...'" [replyToId]="chirpId" (newChirp)="onNewReply()"></app-new-chirp>
-  <app-chirp [viewType]="'normal'" *ngFor="let chirp of replyChirps$ | async" [chirp]="chirp" (deleteChirp)="onDeleteReply()"></app-chirp>
+  <app-chirp
+    *ngFor="let chirp of replyChirps$ | async"
+    [viewType]="'normal'"
+    [chirp]="chirp"
+    [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+    (deleteChirp)="onDeleteReply()"
+  ></app-chirp>
 </div>
