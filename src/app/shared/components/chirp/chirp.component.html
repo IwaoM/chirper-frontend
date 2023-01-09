@@ -5,11 +5,7 @@
 >
 
   <div class="global__profile-pic-box global__clickable" (click)="onAuthorClick($event)" *ngIf="viewType === 'normal'">
-    <img
-      class="global__profile-pic"
-      [src]="authorProfilePicUrl"
-      [alt]="chirp.username"
-    >
+    <img class="global__profile-pic" [src]="authorProfilePicUrl" [alt]="chirp.username">
   </div>
 
   <div class="body-block">

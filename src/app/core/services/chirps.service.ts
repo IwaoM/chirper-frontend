@@ -29,12 +29,6 @@ export class ChirpsService {
     return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}/replies`);
   }
 
-  getUserProfilePic (authorId: number): Observable<SafeUrl> {
-    return this.http.get(`https://localhost:3000/api/users/${authorId}/picture`, { responseType: "blob" }).pipe(
-      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
-    );
-  }
-
   getChirpById (chirpId: number): Observable<Chirp> {
     return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}`).pipe(
       map(entries => entries[0])

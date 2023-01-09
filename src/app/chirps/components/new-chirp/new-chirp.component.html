@@ -5,7 +5,7 @@
       class="global__profile-pic"
       [src]="connectedUser.pictureUrl$ | async"
       [alt]="connectedUser.username"
-      (click)="onConnectedUserClick()"
+      (click)="onConnectedUserClick($event)"
     >
   </div>
 

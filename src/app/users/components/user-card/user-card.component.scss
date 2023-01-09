@@ -1,0 +1,19 @@
+* {
+  display: flex;
+}
+
+.user-card {
+  padding: 24px;
+  border: solid var(--theme-border);
+  border-width: 0 0 2px;
+}
+
+.info-block {
+  flex-direction: column;
+  width: 624px;
+}
+
+.bio-box {
+  padding-top: 24px;
+  width: 100%;
+}

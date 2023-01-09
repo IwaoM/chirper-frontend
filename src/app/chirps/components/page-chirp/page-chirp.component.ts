@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Observable, tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
+import { UsersService } from "src/app/core/services/users.service";
 import { Chirp } from "../../../core/models/chirp.model";
 
 @Component({
@@ -15,6 +16,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   constructor (
     private authService: AuthService,
     private chirpsService: ChirpsService,
+    private usersService: UsersService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -24,9 +26,6 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
       }
     });
   }
-
-  currentPage!: string;
-  currentTitle!: string;
 
   chirpId!: number;
 
@@ -60,9 +59,6 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
 
     this.chirpId = +this.route.snapshot.params["id"];
 
-    this.currentPage = "singleChirp";
-    this.currentTitle = "Chirp";
-
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
 
@@ -72,7 +68,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
           this.repliedToChirp$ = this.chirpsService.getChirpById(chirp.reply_to_id);
         }
         if (!this.authorProfilePicUrls.has(chirp.author_id)) {
-          this.authorProfilePicUrls.set(chirp.author_id, this.chirpsService.getUserProfilePic(chirp.author_id));
+          this.authorProfilePicUrls.set(chirp.author_id, this.usersService.getUserProfilePic(chirp.author_id));
           this.authorProfilePicUrls.get(chirp.author_id)?.subscribe();
         }
         if (chirp.image) {
@@ -85,7 +81,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
       tap(replies => {
         for (let i = 0; i < replies.length; i++) {
           if (!this.authorProfilePicUrls.has(replies[i].author_id)) {
-            this.authorProfilePicUrls.set(replies[i].author_id, this.chirpsService.getUserProfilePic(replies[i].author_id));
+            this.authorProfilePicUrls.set(replies[i].author_id, this.usersService.getUserProfilePic(replies[i].author_id));
             this.authorProfilePicUrls.get(replies[i].author_id)?.subscribe();
           }
           if (replies[i].image) {

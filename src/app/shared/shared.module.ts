@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { TitleBannerComponent } from "./components/title-banner/title-banner.component";
-import { RouterModule } from "@angular/router";
 import { FooterComponent } from "./components/footer/footer.component";
+import { ChirpComponent } from "./components/chirp/chirp.component";
 
 
 
@@ -11,7 +13,8 @@ import { FooterComponent } from "./components/footer/footer.component";
   declarations: [
     NavbarComponent,
     TitleBannerComponent,
-    FooterComponent
+    FooterComponent,
+    ChirpComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +23,8 @@ import { FooterComponent } from "./components/footer/footer.component";
   exports: [
     NavbarComponent,
     TitleBannerComponent,
-    FooterComponent
+    FooterComponent,
+    ChirpComponent
   ]
 })
 export class SharedModule { }

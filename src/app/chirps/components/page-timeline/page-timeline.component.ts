@@ -4,6 +4,7 @@ import { Observable, tap } from "rxjs";
 import { Chirp } from "src/app/core/models/chirp.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
+import { UsersService } from "src/app/core/services/users.service";
 
 @Component({
   selector: "app-page-timeline",
@@ -13,11 +14,9 @@ import { ChirpsService } from "src/app/core/services/chirps.service";
 export class PageTimelineComponent implements OnInit {
   constructor (
     private authService: AuthService,
-    private chirpsService: ChirpsService
+    private chirpsService: ChirpsService,
+    private usersService: UsersService,
   ) {}
-
-  currentPage!: string;
-  currentTitle!: string;
 
   chirps$!: Observable<Chirp[]>;
   repliedToChirps!: Map<number, Chirp | null>;
@@ -36,9 +35,6 @@ export class PageTimelineComponent implements OnInit {
       id: this.authService.getConnectedUserId()
     };
 
-    this.currentPage = "timeline";
-    this.currentTitle = "Derniers chirps";
-
     this.repliedToChirps = new Map();
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
@@ -51,7 +47,7 @@ export class PageTimelineComponent implements OnInit {
               this.repliedToChirps.set(chirps[i].id, chirps.find(elem => elem.id === chirps[i].reply_to_id) || null);
             }
             if (!this.authorProfilePicUrls.has(chirps[i].author_id)) {
-              this.authorProfilePicUrls.set(chirps[i].author_id, this.chirpsService.getUserProfilePic(chirps[i].author_id));
+              this.authorProfilePicUrls.set(chirps[i].author_id, this.usersService.getUserProfilePic(chirps[i].author_id));
               this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
             }
             if (chirps[i].image) {

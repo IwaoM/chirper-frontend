@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SafeUrl } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 import { Observable, tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
+import { UsersService } from "src/app/core/services/users.service";
 
 @Component({
   selector: "app-new-chirp",
@@ -14,7 +16,9 @@ export class NewChirpComponent implements OnInit {
   constructor (
     private authService: AuthService,
     private chirpsService: ChirpsService,
-    private formBuilder: FormBuilder
+    private usersService: UsersService,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   @Input() placeholderText!: string;
@@ -35,7 +39,7 @@ export class NewChirpComponent implements OnInit {
     this.connectedUser = {
       id: this.authService.getConnectedUserId(),
       username: this.authService.getConnectedUserUsername(),
-      pictureUrl$: this.chirpsService.getUserProfilePic(this.authService.getConnectedUserId())
+      pictureUrl$: this.usersService.getUserProfilePic(this.authService.getConnectedUserId())
     };
 
     this.newChirpForm = this.formBuilder.group({
@@ -51,8 +55,9 @@ export class NewChirpComponent implements OnInit {
   }
 
   // Connected user pp (next to the new tweet / new answer field)
-  onConnectedUserClick () {
-    // todo : open own profile page
+  onConnectedUserClick (event: Event) {
+    event.stopPropagation();
+    this.router.navigateByUrl(`users/${this.connectedUser.id}`);
   }
 
   // Remove image button

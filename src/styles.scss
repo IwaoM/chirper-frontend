@@ -42,6 +42,7 @@ h2 {
 
 p {
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -250,11 +251,26 @@ textarea {
   border-radius: 24px;
   overflow: hidden;
   margin-right: 24px;
+
+  &-big {
+    min-height: 144px;
+    min-width: 144px;
+    height: 144px;
+    width: 144px;
+    border-radius: 72px;
+    overflow: hidden;
+    margin-right: 24px;
+  }
 }
 
 .global__profile-pic {
   height: 48px;
   width: 48px;
+
+  &-big {
+    height: 144px;
+    width: 144px;
+  }
 }
 
 .global__clickable {

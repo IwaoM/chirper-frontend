@@ -4,11 +4,11 @@
       <div class="navbarLogo">
         <img class="appLogo" src="assets/logo/text_accent.svg"/>
       </div>
-      <div class="navbarButton" routerLink="app/timeline">
+      <div class="navbarButton" routerLink="/app/timeline">
         <img *ngIf="currentPage === 'timeline'" class="global__icon-button" src="assets/svgIcons/home_filled_dark.svg"/>
         <img *ngIf="currentPage !== 'timeline'" class="global__icon-button" src="assets/svgIcons/home_dark.svg"/>
       </div>
-      <div class="navbarButton">
+      <div class="navbarButton" [routerLink]="'/users/' + connectedUser.id">
         <img *ngIf="currentPage === 'ownProfile'" class="global__icon-button" src="assets/svgIcons/profile_filled_dark.svg"/>
         <img *ngIf="currentPage !== 'ownProfile'" class="global__icon-button" src="assets/svgIcons/profile_dark.svg"/>
       </div>

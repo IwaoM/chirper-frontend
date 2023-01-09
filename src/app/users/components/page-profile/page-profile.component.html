@@ -1,0 +1,15 @@
+<div class="global__fixed-block-top">
+  <app-navbar [currentPage]="pageType"></app-navbar>
+  <app-title-banner [currentTitle]="'Profil'"></app-title-banner>
+</div>
+<div class="global__vertical-container">
+  <div class="global__header-offset-block"></div>
+  <app-user-card
+    *ngIf="user$ | async as user"
+    [user]="user"
+    [profilePicUrl]="profilePictureUrl$ | async"
+  ></app-user-card>
+</div>
+<div class="global__fixed-block-bottom">
+  <app-footer></app-footer>
+</div>

@@ -9,6 +9,7 @@ import { CoreModule } from "./core/core.module";
 import { AuthModule } from "./auth/auth.module";
 import { ChirpsModule } from "./chirps/chirps.module";
 import { SharedModule } from "./shared/shared.module";
+import { UsersModule } from "./users/users.module";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SharedModule } from "./shared/shared.module";
     CoreModule,
     SharedModule,
     ChirpsModule,
+    UsersModule,
     AuthModule
   ],
   bootstrap: [AppComponent]
