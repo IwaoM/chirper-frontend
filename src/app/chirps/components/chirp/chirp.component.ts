@@ -119,6 +119,10 @@ export class ChirpComponent implements OnInit {
 
   onAnswerClick (event: Event) {
     event.stopPropagation();
-    this.router.navigateByUrl(`app/chirps/${this.chirp.id}?action=reply`);
+    if (this.viewType === "normal") {
+      this.router.navigateByUrl(`app/chirps/${this.chirp.id}?action=reply`);
+    } else {
+      document.getElementById("chirpTextArea")?.focus();
+    }
   }
 }

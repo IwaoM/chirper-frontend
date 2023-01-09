@@ -1,0 +1,39 @@
+* {
+  display: flex;
+}
+
+footer {
+  width: 100%;
+  margin: auto;
+
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  background-color: var(--theme-bg);
+  border-top: 2px solid var(--theme-border);
+
+  z-index: 1;
+}
+
+.footer-block {
+  height: 56px;
+  width: 840px;
+  max-width: 100%;
+  margin: auto;
+  flex-direction: row-reverse;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-elem-right {
+  height: 24px;
+  margin-right: 16px;
+
+  transition: 0.1s;
+}
+
+path {
+  fill: var(--theme-text);
+}

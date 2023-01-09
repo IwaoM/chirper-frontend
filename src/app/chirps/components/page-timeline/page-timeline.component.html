@@ -1,4 +1,4 @@
-<div class="global__fixed-block">
+<div class="global__fixed-block-top">
   <app-navbar [currentPage]="currentPage"></app-navbar>
   <app-title-banner [currentTitle]="currentTitle"></app-title-banner>
 </div>
@@ -15,4 +15,7 @@
     [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
     (deleteChirp)="onDeleteChirp()"
   ></app-chirp>
+</div>
+<div class="global__fixed-block-bottom">
+  <app-footer></app-footer>
 </div>

@@ -151,10 +151,16 @@ body {
   margin: auto;
 }
 
-.global__fixed-block {
+.global__fixed-block-top {
   position: fixed;
   width: 100%;
   top: 0;
+}
+
+.global__fixed-block-bottom {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .global__header-offset-block {
