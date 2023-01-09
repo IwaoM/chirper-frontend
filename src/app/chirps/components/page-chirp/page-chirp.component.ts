@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, OnInit } from "@angular/core";
+import { SafeUrl } from "@angular/platform-browser";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { Observable, tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
@@ -26,11 +27,17 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
 
   currentPage!: string;
   currentTitle!: string;
+
   chirpId!: number;
+
   focusedChirp$!: Observable<Chirp>;
+  repliedToChirp$!: Observable<Chirp> | null;
   replyChirps$!: Observable<Chirp[]>;
   chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
   chirpsStarredByConnectedUserArray!: number[];
+
+  authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
+  chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
   connectedUser!: {
     id: number
@@ -52,10 +59,42 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
     };
 
     this.chirpId = +this.route.snapshot.params["id"];
+
     this.currentPage = "singleChirp";
     this.currentTitle = "Chirp";
-    this.focusedChirp$ = this.chirpsService.getChirpById(this.chirpId);
-    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
+
+    this.authorProfilePicUrls = new Map();
+    this.chirpImageUrls = new Map();
+
+    this.focusedChirp$ = this.chirpsService.getChirpById(this.chirpId).pipe(
+      tap(chirp => {
+        if (chirp.reply_to_id) {
+          this.repliedToChirp$ = this.chirpsService.getChirpById(chirp.reply_to_id);
+        }
+        if (!this.authorProfilePicUrls.has(chirp.author_id)) {
+          this.authorProfilePicUrls.set(chirp.author_id, this.chirpsService.getUserProfilePic(chirp.author_id));
+          this.authorProfilePicUrls.get(chirp.author_id)?.subscribe();
+        }
+        if (chirp.image) {
+          this.chirpImageUrls.set(chirp.id, this.chirpsService.getChirpImage(chirp.id));
+          this.chirpImageUrls.get(chirp.id)?.subscribe();
+        }
+      })
+    );
+    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId).pipe(
+      tap(replies => {
+        for (let i = 0; i < replies.length; i++) {
+          if (!this.authorProfilePicUrls.has(replies[i].author_id)) {
+            this.authorProfilePicUrls.set(replies[i].author_id, this.chirpsService.getUserProfilePic(replies[i].author_id));
+            this.authorProfilePicUrls.get(replies[i].author_id)?.subscribe();
+          }
+          if (replies[i].image) {
+            this.chirpImageUrls.set(replies[i].id, this.chirpsService.getChirpImage(replies[i].id));
+            this.chirpImageUrls.get(replies[i].id)?.subscribe();
+          }
+        }
+      })
+    );
     this.chirpsStarredByConnectedUser$ = this.chirpsService.getAllStarredByUser(this.connectedUser.id).pipe(
       tap(list => {
         this.chirpsStarredByConnectedUserArray = [];

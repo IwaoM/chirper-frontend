@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { SafeUrl } from "@angular/platform-browser";
 import { Observable, tap } from "rxjs";
 import { Chirp } from "src/app/core/models/chirp.model";
 import { AuthService } from "src/app/core/services/auth.service";
@@ -17,9 +18,14 @@ export class PageTimelineComponent implements OnInit {
 
   currentPage!: string;
   currentTitle!: string;
+
   chirps$!: Observable<Chirp[]>;
+  repliedToChirps!: Map<number, Chirp | null>;
   chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
   chirpsStarredByConnectedUserArray!: number[];
+
+  authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
+  chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
   connectedUser!: {
     id: number
@@ -32,14 +38,32 @@ export class PageTimelineComponent implements OnInit {
 
     this.currentPage = "timeline";
     this.currentTitle = "Derniers chirps";
-    this.chirps$ = this.chirpsService.getAllChirps();
-    this.chirpsStarredByConnectedUser$ = this.chirpsService.getAllStarredByUser(this.connectedUser.id).pipe(
-      tap(list => {
-        this.chirpsStarredByConnectedUserArray = [];
-        for (let i = 0; i < list.length; i++) {
-          this.chirpsStarredByConnectedUserArray.push(list[i].chirp_id);
+
+    this.repliedToChirps = new Map();
+    this.authorProfilePicUrls = new Map();
+    this.chirpImageUrls = new Map();
+
+    this.chirps$ = this.chirpsService.getAllChirps().pipe(
+      tap(
+        chirps => {
+          for (let i = 0; i < chirps.length; i++) {
+            if (chirps[i].reply_to_id) {
+              this.repliedToChirps.set(chirps[i].id, chirps.find(elem => elem.id === chirps[i].reply_to_id) || null);
+            }
+            if (!this.authorProfilePicUrls.has(chirps[i].author_id)) {
+              this.authorProfilePicUrls.set(chirps[i].author_id, this.chirpsService.getUserProfilePic(chirps[i].author_id));
+              this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
+            }
+            if (chirps[i].image) {
+              this.chirpImageUrls.set(chirps[i].id, this.chirpsService.getChirpImage(chirps[i].id));
+              this.chirpImageUrls.get(chirps[i].id)?.subscribe();
+            }
+          }
         }
-      })
+      )
+    );
+    this.chirpsStarredByConnectedUser$ = this.chirpsService.getAllStarredByUser(this.connectedUser.id).pipe(
+      tap(list => this.chirpsStarredByConnectedUserArray = list.map(elem => elem.chirp_id))
     );
     this.chirpsStarredByConnectedUser$.subscribe();
   }

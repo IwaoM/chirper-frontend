@@ -9,6 +9,9 @@
     [viewType]="'focused'"
     [chirp]="focusedChirp"
     [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+    [repliedToChirp]="repliedToChirp$ | async"
+    [authorProfilePicUrl]="(authorProfilePicUrls.get(focusedChirp.author_id) | async) || null"
+    [chirpImageUrl]="(chirpImageUrls.get(focusedChirp.id) | async) || null"
     (deleteChirp)="onDeleteChirp()"
   ></app-chirp>
   <app-new-chirp [placeholderText]="'Votre réponse...'" [replyToId]="chirpId" (newChirp)="onNewReply()"></app-new-chirp>
@@ -17,6 +20,9 @@
     [viewType]="'normal'"
     [chirp]="chirp"
     [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+    [repliedToChirp]="focusedChirp$ | async"
+    [authorProfilePicUrl]="(authorProfilePicUrls.get(chirp.author_id) | async) || null"
+    [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
     (deleteChirp)="onDeleteReply()"
   ></app-chirp>
 </div>
