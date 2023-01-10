@@ -6,6 +6,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { TitleBannerComponent } from "./components/title-banner/title-banner.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { ChirpComponent } from "./components/chirp/chirp.component";
+import { SectionTabsComponent } from "./components/section-tabs/section-tabs.component";
 
 
 
@@ -14,7 +15,8 @@ import { ChirpComponent } from "./components/chirp/chirp.component";
     NavbarComponent,
     TitleBannerComponent,
     FooterComponent,
-    ChirpComponent
+    ChirpComponent,
+    SectionTabsComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ChirpComponent } from "./components/chirp/chirp.component";
     NavbarComponent,
     TitleBannerComponent,
     FooterComponent,
-    ChirpComponent
+    ChirpComponent,
+    SectionTabsComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,5 @@
+<div class="tabs-block">
+  <div *ngFor="let tab of tabs; let i = index" class="single-tab">
+    <h2 class="global__clickable" [ngClass]="{ 'selected': i === selectedTabIndex }" (click)="onTabClick(i)">{{ tab.title }}</h2>
+  </div>
+</div>

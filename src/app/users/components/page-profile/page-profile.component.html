@@ -9,6 +9,8 @@
     [user]="user"
     [profilePicUrl]="profilePictureUrl$ | async"
   ></app-user-card>
+  <app-section-tabs [tabs]="profileTabs" [selectedTabIndex]="selectedProfileTabIndex" (tabClicked)="onTabClick($event)"></app-section-tabs>
+  <div class="global__footer-offset-block"></div>
 </div>
 <div class="global__fixed-block-bottom">
   <app-footer></app-footer>

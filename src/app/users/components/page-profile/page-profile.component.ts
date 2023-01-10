@@ -32,8 +32,17 @@ export class PageProfileComponent implements OnInit {
   user$!: Observable<User>;
   profilePictureUrl$!: Observable<SafeUrl>;
 
+  profileTabs!: { title: string }[];
+  selectedProfileTabIndex!: number;
+
   ngOnInit () {
     this.onNavigationToProfilePage();
+
+    this.profileTabs = [
+      { title: "Chirps" },
+      { title: "Étoiles" },
+    ];
+    this.selectedProfileTabIndex = 0;
   }
 
   onNavigationToProfilePage () {
@@ -43,5 +52,9 @@ export class PageProfileComponent implements OnInit {
 
     this.user$ = this.usersService.getUserById(this.userId);
     this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.userId);
+  }
+
+  onTabClick (index: number) {
+    this.selectedProfileTabIndex = index;
   }
 }

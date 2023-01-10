@@ -1,0 +1,21 @@
+* {
+  display: flex;
+}
+
+.tabs-block {
+  height: 56px;
+  margin: auto;
+
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--theme-bg);
+  border-bottom: 2px solid var(--theme-border);
+}
+
+.single-tab {
+  height: 56px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
