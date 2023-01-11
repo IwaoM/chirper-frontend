@@ -55,7 +55,7 @@ export class PageSignupComponent implements OnInit {
         Validators.maxLength(40)
       ]),
       bio: new FormControl("", [
-        Validators.maxLength(160)
+        Validators.maxLength(120)
       ]),
     }, {
       validators: [this.samePasswordValidator("password", "password2")],

@@ -21,10 +21,6 @@ export class ChirpsService {
     return this.http.get<Chirp[]>("https://localhost:3000/api/chirps");
   }
 
-  getAllStarredByUser (userId: number): Observable<{ chirp_id: number }[]> {
-    return this.http.get<{ chirp_id: number }[]>(`https://localhost:3000/api/chirps/stars/${userId}`);
-  }
-
   getRepliesTo (chirpId: number): Observable<Chirp[]> {
     return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}/replies`);
   }

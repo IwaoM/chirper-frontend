@@ -19,10 +19,10 @@ export class PageTimelineComponent implements OnInit {
   ) {}
 
   chirps$!: Observable<Chirp[]>;
-  repliedToChirps!: Map<number, Chirp | null>;
   chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
   chirpsStarredByConnectedUserArray!: number[];
 
+  repliedToChirps!: Map<number, Chirp | null>;
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
@@ -58,7 +58,7 @@ export class PageTimelineComponent implements OnInit {
         }
       )
     );
-    this.chirpsStarredByConnectedUser$ = this.chirpsService.getAllStarredByUser(this.connectedUser.id).pipe(
+    this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => this.chirpsStarredByConnectedUserArray = list.map(elem => elem.chirp_id))
     );
     this.chirpsStarredByConnectedUser$.subscribe();

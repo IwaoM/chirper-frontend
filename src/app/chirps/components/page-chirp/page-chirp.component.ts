@@ -91,7 +91,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
         }
       })
     );
-    this.chirpsStarredByConnectedUser$ = this.chirpsService.getAllStarredByUser(this.connectedUser.id).pipe(
+    this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => {
         this.chirpsStarredByConnectedUserArray = [];
         for (let i = 0; i < list.length; i++) {

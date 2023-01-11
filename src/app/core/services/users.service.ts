@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { map, Observable } from "rxjs";
+import { Chirp } from "../models/chirp.model";
 import { User } from "../models/user.model";
 
 @Injectable({
@@ -25,5 +26,17 @@ export class UsersService {
     return this.http.get(`https://localhost:3000/api/users/${authorId}/picture`, { responseType: "blob" }).pipe(
       map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
     );
+  }
+
+  getUserChirps (userId: number): Observable<Chirp[]> {
+    return this.http.get<Chirp[]>(`https://localhost:3000/api/users/${userId}/chirps`);
+  }
+
+  getUserStars (userId: number): Observable<Chirp[]> {
+    return this.http.get<Chirp[]>(`https://localhost:3000/api/users/${userId}/stars`);
+  }
+
+  getUserStarIds (userId: number): Observable<{ chirp_id: number }[]> {
+    return this.http.get<{ chirp_id: number }[]>(`https://localhost:3000/api/users/${userId}/star-ids`);
   }
 }
