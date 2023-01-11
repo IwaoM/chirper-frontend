@@ -32,8 +32,9 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   focusedChirp$!: Observable<Chirp>;
   repliedToChirp$!: Observable<Chirp> | null;
   replyChirps$!: Observable<Chirp[]>;
+
   chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
-  chirpsStarredByConnectedUserArray!: number[];
+  starredMap!: Map<number, boolean>;
 
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
@@ -61,6 +62,18 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
 
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
+    this.starredMap = new Map();
+
+    this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
+      tap(list => {
+        for (let i = 0; i < list.length; i++) {
+          if (!this.starredMap.has(list[i].chirp_id)) {
+            this.starredMap.set(list[i].chirp_id, true);
+          }
+        }
+      })
+    );
+    this.chirpsStarredByConnectedUser$.subscribe();
 
     this.focusedChirp$ = this.chirpsService.getChirpById(this.chirpId).pipe(
       tap(chirp => {
@@ -91,15 +104,6 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
         }
       })
     );
-    this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
-      tap(list => {
-        this.chirpsStarredByConnectedUserArray = [];
-        for (let i = 0; i < list.length; i++) {
-          this.chirpsStarredByConnectedUserArray.push(list[i].chirp_id);
-        }
-      })
-    );
-    this.chirpsStarredByConnectedUser$.subscribe();
   }
 
   onNewReply () {

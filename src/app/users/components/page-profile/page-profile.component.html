@@ -15,11 +15,12 @@
       *ngFor="let chirp of userChirps$ | async"
       [viewType]="'normal'"
       [chirp]="chirp"
-      [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+      [starred]="starredMap.get(chirp.id) || false"
       [repliedToChirp]="(repliedToChirps.get(chirp.id) | async) || null"
       [authorProfilePicUrl]="(authorProfilePicUrls.get(chirp.author_id) | async) || null"
       [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
       (deleteChirp)="onDeleteChirp()"
+      (starChirp)="onStarChirp()"
     ></app-chirp>
   </div>
   <div *ngIf="selectedProfileTabIndex === 1">
@@ -27,11 +28,12 @@
       *ngFor="let chirp of userStars$ | async"
       [viewType]="'normal'"
       [chirp]="chirp"
-      [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+      [starred]="starredMap.get(chirp.id) || false"
       [repliedToChirp]="(repliedToChirps.get(chirp.id) | async) || null"
       [authorProfilePicUrl]="(authorProfilePicUrls.get(chirp.author_id) | async) || null"
       [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
       (deleteChirp)="onDeleteChirp()"
+      (starChirp)="onStarChirp()"
     ></app-chirp>
   </div>
   <div class="global__footer-offset-block"></div>

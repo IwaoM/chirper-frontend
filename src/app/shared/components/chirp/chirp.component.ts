@@ -21,16 +21,12 @@ export class ChirpComponent implements OnInit {
 
   @Input() viewType!: "normal" | "focused";
   @Input() chirp!: Chirp;
-  @Input() chirpsStarredByConnectedUser!: number[];
+  @Input() starred!: boolean;
   @Input() repliedToChirp!: Chirp | null;
   @Input() authorProfilePicUrl!: SafeUrl | null;
   @Input() chirpImageUrl!: SafeUrl | null;
   @Output() deleteChirp = new EventEmitter<null>();
-
-  starred!: boolean;
-
-  localStarcount!: number;
-  localStarred!: boolean;
+  @Output() starChirp = new EventEmitter<null>();
 
   connectedUser!: {
     id: number
@@ -44,10 +40,6 @@ export class ChirpComponent implements OnInit {
     this.connectedUser = {
       id: this.authService.getConnectedUserId()
     };
-
-    this.starred = this.chirpsStarredByConnectedUser.includes(this.chirp.id);
-    this.localStarred = this.starred;
-    this.localStarcount = this.chirp.star_count;
 
     this.deleteHovered = false;
     this.starHovered = false;
@@ -103,9 +95,11 @@ export class ChirpComponent implements OnInit {
   onStarClick (event: Event) {
     event.stopPropagation();
     // update displayed values without reloading the whole list
-    this.localStarred = !this.localStarred;
-    this.localStarred ? this.localStarcount++ : this.localStarcount--;
-    this.chirpsService.starChirpById(this.chirp.id, this.connectedUser.id, this.localStarred).subscribe();
+    this.starred = !this.starred;
+    this.starred ? this.chirp.star_count++ : this.chirp.star_count--;
+    this.chirpsService.starChirpById(this.chirp.id, this.connectedUser.id, this.starred).pipe(
+      tap(() => this.starChirp.emit())
+    ).subscribe();
   }
 
   // Answer button events

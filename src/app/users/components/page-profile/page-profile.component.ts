@@ -42,7 +42,7 @@ export class PageProfileComponent implements OnInit {
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
   chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
-  chirpsStarredByConnectedUserArray!: number[];
+  starredMap!: Map<number, boolean>;
 
   profileTabs!: { title: string }[];
   selectedProfileTabIndex!: number;
@@ -65,12 +65,19 @@ export class PageProfileComponent implements OnInit {
     this.repliedToChirps = new Map();
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
+    this.starredMap = new Map();
 
     this.user$ = this.usersService.getUserById(this.userId);
     this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.userId);
 
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
-      tap(list => this.chirpsStarredByConnectedUserArray = list.map(elem => elem.chirp_id))
+      tap(list => {
+        for (let i = 0; i < list.length; i++) {
+          if (!this.starredMap.has(list[i].chirp_id)) {
+            this.starredMap.set(list[i].chirp_id, true);
+          }
+        }
+      })
     );
     this.chirpsStarredByConnectedUser$.subscribe();
 
@@ -124,7 +131,10 @@ export class PageProfileComponent implements OnInit {
   }
 
   onDeleteChirp () {
-    this.userChirps$ = this.usersService.getUserChirps(this.userId);
-    this.userStars$ = this.usersService.getUserStars(this.userId);
+    this.onNavigationToProfilePage();
+  }
+
+  onStarChirp () {
+    this.onNavigationToProfilePage();
   }
 }

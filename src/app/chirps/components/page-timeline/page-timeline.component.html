@@ -9,7 +9,7 @@
     *ngFor="let chirp of chirps$ | async"
     [viewType]="'normal'"
     [chirp]="chirp"
-    [chirpsStarredByConnectedUser]="chirpsStarredByConnectedUserArray"
+    [starred]="starredMap.get(chirp.id) || false"
     [repliedToChirp]="repliedToChirps.get(chirp.id) || null"
     [authorProfilePicUrl]="(authorProfilePicUrls.get(chirp.author_id) | async) || null"
     [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
