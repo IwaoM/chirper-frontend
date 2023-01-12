@@ -16,9 +16,10 @@
         <img *ngIf="currentPage === 'search'" class="global__icon-button" src="assets/svgIcons/search_filled_dark.svg"/>
         <img *ngIf="currentPage !== 'search'" class="global__icon-button" src="assets/svgIcons/search_dark.svg"/>
       </div>
+      <div class="navbar-padding"></div>
     </div>
     <div class="iconGroup">
-      <div class="navbarButtonRight">
+      <div class="navbarButtonRight" [routerLink]="'/users/' + connectedUser.id + '/settings'">
         <img *ngIf="currentPage === 'settings'" class="global__icon-button" src="assets/svgIcons/settings_filled_dark.svg"/>
         <img *ngIf="currentPage !== 'settings'" class="global__icon-button" src="assets/svgIcons/settings_dark.svg"/>
       </div>

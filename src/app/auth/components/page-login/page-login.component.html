@@ -3,19 +3,29 @@
     <div class="main-logo-box">
       <img class="main-logo" src="assets/logo/full_logo_accent.svg"/>
     </div>
-    <form [formGroup]="loginForm" class="form-fields-block" (ngSubmit)="onLoginButton()">
-      <input type="email" class="text-input global__text-normal" formControlName="email" placeholder="Email" required>
-      <p
-        *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
-        class="global__form-error"
-      >Ce champ est requis</p>
-      <input type="password" class="text-input global__text-normal" formControlName="password" placeholder="Mot de passe" required>
-      <p
-        *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-        class="global__form-error"
-      >Ce champ est requis</p>
-      <button class="global__accent-button login-page-button" type="submit" [disabled]="loginForm.invalid">Connexion</button>
-      <button class="global__accent-button login-page-button" (click)="onSignupButton()">S'inscrire</button>
+    <form [formGroup]="loginForm" class="global__form-fields-block" (ngSubmit)="onLoginButton()">
+      <div class="global__form-items-row">
+        <input type="email" class="global__text-input global__text-normal width-full" formControlName="email" placeholder="Email" required>
+      </div>
+      <div>
+        <p *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="global__form-error">
+          Ce champ est requis
+        </p>
+      </div>
+      <div class="global__form-items-row">
+        <input type="password" class="global__text-input global__text-normal width-full" formControlName="password" placeholder="Mot de passe" required>
+      </div>
+      <div>
+        <p *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="global__form-error">
+          Ce champ est requis
+        </p>
+      </div>
+      <div class="global__form-items-row">
+        <button class="global__accent-button width-full" type="submit" [disabled]="loginForm.invalid">Connexion</button>
+      </div>
+      <div class="global__form-items-row">
+        <button class="global__accent-button width-full" (click)="onSignupButton()">S'inscrire</button>
+      </div>
     </form>
   </div>
 </div>

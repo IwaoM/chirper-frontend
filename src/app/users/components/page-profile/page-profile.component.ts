@@ -44,20 +44,19 @@ export class PageProfileComponent implements OnInit {
   chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
   starredMap!: Map<number, boolean>;
 
-  profileTabs!: { title: string }[];
+  profileTabs = [
+    { title: "Chirps" },
+    { title: "Étoiles" },
+  ];
   selectedProfileTabIndex!: number;
 
   ngOnInit () {
     this.onNavigationToProfilePage();
-
-    this.profileTabs = [
-      { title: "Chirps" },
-      { title: "Étoiles" },
-    ];
-    this.selectedProfileTabIndex = 0;
   }
 
   onNavigationToProfilePage () {
+    this.selectedProfileTabIndex = 0;
+
     this.userId = +this.route.snapshot.params["id"];
     this.connectedUser = { id: this.authService.getConnectedUserId() };
     this.pageType = this.userId === this.connectedUser.id ? "ownProfile" : "profile";

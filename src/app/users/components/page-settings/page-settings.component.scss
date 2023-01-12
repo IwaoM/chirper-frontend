@@ -1,12 +1,5 @@
-* {
+form {
   display: flex;
-}
-
-@media only screen and (max-height: 752px) {
-  .global__centered-container {
-    outline: 0;
-    padding: 0;
-  }
 }
 
 .profile-pic-box {

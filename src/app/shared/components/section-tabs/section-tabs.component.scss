@@ -3,7 +3,7 @@
 }
 
 .tabs-block {
-  height: 56px;
+  min-height: 56px;
   margin: auto;
 
   align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .single-tab {
-  height: 56px;
+  min-height: 56px;
   width: 100%;
   justify-content: center;
   align-items: center;

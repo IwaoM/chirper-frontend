@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { map, Observable, tap } from "rxjs";
+import { tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
+import { ValidatorsService } from "src/app/core/services/validators.service";
 
 @Component({
   selector: "app-signup",
@@ -13,7 +14,8 @@ export class PageSignupComponent implements OnInit {
   constructor (
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private validatorsService: ValidatorsService
   ) {}
 
   signupForm!: FormGroup;
@@ -33,7 +35,7 @@ export class PageSignupComponent implements OnInit {
         Validators.required,
         Validators.email,
       ], [
-        this.uniqueEmailValidator()
+        this.validatorsService.uniqueEmailValidator()
       ]),
       password: new FormControl("", [
         Validators.required,
@@ -49,7 +51,7 @@ export class PageSignupComponent implements OnInit {
         Validators.maxLength(20),
         Validators.pattern("^[a-zA-Z0-9_-]{1,15}$"),
       ], [
-        this.uniqueHandleValidator()
+        this.validatorsService.uniqueHandleValidator()
       ]),
       username: new FormControl("", [
         Validators.maxLength(40)
@@ -58,7 +60,7 @@ export class PageSignupComponent implements OnInit {
         Validators.maxLength(120)
       ]),
     }, {
-      validators: [this.samePasswordValidator("password", "password2")],
+      validators: [this.validatorsService.samePasswordValidator("password", "password2")],
       updateOn: "blur"
     });
   }
@@ -108,32 +110,7 @@ export class PageSignupComponent implements OnInit {
     this.signupFormData.delete("profilePic");
   }
 
-  //* Validators
-  uniqueEmailValidator (): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.authService.getEmailUsed(control.value).pipe(
-        map(result => result ? { emailAlreadyInUse: true } : null)
-      );
-    };
-  }
-
-  samePasswordValidator (mainName: string, confirmName: string): ValidatorFn {
-    return (group: AbstractControl): null | ValidationErrors => {
-      const main = group.get(mainName);
-      const confirm = group.get(confirmName);
-      return main && confirm && confirm.value === main.value ? null : { passwordsMismatch: true };
-    };
-  }
-
-  uniqueHandleValidator (): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.authService.getHandleUsed(control.value).pipe(
-        map(result => result ? { handleAlreadyInUse: true } : null)
-      );
-    };
-  }
-
-  //* Error messages
+  //* Form error messages
   getFormControlErrorText (ctrl: AbstractControl | null): string {
     if (ctrl?.hasError("required")) {
       return "Ce champ est requis";

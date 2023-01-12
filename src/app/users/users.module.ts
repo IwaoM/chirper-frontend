@@ -6,11 +6,13 @@ import { SharedModule } from "../shared/shared.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { UsersRoutingModule } from "./users-routing.module";
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { PageSettingsComponent } from './components/page-settings/page-settings.component';
 
 @NgModule({
   declarations: [
     PageProfileComponent,
-    UserCardComponent
+    UserCardComponent,
+    PageSettingsComponent
   ],
   imports: [
     CommonModule,

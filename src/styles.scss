@@ -103,6 +103,7 @@ a {
 }
 
 .global__form-error {
+  position: fixed;
   font-size: 12px;
   line-height: 16px;
   color: var(--theme-red);
@@ -149,6 +150,13 @@ body {
   padding: 72px 0;
 }
 
+@media only screen and (max-width: 840px) {
+  .global__centered-container {
+    outline: 0;
+    padding: 0;
+  }
+}
+
 .global__form-container {
   max-width: 80vw;
   width: 408px;
@@ -159,8 +167,7 @@ body {
 .global__vertical-container {
   max-width: 840px;
   min-height: 100vh;
-  border-left: 2px solid var(--theme-border);
-  border-right: 2px solid var(--theme-border);
+  outline: 2px solid var(--theme-border);
   margin: auto;
 }
 
@@ -189,8 +196,59 @@ body {
 
 //* buttons & form items
 
+.global__form-title-box {
+  width: 100%;
+  justify-content: center;
+}
+
+.global__form-title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+  margin: 0;
+  color: var(--theme-text);
+}
+
+.global__form-fields-block {
+  width: 408px;
+  flex-direction: column;
+}
+
+.global__form-items-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+}
+
+.global__form-item-separator {
+  width: 24px;
+}
+
 button {
   cursor: pointer;
+}
+
+.global__text-input {
+  height: 48px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 24px;
+  outline: 2px solid var(--theme-border);
+  outline-offset: -2px;
+  background-color: var(--theme-bg);
+  transition: 0.2s;
+
+  &.width-full {
+    width: 100%
+  }
+
+  &.ng-invalid.ng-touched {
+    outline: 2px solid var(--theme-red);
+  }
+
+  &.invalid-pw2.ng-touched {
+    outline: 2px solid var(--theme-red);
+  }
 }
 
 .global__accent-button {
@@ -205,6 +263,14 @@ button {
   border: none;
   border-radius: 24px;
   transition: 0.1s;
+
+  &.width-full {
+    width: 100%
+  }
+
+  &.width-192px {
+    width: 192px
+  }
 
   &:enabled:hover {
     background-color: var(--theme-accent-hover);
