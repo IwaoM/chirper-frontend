@@ -27,14 +27,10 @@ export class PageTimelineComponent implements OnInit {
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
-  connectedUser!: {
-    id: number
-  };
+  connectedUser!: { id: number };
 
   ngOnInit () {
-    this.connectedUser = {
-      id: this.authService.getConnectedUserId()
-    };
+    this.connectedUser = { id: this.authService.getConnectedUserId() };
 
     this.repliedToChirps = new Map();
     this.authorProfilePicUrls = new Map();

@@ -91,9 +91,7 @@ export class PageSignupComponent implements OnInit {
       const file: File = event.target.files[0];
 
       // add picture to formData
-      if (this.signupFormData.has("profilePic")) {
-        this.signupFormData.delete("profilePic");
-      }
+      this.signupFormData.delete("profilePic");
       this.signupFormData.append("profilePic", file, "profilePic.png");
 
       // update the src for the preview image

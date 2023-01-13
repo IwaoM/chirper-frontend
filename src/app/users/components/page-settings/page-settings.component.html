@@ -9,7 +9,7 @@
   <div *ngIf="selectedSettingsTabIndex === 0" class="global__form-container">
     <form [formGroup]="profileForm" class="global__form-fields-block" (ngSubmit)="onUpdateButton()">
       <div class="global__form-items-row">
-        <input type="email" class="global__text-input global__text-normal width-full" formControlName="email" [value]="(user$ | async)?.email" placeholder="Email *">
+        <input type="email" class="global__text-input global__text-normal width-full" formControlName="email" placeholder="Email *">
       </div>
       <div>
         <p *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="global__form-error">
@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="global__form-items-row">
-        <input type="text" class="global__text-input global__text-normal width-full" formControlName="handle" [value]="(user$ | async)?.handle" placeholder="Nom d'utilisateur *">
+        <input type="text" class="global__text-input global__text-normal width-full" formControlName="handle" placeholder="Nom d'utilisateur *">
       </div>
       <div>
         <p *ngIf="profileForm.get('handle')?.invalid && profileForm.get('handle')?.touched" class="global__form-error">
@@ -25,20 +25,20 @@
         </p>
       </div>
       <div class="global__form-items-row">
-        <input type="text" class="global__text-input global__text-normal width-full" formControlName="username" [value]="(user$ | async)?.username" placeholder="Nom d'affichage">
+        <input type="text" class="global__text-input global__text-normal width-full" formControlName="username" placeholder="Nom d'affichage">
       </div>
       <div class="global__form-items-row">
         <div class="profile-pic-box">
           <input class="profile-pic-field" type="file" accept=".png" (change)="onProfilePicSelect($event)">
-          <img *ngIf="profilePictureUrl$ | async as profilePictureUrl" [src]="profilePictureUrl" class="profile-pic-preview">
-          <img *ngIf="(profilePictureUrl$ | async) === null" src="assets/svgIcons/picture_dark.svg"/>
+          <img *ngIf="profilePicturePreview" [src]="profilePicturePreview" class="profile-pic-preview">
+          <img *ngIf="!profilePicturePreview" src="assets/svgIcons/picture_dark.svg"/>
         </div>
         <div class="global__form-item-separator"></div>
         <div class="textarea-box">
-          <textarea [value]="(user$ | async)?.bio" placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
+          <textarea placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
         </div>
       </div>
-      <div *ngIf="profilePictureUrl$ | async" class="remove-image-button" (click)="onProfilePicRemove()">
+      <div *ngIf="profilePicturePreview" class="remove-image-button" (click)="onProfilePicRemove()">
         <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
       </div>
       <div class="global__form-items-row">

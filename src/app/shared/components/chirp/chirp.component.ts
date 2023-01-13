@@ -28,18 +28,14 @@ export class ChirpComponent implements OnInit {
   @Output() deleteChirp = new EventEmitter<null>();
   @Output() starChirp = new EventEmitter<null>();
 
-  connectedUser!: {
-    id: number
-  };
+  connectedUser!: { id: number };
 
   deleteHovered!: boolean;
   starHovered!: boolean;
   answerHovered!: boolean;
 
   ngOnInit () {
-    this.connectedUser = {
-      id: this.authService.getConnectedUserId()
-    };
+    this.connectedUser = { id: this.authService.getConnectedUserId() };
 
     this.deleteHovered = false;
     this.starHovered = false;

@@ -12,10 +12,12 @@ export class ValidatorsService {
     private authService: AuthService
   ) {}
 
+  private connectedUser = { id: this.authService.getConnectedUserId() };
+
   //* Angular form validators
   uniqueEmailValidator (): AsyncValidatorFn {
     return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.authService.getEmailUsed(control.value).pipe(
+      return this.authService.getEmailUsed(control.value, this.connectedUser.id).pipe(
         map(result => result ? { emailAlreadyInUse: true } : null)
       );
     };
@@ -31,7 +33,7 @@ export class ValidatorsService {
 
   uniqueHandleValidator (): AsyncValidatorFn {
     return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.authService.getHandleUsed(control.value).pipe(
+      return this.authService.getHandleUsed(control.value, this.connectedUser.id).pipe(
         map(result => result ? { handleAlreadyInUse: true } : null)
       );
     };

@@ -39,9 +39,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
-  connectedUser!: {
-    id: number
-  };
+  connectedUser!: { id: number };
 
   ngOnInit () {
     this.onNavigationToChirpPage();
@@ -54,9 +52,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   }
 
   onNavigationToChirpPage () {
-    this.connectedUser = {
-      id: this.authService.getConnectedUserId()
-    };
+    this.connectedUser = { id: this.authService.getConnectedUserId() };
 
     this.chirpId = +this.route.snapshot.params["id"];
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SafeUrl } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -29,6 +29,7 @@ export class PageSettingsComponent implements OnInit {
 
   user$!: Observable<User>;
   profilePictureUrl$!: Observable<SafeUrl>;
+  profilePicturePreview!: string | SafeUrl;
 
   profileForm!: FormGroup;
   profileFormData!: FormData;
@@ -54,9 +55,22 @@ export class PageSettingsComponent implements OnInit {
     }
 
     this.initForms();
+    this.profileFormData = new FormData();
+    this.profileFormData.append("keepOldProfilePic", "true");
 
-    this.user$ = this.usersService.getUserById(this.userId);
-    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.userId);
+    this.user$ = this.usersService.getUserById(this.userId).pipe(
+      tap(user => {
+        this.profileForm.get("email")?.setValue(user.email);
+        this.profileForm.get("handle")?.setValue(user.handle);
+        this.profileForm.get("username")?.setValue(user.username);
+        this.profileForm.get("bio")?.setValue(user.bio);
+        this.profileForm.updateValueAndValidity();
+      })
+    );
+    this.user$.subscribe();
+    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.userId).pipe(
+      tap(url => this.profilePicturePreview = url)
+    );
     this.profilePictureUrl$.subscribe();
   }
 
@@ -90,15 +104,44 @@ export class PageSettingsComponent implements OnInit {
   }
 
   onUpdateButton () {
-    // todo
+    for (const field in this.profileForm.value) {
+      this.profileFormData.append(field, this.profileForm.value[field]);
+    }
+    this.authService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
+      tap(() => this.onNavigationToSettingsPage())
+    ).subscribe();
+
+    this.profileFormData.delete("email");
+    this.profileFormData.delete("handle");
+    this.profileFormData.delete("username");
+    this.profileFormData.delete("bio");
+    this.profileFormData.delete("keepOldProfilePic");
   }
 
   onProfilePicSelect (event: any) {
-    // todo
+    if (event?.target?.files[0]) {
+      this.profileFormData.delete("keepOldProfilePic");
+      const file: File = event.target.files[0];
+
+      // add picture to formData
+      this.profileFormData.delete("profilePic");
+      this.profileFormData.append("profilePic", file, "profilePic.png");
+
+      // update the src for the preview image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profilePicturePreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onProfilePicRemove () {
-    // todo
+    this.profilePicturePreview = "";
+    this.profileFormData.delete("keepOldProfilePic");
+    if (this.profileFormData.has("profilePic")) {
+      this.profileFormData.delete("profilePic");
+    }
   }
 
   //* Error messages

@@ -350,11 +350,17 @@ textarea {
 
 .global__profile-pic {
   height: 48px;
+  min-height: 48px;
   width: 48px;
+  min-width: 48px;
+  object-fit: cover;
 
   &-big {
     height: 144px;
+    min-height: 144px;
     width: 144px;
+    min-width: 144px;
+    object-fit: cover;
   }
 }
 
