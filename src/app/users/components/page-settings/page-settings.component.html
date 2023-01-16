@@ -6,45 +6,8 @@
   <div class="global__header-offset-block"></div>
   <app-section-tabs [tabs]="settingsTabs" [selectedTabIndex]="selectedSettingsTabIndex" (tabClicked)="onTabClick($event)"></app-section-tabs>
 
-  <div *ngIf="selectedSettingsTabIndex === 0" class="global__form-container">
-    <form [formGroup]="profileForm" class="global__form-fields-block" (ngSubmit)="onUpdateButton()">
-      <div class="global__form-items-row">
-        <input type="email" class="global__text-input global__text-normal width-full" formControlName="email" placeholder="Email *">
-      </div>
-      <div>
-        <p *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="global__form-error">
-          {{ getFormControlErrorText(profileForm.get('email')) }}
-        </p>
-      </div>
-      <div class="global__form-items-row">
-        <input type="text" class="global__text-input global__text-normal width-full" formControlName="handle" placeholder="Nom d'utilisateur *">
-      </div>
-      <div>
-        <p *ngIf="profileForm.get('handle')?.invalid && profileForm.get('handle')?.touched" class="global__form-error">
-          {{ getFormControlErrorText(profileForm.get('handle')) }}
-        </p>
-      </div>
-      <div class="global__form-items-row">
-        <input type="text" class="global__text-input global__text-normal width-full" formControlName="username" placeholder="Nom d'affichage">
-      </div>
-      <div class="global__form-items-row">
-        <div class="profile-pic-box">
-          <input class="profile-pic-field" type="file" accept=".png" (change)="onProfilePicSelect($event)">
-          <img *ngIf="profilePicturePreview" [src]="profilePicturePreview" class="profile-pic-preview">
-          <img *ngIf="!profilePicturePreview" src="assets/svgIcons/picture_dark.svg"/>
-        </div>
-        <div class="global__form-item-separator"></div>
-        <div class="textarea-box">
-          <textarea placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
-        </div>
-      </div>
-      <div *ngIf="profilePicturePreview" class="remove-image-button" (click)="onProfilePicRemove()">
-        <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
-      </div>
-      <div class="global__form-items-row">
-        <button class="global__accent-button width-full" type="submit" [disabled]="profileForm.invalid">Mettre à jour</button>
-      </div>
-    </form>
+  <div *ngIf="selectedSettingsTabIndex === 0">
+    <app-profile-update-form></app-profile-update-form>
   </div>
 
   <div *ngIf="selectedSettingsTabIndex === 1">

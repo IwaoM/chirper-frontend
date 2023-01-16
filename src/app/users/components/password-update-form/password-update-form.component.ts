@@ -32,10 +32,10 @@ export class PasswordUpdateFormComponent implements OnInit {
 
   initPage () {
     this.connectedUser = { id: this.authService.getConnectedUserId() };
-    this.initForms();
+    this.initForm();
   }
 
-  private initForms (): void {
+  private initForm (): void {
     this.passwordFormData = new FormData();
 
     this.passwordForm = this.formBuilder.group({
