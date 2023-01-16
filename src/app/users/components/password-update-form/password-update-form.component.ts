@@ -25,6 +25,7 @@ export class PasswordUpdateFormComponent implements OnInit {
   passwordFormData!: FormData;
 
   passwordUpdateResult = 0;
+  errorMessage = "";
 
   ngOnInit () {
     this.initPage();
@@ -63,11 +64,19 @@ export class PasswordUpdateFormComponent implements OnInit {
       this.passwordFormData.append(field, this.passwordForm.value[field]);
     }
     this.usersService.updatePassword(this.connectedUser.id, this.passwordFormData).pipe(
-      tap(result => {
-        this.initPage();
+      tap(() => this.initPage())
+    ).subscribe({
+      next: (result) => {
         this.passwordUpdateResult = result;
-      })
-    ).subscribe();
+        this.errorMessage = "";
+      },
+      error: (err) => {
+        this.passwordUpdateResult = 0;
+        if (err.error.message === "Incorrect password") {
+          this.errorMessage = "Le mot de passe actuel entré est incorrect";
+        }
+      }
+    });
 
     this.passwordFormData.delete("oldPassword");
     this.passwordFormData.delete("newPassword");

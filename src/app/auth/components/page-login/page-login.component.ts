@@ -19,6 +19,8 @@ export class PageLoginComponent implements OnInit {
   loginForm!: FormGroup;
   loginFormData!: FormData;
 
+  errorMessage = "";
+
   ngOnInit (): void {
     this.loginForm = this.formBuilder.group({
       email: new FormControl("", [
@@ -37,7 +39,16 @@ export class PageLoginComponent implements OnInit {
     }
     this.authService.login(this.loginFormData).pipe(
       tap(() => this.router.navigateByUrl("app/timeline"))
-    ).subscribe();
+    ).subscribe({
+      next: () => {
+        this.errorMessage = "";
+      },
+      error: (err) => {
+        if (err.error.message === "Incorrect credentials") {
+          this.errorMessage = "Les identifiants entrés sont incorrects";
+        }
+      }
+    });
 
     this.loginFormData.delete("email");
     this.loginFormData.delete("password");

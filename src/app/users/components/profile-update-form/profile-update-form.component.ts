@@ -29,6 +29,8 @@ export class ProfileUpdateFormComponent implements OnInit {
   profileForm!: FormGroup;
   profileFormData!: FormData;
 
+  profileUpdateResult = 0;
+
   ngOnInit () {
     this.initPage();
   }
@@ -91,7 +93,7 @@ export class ProfileUpdateFormComponent implements OnInit {
     }
     this.usersService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
       tap(() => this.initPage())
-    ).subscribe();
+    ).subscribe({ next: (result) => this.profileUpdateResult = result });
 
     this.profileFormData.delete("email");
     this.profileFormData.delete("handle");
