@@ -1,72 +1,74 @@
 <div class="global__centered-container">
-  <div class="global__form-container">
-    <div class="global__form-title-box">
-      <p class="global__form-title">Inscription</p>
+  <div class="global__form-vertical-padding">
+    <div class="global__form-container">
+      <div class="global__form-title-box">
+        <p class="global__form-title">Inscription</p>
+      </div>
+      <form [formGroup]="signupForm" class="global__form-fields-block" (ngSubmit)="onSignupButton()">
+        <div class="global__form-items-row">
+          <input type="email" class="global__text-input global__text-normal width-full" formControlName="email" placeholder="Email *">
+        </div>
+        <div class="global__form-error-box">
+          <p *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="global__form-error">
+            {{ getFormControlErrorText(signupForm.get('email')) }}
+          </p>
+        </div>
+        <div class="global__form-items-row">
+          <input type="password" class="global__text-input global__text-normal width-full" formControlName="password" placeholder="Mot de passe *">
+        </div>
+        <div class="global__form-error-box">
+          <p *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="global__form-error">
+            {{ getFormControlErrorText(signupForm.get('password')) }}
+          </p>
+        </div>
+        <div class="global__form-items-row">
+          <input
+            type="password"
+            class="global__text-input global__text-normal width-full"
+            formControlName="password2"
+            placeholder="Répétez le mot de passe *"
+            [ngClass]="{ 'invalid-pw2': signupForm.hasError('passwordsMismatch') }"
+          >
+        </div>
+        <div class="global__form-error-box">
+          <p *ngIf="signupForm.get('password2')?.invalid && signupForm.get('password2')?.touched" class="global__form-error">
+            {{ getFormControlErrorText(signupForm.get('password2')) }}
+          </p>
+          <p *ngIf="signupForm.get('password2')?.valid && signupForm.get('password2')?.touched && signupForm.hasError('passwordsMismatch')" class="global__form-error">
+            {{ getFormControlErrorText(signupForm) }}
+          </p>
+        </div>
+        <div class="global__form-items-row">
+          <input type="text" class="global__text-input global__text-normal width-full" formControlName="handle" placeholder="Nom d'utilisateur *">
+        </div>
+        <div class="global__form-error-box">
+          <p *ngIf="signupForm.get('handle')?.invalid && signupForm.get('handle')?.touched" class="global__form-error">
+            {{ getFormControlErrorText(signupForm.get('handle')) }}
+          </p>
+        </div>
+        <div class="global__form-items-row">
+          <input type="text" class="global__text-input global__text-normal width-full" formControlName="username" placeholder="Nom d'affichage">
+        </div>
+        <div class="global__form-items-row">
+          <div class="profile-pic-box">
+            <input class="profile-pic-field" type="file" accept=".png" (change)="onProfilePicSelect($event)">
+            <img *ngIf="profilePicPreview" [src]="profilePicPreview" class="profile-pic-preview">
+            <img *ngIf="!profilePicPreview" src="assets/svgIcons/picture_dark.svg"/>
+          </div>
+          <div class="global__form-item-separator"></div>
+          <div class="textarea-box">
+            <textarea placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
+          </div>
+        </div>
+        <div *ngIf="profilePicPreview" class="remove-image-button" (click)="onProfilePicRemove()">
+          <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
+        </div>
+        <div class="global__form-items-row">
+          <button class="global__accent-button width-192px" type="submit" [disabled]="signupForm.invalid">S'inscrire</button>
+          <div class="global__form-item-separator"></div>
+          <button class="global__accent-button width-192px" type="button" (click)="onCancelButton()">Annuler</button>
+        </div>
+      </form>
     </div>
-    <form [formGroup]="signupForm" class="global__form-fields-block" (ngSubmit)="onSignupButton()">
-      <div class="global__form-items-row">
-        <input type="email" class="global__text-input global__text-normal width-full" formControlName="email" placeholder="Email *">
-      </div>
-      <div>
-        <p *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="global__form-error">
-          {{ getFormControlErrorText(signupForm.get('email')) }}
-        </p>
-      </div>
-      <div class="global__form-items-row">
-        <input type="password" class="global__text-input global__text-normal width-full" formControlName="password" placeholder="Mot de passe *">
-      </div>
-      <div>
-        <p *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="global__form-error">
-          {{ getFormControlErrorText(signupForm.get('password')) }}
-        </p>
-      </div>
-      <div class="global__form-items-row">
-        <input
-          type="password"
-          class="global__text-input global__text-normal width-full"
-          formControlName="password2"
-          placeholder="Répétez le mot de passe *"
-          [ngClass]="{ 'invalid-pw2': signupForm.hasError('passwordsMismatch') }"
-        >
-      </div>
-      <div>
-        <p *ngIf="signupForm.get('password2')?.invalid && signupForm.get('password2')?.touched" class="global__form-error">
-          {{ getFormControlErrorText(signupForm.get('password2')) }}
-        </p>
-        <p *ngIf="signupForm.get('password2')?.valid && signupForm.get('password2')?.touched && signupForm.hasError('passwordsMismatch')" class="global__form-error">
-          {{ getFormControlErrorText(signupForm) }}
-        </p>
-      </div>
-      <div class="global__form-items-row">
-        <input type="text" class="global__text-input global__text-normal width-full" formControlName="handle" placeholder="Nom d'utilisateur *">
-      </div>
-      <div>
-        <p *ngIf="signupForm.get('handle')?.invalid && signupForm.get('handle')?.touched" class="global__form-error">
-          {{ getFormControlErrorText(signupForm.get('handle')) }}
-        </p>
-      </div>
-      <div class="global__form-items-row">
-        <input type="text" class="global__text-input global__text-normal width-full" formControlName="username" placeholder="Nom d'affichage">
-      </div>
-      <div class="global__form-items-row">
-        <div class="profile-pic-box">
-          <input class="profile-pic-field" type="file" accept=".png" (change)="onProfilePicSelect($event)">
-          <img *ngIf="profilePicPreview" [src]="profilePicPreview" class="profile-pic-preview">
-          <img *ngIf="!profilePicPreview" src="assets/svgIcons/picture_dark.svg"/>
-        </div>
-        <div class="global__form-item-separator"></div>
-        <div class="textarea-box">
-          <textarea placeholder="Bio : quelques mots sur vous..." formControlName="bio"></textarea>
-        </div>
-      </div>
-      <div *ngIf="profilePicPreview" class="remove-image-button" (click)="onProfilePicRemove()">
-        <img class="global__mini-icon-button" src="assets/svgIcons/x_dark.svg"/>
-      </div>
-      <div class="global__form-items-row">
-        <button class="global__accent-button width-192px" type="submit" [disabled]="signupForm.invalid">S'inscrire</button>
-        <div class="global__form-item-separator"></div>
-        <button class="global__accent-button width-192px" type="button" (click)="onCancelButton()">Annuler</button>
-      </div>
-    </form>
   </div>
 </div>

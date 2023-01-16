@@ -21,14 +21,12 @@ export class ChirpsService {
     return this.http.get<Chirp[]>("https://localhost:3000/api/chirps");
   }
 
-  getRepliesTo (chirpId: number): Observable<Chirp[]> {
-    return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}/replies`);
+  getChirpById (chirpId: number): Observable<Chirp> {
+    return this.http.get<Chirp>(`https://localhost:3000/api/chirps/${chirpId}`);
   }
 
-  getChirpById (chirpId: number): Observable<Chirp> {
-    return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}`).pipe(
-      map(entries => entries[0])
-    );
+  getRepliesTo (chirpId: number): Observable<Chirp[]> {
+    return this.http.get<Chirp[]>(`https://localhost:3000/api/chirps/${chirpId}/replies`);
   }
 
   getChirpImage (chirpId: number): Observable<SafeUrl> {
@@ -42,8 +40,8 @@ export class ChirpsService {
     return this.http.post<number>(`https://localhost:3000/api/chirps`, data);
   }
 
-  starChirpById (chirpId: number, userId: number, starred: boolean): Observable<boolean> {
-    return this.http.post<boolean>(`https://localhost:3000/api/chirps/${chirpId}/stars/${userId}`, { starred });
+  starChirpById (chirpId: number, userId: number, starred: boolean): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/chirps/${chirpId}/stars/${userId}`, { starred });
   }
 
   deleteChirp (chirpId: number): Observable<number> {

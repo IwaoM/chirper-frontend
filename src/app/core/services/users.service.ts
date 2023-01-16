@@ -17,9 +17,7 @@ export class UsersService {
 
   // GET requests
   getUserById (userId: number): Observable<User> {
-    return this.http.get<User[]>(`https://localhost:3000/api/users/${userId}`).pipe(
-      map(entries => entries[0])
-    );
+    return this.http.get<User>(`https://localhost:3000/api/users/${userId}`);
   }
 
   getUserProfilePic (authorId: number): Observable<SafeUrl> {
@@ -36,8 +34,8 @@ export class UsersService {
     return this.http.get<Chirp[]>(`https://localhost:3000/api/users/${userId}/stars`);
   }
 
-  getUserStarIds (userId: number): Observable<{ chirp_id: number }[]> {
-    return this.http.get<{ chirp_id: number }[]>(`https://localhost:3000/api/users/${userId}/star-ids`);
+  getUserStarIds (userId: number): Observable<number[]> {
+    return this.http.get<number[]>(`https://localhost:3000/api/users/${userId}/star-ids`);
   }
 
   // POST requests

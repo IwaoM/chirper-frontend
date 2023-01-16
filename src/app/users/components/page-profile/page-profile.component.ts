@@ -41,7 +41,7 @@ export class PageProfileComponent implements OnInit {
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
-  chirpsStarredByConnectedUser$!: Observable<{ chirp_id: number }[]>;
+  chirpsStarredByConnectedUser$!: Observable<number[]>;
   starredMap!: Map<number, boolean>;
 
   profileTabs = [
@@ -72,8 +72,8 @@ export class PageProfileComponent implements OnInit {
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => {
         for (let i = 0; i < list.length; i++) {
-          if (!this.starredMap.has(list[i].chirp_id)) {
-            this.starredMap.set(list[i].chirp_id, true);
+          if (!this.starredMap.has(list[i])) {
+            this.starredMap.set(list[i], true);
           }
         }
       })
