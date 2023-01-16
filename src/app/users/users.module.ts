@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { UsersRoutingModule } from "./users-routing.module";
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { PageSettingsComponent } from './components/page-settings/page-settings.component';
+import { PasswordUpdateFormComponent } from './components/password-update-form/password-update-form.component';
 
 @NgModule({
   declarations: [
     PageProfileComponent,
     UserCardComponent,
-    PageSettingsComponent
+    PageSettingsComponent,
+    PasswordUpdateFormComponent
   ],
   imports: [
     CommonModule,

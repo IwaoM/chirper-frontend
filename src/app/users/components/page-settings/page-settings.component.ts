@@ -55,8 +55,6 @@ export class PageSettingsComponent implements OnInit {
     }
 
     this.initForms();
-    this.profileFormData = new FormData();
-    this.profileFormData.append("keepOldProfilePic", "true");
 
     this.user$ = this.usersService.getUserById(this.userId).pipe(
       tap(user => {
@@ -75,6 +73,10 @@ export class PageSettingsComponent implements OnInit {
   }
 
   private initForms (): void {
+    // Profile update form
+    this.profileFormData = new FormData();
+    this.profileFormData.append("keepOldProfilePic", "true");
+
     this.profileForm = this.formBuilder.group({
       email: new FormControl("", [
         Validators.required,
@@ -107,7 +109,7 @@ export class PageSettingsComponent implements OnInit {
     for (const field in this.profileForm.value) {
       this.profileFormData.append(field, this.profileForm.value[field]);
     }
-    this.authService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
+    this.usersService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
       tap(() => this.onNavigationToSettingsPage())
     ).subscribe();
 

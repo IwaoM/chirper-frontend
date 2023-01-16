@@ -39,4 +39,13 @@ export class UsersService {
   getUserStarIds (userId: number): Observable<{ chirp_id: number }[]> {
     return this.http.get<{ chirp_id: number }[]>(`https://localhost:3000/api/users/${userId}/star-ids`);
   }
+
+  // POST requests
+  updateProfile (userId: number, data: FormData): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/update-profile`, data);
+  }
+
+  updatePassword (userId: number, data: FormData): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/update-password`, data);
+  }
 }

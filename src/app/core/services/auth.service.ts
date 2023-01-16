@@ -56,8 +56,4 @@ export class AuthService {
       })
     );
   }
-
-  updateProfile (userId: number, data: FormData): Observable<number> {
-    return this.http.post<number>(`https://localhost:3000/api/auth/${userId}/update-profile`, data);
-  }
 }

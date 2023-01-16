@@ -209,6 +209,12 @@ body {
   color: var(--theme-text);
 }
 
+.global__form-confirm-box {
+  width: 100%;
+  justify-content: center;
+  margin-top: 24px;
+}
+
 .global__form-fields-block {
   width: 408px;
   flex-direction: column;
@@ -247,6 +253,10 @@ button {
   }
 
   &.invalid-pw2.ng-touched {
+    outline: 2px solid var(--theme-red);
+  }
+
+  &.invalid-new-pw.ng-touched {
     outline: 2px solid var(--theme-red);
   }
 }

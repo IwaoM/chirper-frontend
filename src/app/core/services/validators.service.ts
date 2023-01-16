@@ -23,6 +23,14 @@ export class ValidatorsService {
     };
   }
 
+  uniqueHandleValidator (): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<null | ValidationErrors> => {
+      return this.authService.getHandleUsed(control.value, this.connectedUser.id).pipe(
+        map(result => result ? { handleAlreadyInUse: true } : null)
+      );
+    };
+  }
+
   samePasswordValidator (mainName: string, confirmName: string): ValidatorFn {
     return (group: AbstractControl): null | ValidationErrors => {
       const main = group.get(mainName);
@@ -31,11 +39,11 @@ export class ValidatorsService {
     };
   }
 
-  uniqueHandleValidator (): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<null | ValidationErrors> => {
-      return this.authService.getHandleUsed(control.value, this.connectedUser.id).pipe(
-        map(result => result ? { handleAlreadyInUse: true } : null)
-      );
+  differentNewPasswordValidator (oldName: string, newName: string): ValidatorFn {
+    return (group: AbstractControl): null | ValidationErrors => {
+      const oldPw = group.get(oldName);
+      const newPw = group.get(newName);
+      return oldPw && newPw && newPw.value !== oldPw.value ? null : { sameAsOldPassword: true };
     };
   }
 }
