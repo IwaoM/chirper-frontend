@@ -40,20 +40,16 @@
 
       </div>
 
-      <div *ngIf="connectedUser.id === chirp.author_id"
-        class="delete-button"
-        (click)="onDeleteClick($event)"
-        (mouseenter)="onDeleteMouseEnter()"
-        (mouseleave)="onDeleteMouseLeave()"
-      >
-        <object *ngIf="!deleteHovered" type="image/svg+xml">
-          <img class="global__mini-icon-button" src="assets/svgIcons/delete_dark.svg"/>
-        </object>
-
-        <object *ngIf="deleteHovered" type="image/svg+xml">
-          <img class="global__mini-icon-button" src="assets/svgIcons/delete_warning.svg"/>
-        </object>
-
+      <div *ngIf="connectedUser.id === chirp.author_id" class="delete-button">
+        <svg
+          class="global__mini-icon-button"
+          viewBox="0 0 16 16"
+          (click)="onDeleteClick($event)"
+          (mouseenter)="onDeleteMouseEnter()"
+          (mouseleave)="onDeleteMouseLeave()"
+        >
+          <path [ngClass]="{ 'global__svg-text-light': !deleteHovered, 'global__svg-red': deleteHovered }" d="M 5.00,0.00 C 5.00,0.00 4.36,0.42 4.36,0.42 4.36,0.42 3.54,2.30 3.54,2.30 2.36,2.30 1.18,2.30 0.00,2.30 0.00,2.30 0.00,3.70 0.00,3.70 0.45,3.70 0.90,3.70 1.35,3.70 1.35,3.70 2.30,15.35 2.30,15.35 2.30,15.35 3.00,16.00 3.00,16.00 3.00,16.00 13.00,16.00 13.00,16.00 13.00,16.00 13.70,15.35 13.70,15.35 13.70,15.35 14.64,3.70 14.64,3.70 14.64,3.70 16.00,3.70 16.00,3.70 16.00,3.70 16.00,2.30 16.00,2.30 16.00,2.30 12.46,2.30 12.46,2.30 12.46,2.30 11.64,0.42 11.64,0.42 11.64,0.42 11.00,0.00 11.00,0.00 11.00,0.00 5.00,0.00 5.00,0.00 Z M 5.46,1.40 C 5.46,1.40 10.54,1.40 10.54,1.40 10.54,1.40 10.94,2.30 10.94,2.30 10.94,2.30 5.07,2.30 5.07,2.30 5.07,2.30 5.46,1.40 5.46,1.40 Z M 2.76,3.70 C 2.76,3.70 13.24,3.70 13.24,3.70 13.24,3.70 12.36,14.60 12.36,14.60 12.36,14.60 3.65,14.60 3.65,14.60 3.65,14.60 2.76,3.70 2.76,3.70 Z M 5.30,5.30 C 5.30,7.50 5.30,9.80 5.30,11.70 5.30,11.70 6.70,11.70 6.70,11.70 6.70,9.36 6.70,7.41 6.70,5.30 6.70,5.30 5.30,5.30 5.30,5.30 Z M 10.70,5.30 C 10.70,7.64 10.70,9.59 10.70,11.70 10.70,11.70 9.30,11.70 9.30,11.70 9.30,9.50 9.30,7.20 9.30,5.30 9.30,5.30 10.70,5.30 10.70,5.30 Z"/>
+        </svg>
       </div>
   
     </div>
@@ -104,21 +100,17 @@
     <div class="button-block">
   
       <div class="star-block">
-        <div
-          class="star-button"
-          (click)="onStarClick($event)"
-          (mouseenter)="onStarMouseEnter()"
-          (mouseleave)="onStarMouseLeave()"
-        >
-          <object *ngIf="!starred && !starHovered" type="image/svg+xml">
-            <img class="global__mini-icon-button" src="assets/svgIcons/star_dark.svg"/>
-          </object>
-          <object *ngIf="!starred && starHovered" type="image/svg+xml">
-            <img class="global__mini-icon-button" src="assets/svgIcons/star_accent1.svg"/>
-          </object>
-          <object *ngIf="starred" type="image/svg+xml">
-            <img class="global__mini-icon-button" src="assets/svgIcons/star_filled_accent1.svg"/>
-          </object>
+        <div class="star-button">
+          <svg
+            class="global__mini-icon-button"
+            viewBox="0 0 16 16"
+            (click)="onStarClick($event)"
+            (mouseenter)="onStarMouseEnter()"
+            (mouseleave)="onStarMouseLeave()"
+          >
+            <path *ngIf="!starred" [ngClass]="{ 'global__svg-text-light': !starHovered, 'global__svg-accent-variant': starHovered }" d="M 7.37,0.39 C 7.37,0.39 5.21,4.76 5.21,4.76 5.21,4.76 0.39,5.47 0.39,5.47 0.39,5.47 0.00,6.66 0.00,6.66 0.00,6.66 3.49,10.06 3.49,10.06 3.49,10.06 2.67,14.87 2.67,14.87 2.67,14.87 3.68,15.61 3.68,15.61 3.68,15.61 8.00,13.34 8.00,13.34 8.00,13.34 12.31,15.61 12.31,15.61 12.31,15.61 13.33,14.87 13.33,14.87 13.33,14.87 12.51,10.06 12.51,10.06 12.51,10.06 16.00,6.66 16.00,6.66 16.00,6.66 15.61,5.47 15.61,5.47 15.61,5.47 10.79,4.76 10.79,4.76 10.79,4.76 8.63,0.39 8.63,0.39 8.63,0.39 7.37,0.39 7.37,0.39 Z M 8.00,2.29 C 8.00,2.29 9.69,5.72 9.69,5.72 9.69,5.72 10.22,6.10 10.22,6.10 10.22,6.10 14.00,6.65 14.00,6.65 14.00,6.65 11.27,9.32 11.27,9.32 11.27,9.32 11.07,9.94 11.07,9.94 11.07,9.94 11.72,13.71 11.72,13.71 11.72,13.71 8.33,11.93 8.33,11.93 8.33,11.93 7.67,11.93 7.67,11.93 7.67,11.93 4.29,13.71 4.29,13.71 4.29,13.71 4.93,9.94 4.93,9.94 4.93,9.94 4.73,9.32 4.73,9.32 4.73,9.32 2.00,6.65 2.00,6.65 2.00,6.65 5.78,6.10 5.78,6.10 5.78,6.10 6.31,5.72 6.31,5.72 6.31,5.72 8.00,2.29 8.00,2.29 Z"/>
+            <path *ngIf="starred" class="global__svg-accent-variant" d="M 7.37,0.39 C 7.37,0.39 5.21,4.76 5.21,4.76 5.21,4.76 0.39,5.47 0.39,5.47 0.39,5.47 0.00,6.66 0.00,6.66 0.00,6.66 3.49,10.06 3.49,10.06 3.49,10.06 2.67,14.87 2.67,14.87 2.67,14.87 3.69,15.61 3.69,15.61 3.69,15.61 8.00,13.34 8.00,13.34 8.00,13.34 12.31,15.61 12.31,15.61 12.31,15.61 13.33,14.87 13.33,14.87 13.33,14.87 12.51,10.06 12.51,10.06 12.51,10.06 16.00,6.66 16.00,6.66 16.00,6.66 15.61,5.47 15.61,5.47 15.61,5.47 10.79,4.76 10.79,4.76 10.79,4.76 8.63,0.39 8.63,0.39 8.63,0.39 7.37,0.39 7.37,0.39 Z"/>
+          </svg>
         </div>
         <div class="star-count">
           <p
@@ -129,18 +121,16 @@
       </div>
   
       <div class="reply-block">
-        <div
-          class="reply-button"
-          (click)="onAnswerClick($event)"
-          (mouseenter)="onAnswerMouseEnter()"
-          (mouseleave)="onAnswerMouseLeave()"
-        >
-          <object *ngIf="!answerHovered" type="image/svg+xml">
-            <img class="global__mini-icon-button" src="assets/svgIcons/answer_dark.svg"/>
-          </object>
-          <object *ngIf="answerHovered" type="image/svg+xml">
-            <img class="global__mini-icon-button" src="assets/svgIcons/answer_accent1.svg"/>
-          </object>
+        <div class="reply-button">
+          <svg
+            class="global__mini-icon-button"
+            viewBox="0 0 16 16"
+            (click)="onAnswerClick($event)"
+            (mouseenter)="onAnswerMouseEnter()"
+            (mouseleave)="onAnswerMouseLeave()"
+          >
+            <path [ngClass]="{ 'global__svg-text-light': !answerHovered, 'global__svg-accent-variant': answerHovered }" d="M 2.00,2.30 C 2.00,2.30 1.57,2.44 1.57,2.44 1.57,2.44 0.27,3.45 0.27,3.45 0.27,3.45 0.00,4.00 0.00,4.00 0.00,4.00 0.00,12.00 0.00,12.00 0.00,12.00 0.27,12.56 0.27,12.56 0.27,12.56 1.57,13.55 1.57,13.55 1.57,13.55 2.00,13.70 2.00,13.70 2.00,13.70 3.62,13.70 3.62,13.70 3.62,13.70 4.92,15.68 4.92,15.68 4.92,15.68 6.08,15.68 6.08,15.68 6.08,15.68 7.38,13.70 7.38,13.70 7.38,13.70 14.00,13.70 14.00,13.70 14.00,13.70 14.42,13.55 14.42,13.55 14.42,13.55 15.72,12.56 15.72,12.56 15.72,12.56 16.00,12.00 16.00,12.00 16.00,12.00 16.00,4.00 16.00,4.00 16.00,4.00 15.72,3.45 15.72,3.45 15.72,3.45 14.42,2.44 14.42,2.44 14.42,2.44 14.00,2.30 14.00,2.30 14.00,2.30 2.00,2.30 2.00,2.30 Z M 2.24,3.70 C 2.24,3.70 13.76,3.70 13.76,3.70 13.76,3.70 14.60,4.35 14.60,4.35 14.60,4.35 14.60,11.66 14.60,11.66 14.60,11.66 13.76,12.30 13.76,12.30 13.76,12.30 7.00,12.30 7.00,12.30 7.00,12.30 6.41,12.62 6.41,12.62 6.41,12.62 5.50,14.03 5.50,14.03 5.50,14.03 4.58,12.62 4.58,12.62 4.58,12.62 4.00,12.30 4.00,12.30 4.00,12.30 2.24,12.30 2.24,12.30 2.24,12.30 1.40,11.66 1.40,11.66 1.40,11.66 1.40,4.34 1.40,4.34 1.40,4.34 2.24,3.70 Z"/>
+          </svg>
         </div>
         <div class="reply-count">
           <p class="global__text-small-light">{{ chirp.reply_count }}</p>

@@ -6,7 +6,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
-   sodipodi:docname="x_dark.svg"
+   sodipodi:docname="x.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="64"
-     inkscape:cx="5.28125"
-     inkscape:cy="8.2265625"
+     inkscape:zoom="32"
+     inkscape:cx="4.625"
+     inkscape:cy="6.890625"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -77,7 +77,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -85,19 +84,9 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <circle
-       r="1.9314582"
-       cy="2.1166666"
-       cx="2.1166666"
+    <path
        id="path1977"
-       style="fill:none;stroke:#5a5d5b;stroke-width:0.370417;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000" />
-    <path
-       id="path1983"
-       d="M 1.0583333,3.1750001 3.1750001,1.0583333"
-       style="fill:none;stroke:#5a5d5b;stroke-width:0.37041667;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
-    <path
-       style="fill:none;stroke:#5a5d5b;stroke-width:0.370417;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 1.0583335,1.0583332 3.1750003,3.1750001"
-       id="path1983-7" />
+       style="color:#000000;fill:#000000;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;fill-opacity:1"
+       d="M 2.1171835 0 C 0.95037677 0 0 0.95037677 0 2.1171835 C 0 3.2839902 0.95037677 4.2322999 2.1171835 4.2322999 C 3.2839902 4.2322999 4.2322999 3.2839902 4.2322999 2.1171835 C 4.2322999 0.95037677 3.2839902 3.133293e-16 2.1171835 0 z M 2.1171835 0.37103679 C 3.0838024 0.37103679 3.8633301 1.1505645 3.8633301 2.1171835 C 3.8633301 3.0838024 3.0838024 3.8633301 2.1171835 3.8633301 C 1.1505645 3.8633301 0.37103679 3.0838024 0.37103679 2.1171835 C 0.37103679 1.1505645 1.1505645 0.37103679 2.1171835 0.37103679 z M 1.4531413 1.1916585 L 1.1916585 1.4531413 L 1.8546672 2.1161499 L 1.1916585 2.7791586 L 1.4531413 3.0411581 L 2.1161499 2.3781495 L 2.7791586 3.0411581 L 3.0411581 2.7791586 L 2.3781495 2.1161499 L 3.0411581 1.4531413 L 2.7791586 1.1916585 L 2.1161499 1.8546672 L 1.4531413 1.1916585 z " />
   </g>
 </svg>

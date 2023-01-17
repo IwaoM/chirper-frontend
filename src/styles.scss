@@ -358,6 +358,38 @@ textarea {
   transition: 0.2s;
 }
 
+//* SVG icons
+.global__svg {
+
+  &-accent {
+    fill: var(--theme-accent);
+  }
+
+  &-accent-hover {
+    fill: var(--theme-accent-hover);
+  }
+
+  &-accent-variant {
+    fill: var(--theme-accent-variant);
+  }
+
+  &-text {
+    fill: var(--theme-text);
+  }
+
+  &-text-light {
+    fill: var(--theme-text-light);
+  }
+
+  &-border {
+    fill: var(--theme-border);
+  }
+
+  &-red {
+    fill: var(--theme-red);
+  }
+}
+
 //* misc
 
 .global__profile-pic-box {
