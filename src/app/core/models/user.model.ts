@@ -5,5 +5,5 @@ export class User {
   handle!: string;
   bio!: string;
   theme_bg!: number;
-  them_accent!: number;
+  theme_accent!: number;
 }

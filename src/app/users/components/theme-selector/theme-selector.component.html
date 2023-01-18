@@ -1,0 +1,42 @@
+<div class="global__form-vertical-padding">
+  <div class="global__form-container">
+    <div class="global__form-title-box">
+      <p class="global__form-title">Modifier le thème de Chirper</p>
+    </div>
+    <div class="global__form-items-row background-selector-block">
+      <div class="background-selector-box background-dark global__clickable" [ngClass]="{ 'selected': selectedBackground === 0}" (click)="selectThemeBackground(0)">
+        <p>Thème sombre</p>
+      </div>
+      <div class="global__form-item-separator"></div>
+      <div class="background-selector-box background-light global__clickable" [ngClass]="{ 'selected': selectedBackground === 1}" (click)="selectThemeBackground(1)">
+        <p>Thème clair</p>
+      </div>
+    </div>
+    <div class="global__form-items-row accent-selector-block">
+      <div class="accent-selector-box global__clickable" [ngClass]="{ 'selected': selectedAccent === 0}" (click)="selectThemeAccent(0)">
+        <svg viewBox="0 0 48 48">
+          <path fill="#00DF77" d="M 24.00,0.00 C 10.75,-0.00 -0.00,10.75 0.00,24.00 0.00,33.42 5.51,41.97 14.09,45.86 32.74,43.32 43.30,32.71 45.86,14.09 41.97,5.51 33.42,-0.00 24.00,0.00 Z"/>
+          <path fill="#00DFB0" d="M 45.86,14.09 C 45.86,14.09 14.10,45.85 14.10,45.85 17.11,47.23 20.46,48.00 24.00,48.00 24.00,48.00 24.00,48.00 24.00,48.00 37.25,48.00 48.00,37.25 48.00,24.00 48.00,24.00 48.00,24.00 48.00,24.00 48.00,20.47 47.24,17.11 45.86,14.09 45.86,14.09 45.86,14.09 45.86,14.09 Z"/>
+        </svg>
+      </div>
+      <div class="accent-selector-box global__clickable" [ngClass]="{ 'selected': selectedAccent === 1}" (click)="selectThemeAccent(1)">
+        <svg viewBox="0 0 48 48">
+          <path fill="#DF0067" d="M 24.00,0.00 C 10.75,-0.00 -0.00,10.75 0.00,24.00 0.00,33.42 5.51,41.97 14.09,45.86 32.74,43.32 43.30,32.71 45.86,14.09 41.97,5.51 33.42,-0.00 24.00,0.00 Z"/>
+          <path fill="#DF009F" d="M 45.86,14.09 C 45.86,14.09 14.10,45.85 14.10,45.85 17.11,47.23 20.46,48.00 24.00,48.00 24.00,48.00 24.00,48.00 24.00,48.00 37.25,48.00 48.00,37.25 48.00,24.00 48.00,24.00 48.00,24.00 48.00,24.00 48.00,20.47 47.24,17.11 45.86,14.09 45.86,14.09 45.86,14.09 45.86,14.09 Z"/>
+        </svg>
+      </div>
+      <div class="accent-selector-box global__clickable" [ngClass]="{ 'selected': selectedAccent === 2}" (click)="selectThemeAccent(2)">
+        <svg viewBox="0 0 48 48">
+          <path fill="#DF3F00" d="M 24.00,0.00 C 10.75,-0.00 -0.00,10.75 0.00,24.00 0.00,33.42 5.51,41.97 14.09,45.86 32.74,43.32 43.30,32.71 45.86,14.09 41.97,5.51 33.42,-0.00 24.00,0.00 Z"/>
+          <path fill="#DF7F00" d="M 45.86,14.09 C 45.86,14.09 14.10,45.85 14.10,45.85 17.11,47.23 20.46,48.00 24.00,48.00 24.00,48.00 24.00,48.00 24.00,48.00 37.25,48.00 48.00,37.25 48.00,24.00 48.00,24.00 48.00,24.00 48.00,24.00 48.00,20.47 47.24,17.11 45.86,14.09 45.86,14.09 45.86,14.09 45.86,14.09 Z"/>
+        </svg>
+      </div>
+      <div class="accent-selector-box global__clickable" [ngClass]="{ 'selected': selectedAccent === 3}" (click)="selectThemeAccent(3)">
+        <svg viewBox="0 0 48 48">
+          <path fill="#68DF00" d="M 24.00,0.00 C 10.75,-0.00 -0.00,10.75 0.00,24.00 0.00,33.42 5.51,41.97 14.09,45.86 32.74,43.32 43.30,32.71 45.86,14.09 41.97,5.51 33.42,-0.00 24.00,0.00 Z"/>
+          <path fill="#A0DF00" d="M 45.86,14.09 C 45.86,14.09 14.10,45.85 14.10,45.85 17.11,47.23 20.46,48.00 24.00,48.00 24.00,48.00 24.00,48.00 24.00,48.00 37.25,48.00 48.00,37.25 48.00,24.00 48.00,24.00 48.00,24.00 48.00,24.00 48.00,20.47 47.24,17.11 45.86,14.09 45.86,14.09 45.86,14.09 45.86,14.09 Z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

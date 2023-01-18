@@ -9,6 +9,7 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { PageSettingsComponent } from './components/page-settings/page-settings.component';
 import { PasswordUpdateFormComponent } from './components/password-update-form/password-update-form.component';
 import { ProfileUpdateFormComponent } from './components/profile-update-form/profile-update-form.component';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProfileUpdateFormComponent } from './components/profile-update-form/pro
     UserCardComponent,
     PageSettingsComponent,
     PasswordUpdateFormComponent,
-    ProfileUpdateFormComponent
+    ProfileUpdateFormComponent,
+    ThemeSelectorComponent
   ],
   imports: [
     CommonModule,
