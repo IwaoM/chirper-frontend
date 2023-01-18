@@ -40,10 +40,18 @@ export class UsersService {
 
   // POST requests
   updateProfile (userId: number, data: FormData): Observable<number> {
-    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/update-profile`, data);
+    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/profile`, data);
   }
 
   updatePassword (userId: number, data: FormData): Observable<number> {
-    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/update-password`, data);
+    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/password`, data);
+  }
+
+  updateThemeBg (userId: number, value: number): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/theme-bg`, { value });
+  }
+
+  updateThemeAccent (userId: number, value: number): Observable<number> {
+    return this.http.post<number>(`https://localhost:3000/api/users/${userId}/theme-accent`, { value });
   }
 }

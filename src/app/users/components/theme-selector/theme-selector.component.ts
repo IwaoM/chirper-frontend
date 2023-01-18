@@ -44,12 +44,16 @@ export class ThemeSelectorComponent implements OnInit {
   selectThemeBackground (background: number) {
     if (this.selectedBackground >= 0) {
       this.selectedBackground = background;
+      this.usersService.updateThemeBg(this.connectedUser.id, background).subscribe();
+      this.authService.updateThemeBackground(background);
     }
   }
 
   selectThemeAccent (accent: number) {
     if (this.selectedAccent >= 0) {
       this.selectedAccent = accent;
+      this.usersService.updateThemeAccent(this.connectedUser.id, accent).subscribe();
+      this.authService.updateThemeAccent(accent);
     }
   }
 }
