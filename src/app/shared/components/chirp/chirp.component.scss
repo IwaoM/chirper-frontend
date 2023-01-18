@@ -6,6 +6,7 @@
   padding: 24px;
   border: solid var(--theme-border);
   border-width: 0 0 2px;
+  transition: border 0.2s;
 
   &--focused {
     padding: 24px 24px 0;
@@ -95,4 +96,5 @@
 
 .star-count--starred {
   color: var(--theme-accent-variant);
+  transition: color 0.2s;
 }

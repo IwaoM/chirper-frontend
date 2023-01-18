@@ -12,6 +12,7 @@
   
   background-color: var(--theme-bg-transparent);
   outline: 2px solid var(--theme-border);
+  transition: background-color 0.2s, outline 0.2s;
 
   backdrop-filter: blur(12px);
 }
