@@ -35,7 +35,7 @@ export class ChirpsService {
     );
   }
 
-  // POST / DELETE requests
+  // POST requests
   createChirp (data: FormData): Observable<number> {
     return this.http.post<number>(`https://localhost:3000/api/chirps`, data);
   }
@@ -44,8 +44,8 @@ export class ChirpsService {
     return this.http.post<number>(`https://localhost:3000/api/chirps/${chirpId}/stars/${userId}`, { starred });
   }
 
+  // DELETE requests
   deleteChirp (chirpId: number): Observable<number> {
     return this.http.delete<number>(`https://localhost:3000/api/chirps/${chirpId}`);
   }
-
 }
