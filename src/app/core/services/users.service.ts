@@ -54,4 +54,9 @@ export class UsersService {
   updateThemeAccent (userId: number, value: number): Observable<number> {
     return this.http.post<number>(`https://localhost:3000/api/users/${userId}/theme-accent`, { value });
   }
+
+  // DELETE requests
+  deleteUser (userId: number): Observable<number> {
+    return this.http.delete<number>(`https://localhost:3000/api/users/${userId}`);
+  }
 }

@@ -10,6 +10,7 @@ import { PageSettingsComponent } from './components/page-settings/page-settings.
 import { PasswordUpdateFormComponent } from './components/password-update-form/password-update-form.component';
 import { ProfileUpdateFormComponent } from './components/profile-update-form/profile-update-form.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
+import { AccountDeleteFormComponent } from './components/account-delete-form/account-delete-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
     PageSettingsComponent,
     PasswordUpdateFormComponent,
     ProfileUpdateFormComponent,
-    ThemeSelectorComponent
+    ThemeSelectorComponent,
+    AccountDeleteFormComponent
   ],
   imports: [
     CommonModule,
