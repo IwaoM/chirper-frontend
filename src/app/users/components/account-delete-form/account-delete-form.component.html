@@ -3,8 +3,8 @@
     <div class="global__form-title-box">
       <p class="global__form-title">Supprimer votre compte Chirper</p>
     </div>
-    <div class="global__form-items-row" *ngIf="!displayConfirm">
-      <button class="global__accent-button dangerous width-full" type="button" (click)="onDeleteButton()">Supprimer mon compte</button>
+    <div class="global__form-items-row">
+      <button class="global__accent-button dangerous width-full" type="button" (click)="onDeleteButton()" [disabled]="displayConfirm">Supprimer mon compte</button>
     </div>
     <div class="global__form-items-row" *ngIf="displayConfirm">
       <button class="global__accent-button width-192px" type="button" (click)="onCancelButton()">Annuler</button>

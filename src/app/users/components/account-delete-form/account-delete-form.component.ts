@@ -34,17 +34,16 @@ export class AccountDeleteFormComponent implements OnInit {
   }
 
   onDeleteButton () {
-    // todo
     this.displayConfirm = true;
   }
 
   onCancelButton () {
-    // todo
     this.displayConfirm = false;
   }
 
   onConfirmButton () {
-    // todo
     this.displayConfirm = false;
+    this.usersService.deleteUser(this.connectedUser.id).subscribe();
+    this.authService.logout();
   }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { map, Observable, tap } from "rxjs";
 import { User } from "../models/user.model";
 
@@ -7,7 +8,10 @@ import { User } from "../models/user.model";
   providedIn: "root"
 })
 export class AuthService {
-  constructor (private http: HttpClient) {}
+  constructor (
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   private token = "";
   private connectedUserUsername = "";
@@ -21,6 +25,7 @@ export class AuthService {
     this.connectedUserUsername = "";
     this.updateThemeBackground(0);
     this.updateThemeAccent(0);
+    this.router.navigateByUrl("auth/login");
   }
 
   getToken (): string {
