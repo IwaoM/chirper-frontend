@@ -29,8 +29,8 @@ export class PageProfileComponent implements OnInit {
   }
 
   pageType!: "profile" | "ownProfile";
-  userId!: number;
-  connectedUser!: { id: number };
+  pageUserId!: number;
+  connectedUser!: User;
 
   user$!: Observable<User>;
   profilePictureUrl$!: Observable<SafeUrl>;
@@ -57,17 +57,17 @@ export class PageProfileComponent implements OnInit {
   onNavigationToProfilePage () {
     this.selectedProfileTabIndex = 0;
 
-    this.userId = +this.route.snapshot.params["id"];
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
-    this.pageType = this.userId === this.connectedUser.id ? "ownProfile" : "profile";
+    this.pageUserId = +this.route.snapshot.params["id"];
+    this.connectedUser = this.authService.getConnectedUser();
+    this.pageType = this.pageUserId === this.connectedUser.id ? "ownProfile" : "profile";
 
     this.repliedToChirps = new Map();
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
     this.starredMap = new Map();
 
-    this.user$ = this.usersService.getUserById(this.userId);
-    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.userId);
+    this.user$ = this.usersService.getUserById(this.pageUserId);
+    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.pageUserId);
 
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => {
@@ -80,7 +80,7 @@ export class PageProfileComponent implements OnInit {
     );
     this.chirpsStarredByConnectedUser$.subscribe();
 
-    this.userChirps$ = this.usersService.getUserChirps(this.userId).pipe(
+    this.userChirps$ = this.usersService.getUserChirps(this.pageUserId).pipe(
       tap(
         chirps => {
           for (let i = 0; i < chirps.length; i++) {
@@ -102,7 +102,7 @@ export class PageProfileComponent implements OnInit {
     );
     this.userChirps$.subscribe();
 
-    this.userStars$ = this.usersService.getUserStars(this.userId).pipe(
+    this.userStars$ = this.usersService.getUserStars(this.pageUserId).pipe(
       tap(
         chirps => {
           for (let i = 0; i < chirps.length; i++) {

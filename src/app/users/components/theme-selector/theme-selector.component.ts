@@ -15,7 +15,7 @@ export class ThemeSelectorComponent implements OnInit {
     private usersService: UsersService
   ) {}
 
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   user$!: Observable<User>;
 
@@ -27,7 +27,7 @@ export class ThemeSelectorComponent implements OnInit {
   }
 
   initPage () {
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
     this.getUserData();
   }
 
@@ -45,6 +45,7 @@ export class ThemeSelectorComponent implements OnInit {
     if (this.selectedBackground >= 0) {
       this.selectedBackground = background;
       this.usersService.updateThemeBg(this.connectedUser.id, background).subscribe();
+      this.authService.refreshConnectedUser().subscribe();
       this.authService.updateThemeBackground(background);
     }
   }
@@ -53,6 +54,7 @@ export class ThemeSelectorComponent implements OnInit {
     if (this.selectedAccent >= 0) {
       this.selectedAccent = accent;
       this.usersService.updateThemeAccent(this.connectedUser.id, accent).subscribe();
+      this.authService.refreshConnectedUser().subscribe();
       this.authService.updateThemeAccent(accent);
     }
   }

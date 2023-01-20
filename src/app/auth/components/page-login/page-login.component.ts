@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 
@@ -12,6 +12,7 @@ import { AuthService } from "src/app/core/services/auth.service";
 export class PageLoginComponent implements OnInit {
   constructor (
     private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private authService: AuthService
   ) {}
@@ -19,7 +20,8 @@ export class PageLoginComponent implements OnInit {
   loginForm!: FormGroup;
   loginFormData!: FormData;
 
-  errorMessage = "";
+  errorMessage!: string;
+  infoMessage!: string;
 
   ngOnInit (): void {
     this.loginForm = this.formBuilder.group({
@@ -31,6 +33,15 @@ export class PageLoginComponent implements OnInit {
       ]),
     });
     this.loginFormData = new FormData();
+
+    this.errorMessage = "";
+    if (this.route.snapshot.queryParams["confirm"] === "create") {
+      this.infoMessage = "Account successfully created";
+    } else if (this.route.snapshot.queryParams["confirm"] === "delete") {
+      this.infoMessage = "Account successfully deleted";
+    } else {
+      this.infoMessage = "";
+    }
   }
 
   onLoginButton (): void {
@@ -46,6 +57,7 @@ export class PageLoginComponent implements OnInit {
       error: (err) => {
         if (err.error.message === "Incorrect credentials") {
           this.errorMessage = "Les identifiants entrés sont incorrects";
+          this.infoMessage = "";
         }
       }
     });

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 import { Observable, tap } from "rxjs";
 import { Chirp } from "src/app/core/models/chirp.model";
+import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -27,10 +28,10 @@ export class PageTimelineComponent implements OnInit {
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
 
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   ngOnInit () {
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
 
     this.repliedToChirps = new Map();
     this.authorProfilePicUrls = new Map();

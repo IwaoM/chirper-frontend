@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { tap } from "rxjs";
+import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { UsersService } from "src/app/core/services/users.service";
 import { ValidatorsService } from "src/app/core/services/validators.service";
@@ -19,7 +20,7 @@ export class PasswordUpdateFormComponent implements OnInit {
     private validatorsService: ValidatorsService,
   ) {}
 
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   passwordForm!: FormGroup;
   passwordFormData!: FormData;
@@ -32,7 +33,7 @@ export class PasswordUpdateFormComponent implements OnInit {
   }
 
   initPage () {
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
     this.initForm();
   }
 

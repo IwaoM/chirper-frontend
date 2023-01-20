@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { Observable, tap } from "rxjs";
+import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -25,22 +26,16 @@ export class NewChirpComponent implements OnInit {
   @Input() replyToId!: number | null;
   @Output() newChirp = new EventEmitter<null>();
 
-  connectedUser!: {
-    id: number,
-    username: string,
-    pictureUrl$: Observable<SafeUrl>
-  };
+  connectedUser!: User;
+  pictureUrl$!: Observable<SafeUrl>;
 
   newChirpForm!: FormGroup;
   newChirpFormData!: FormData;
   imagePreview!: string;
 
   ngOnInit () {
-    this.connectedUser = {
-      id: this.authService.getConnectedUserId(),
-      username: this.authService.getConnectedUserUsername(),
-      pictureUrl$: this.usersService.getUserProfilePic(this.authService.getConnectedUserId())
-    };
+    this.connectedUser = this.authService.getConnectedUser();
+    this.pictureUrl$ = this.usersService.getUserProfilePic(this.connectedUser.id);
 
     this.newChirpForm = this.formBuilder.group({
       chirpText: new FormControl("", [

@@ -14,30 +14,26 @@ export class AuthService {
   ) {}
 
   private token = "";
-  private connectedUserUsername = "";
-  private connectedUserId = 0;
-  private connectedUserThemeBg = 0;
-  private connectedUserThemeAccent = 0;
+  private connectedUser = new User();
 
-  logout (): void {
+  logout (confirm?: string): void {
     this.token = "";
-    this.connectedUserId = 0;
-    this.connectedUserUsername = "";
+    this.connectedUser = new User();
     this.updateThemeBackground(0);
     this.updateThemeAccent(0);
-    this.router.navigateByUrl("auth/login");
+    if (confirm) {
+      this.router.navigateByUrl(`auth/login?confirm=${confirm}`);
+    } else {
+      this.router.navigateByUrl(`auth/login`);
+    }
   }
 
   getToken (): string {
     return this.token;
   }
 
-  getConnectedUserId (): number {
-    return this.connectedUserId;
-  }
-
-  getConnectedUserUsername (): string {
-    return this.connectedUserUsername;
+  getConnectedUser (): User {
+    return this.connectedUser;
   }
 
   //* API requests
@@ -61,18 +57,22 @@ export class AuthService {
     return this.http.post<{ user: User, token: string }>(`https://localhost:3000/api/auth/login`, data).pipe(
       tap(result => {
         this.token = result.token;
-        this.connectedUserId = result.user.id;
-        this.connectedUserUsername = result.user.username;
+        this.connectedUser = result.user;
         this.updateThemeBackground(result.user.theme_bg);
         this.updateThemeAccent(result.user.theme_accent);
       })
     );
   }
 
+  refreshConnectedUser (): Observable<User> {
+    return this.http.get<User>(`https://localhost:3000/api/users/${this.connectedUser.id}`).pipe(
+      tap(user => this.connectedUser = user)
+    );
+  }
+
   updateThemeBackground (background: number) {
     const rootElem = document.querySelector<HTMLElement>(":root");
     if (rootElem) {
-      this.connectedUserThemeBg = background;
       if (background == 0) {
         // dark
         rootElem.style.setProperty("--theme-bg", "#0F1311");
@@ -98,7 +98,6 @@ export class AuthService {
   updateThemeAccent (accent: number) {
     const rootElem = document.querySelector<HTMLElement>(":root");
     if (rootElem) {
-      this.connectedUserThemeAccent = accent;
       if (accent == 0) {
         // mint
         rootElem.style.setProperty("--theme-accent", "#00DF77");

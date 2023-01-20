@@ -20,7 +20,7 @@ export class ProfileUpdateFormComponent implements OnInit {
     private validatorsService: ValidatorsService
   ) {}
 
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   user$!: Observable<User>;
   profilePictureUrl$!: Observable<SafeUrl>;
@@ -36,7 +36,7 @@ export class ProfileUpdateFormComponent implements OnInit {
   }
 
   initPage () {
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
     this.initForm();
     this.getUserData();
   }
@@ -94,6 +94,7 @@ export class ProfileUpdateFormComponent implements OnInit {
     this.usersService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
       tap(() => this.initPage())
     ).subscribe({ next: (result) => this.profileUpdateResult = result });
+    this.authService.refreshConnectedUser().subscribe();
 
     this.profileFormData.delete("email");
     this.profileFormData.delete("handle");

@@ -12,7 +12,7 @@ export class ValidatorsService {
     private authService: AuthService
   ) {}
 
-  private connectedUser = { id: this.authService.getConnectedUserId() };
+  private connectedUser = this.authService.getConnectedUser();
 
   //* Angular form validators
   uniqueEmailValidator (): AsyncValidatorFn {

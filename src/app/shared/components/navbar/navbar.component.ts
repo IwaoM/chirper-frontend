@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 
 @Component({
@@ -9,16 +9,15 @@ import { AuthService } from "src/app/core/services/auth.service";
 })
 export class NavbarComponent implements OnInit {
   constructor (
-    private router: Router,
     private authService: AuthService,
   ) {}
 
   @Input() currentPage!: string;
 
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   ngOnInit () {
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
   }
 
   onLogoutButton (): void {

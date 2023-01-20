@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { tap } from "rxjs";
+import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
 import { Chirp } from "../../../core/models/chirp.model";
@@ -28,14 +29,14 @@ export class ChirpComponent implements OnInit {
   @Output() deleteChirp = new EventEmitter<null>();
   @Output() starChirp = new EventEmitter<null>();
 
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   deleteHovered!: boolean;
   starHovered!: boolean;
   answerHovered!: boolean;
 
   ngOnInit () {
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
 
     this.deleteHovered = false;
     this.starHovered = false;

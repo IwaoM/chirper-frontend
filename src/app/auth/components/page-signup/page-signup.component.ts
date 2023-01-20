@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { tap } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ValidatorsService } from "src/app/core/services/validators.service";
 
@@ -70,9 +69,9 @@ export class PageSignupComponent implements OnInit {
     for (const field in this.signupForm.value) {
       this.signupFormData.append(field, this.signupForm.value[field]);
     }
-    this.authService.createAccount(this.signupFormData).pipe(
-      tap(() => this.router.navigateByUrl("auth/login"))
-    ).subscribe();
+    this.authService.createAccount(this.signupFormData).subscribe({
+      next: () => this.router.navigateByUrl("auth/login?confirm=create")
+    });
 
     this.signupFormData.delete("email");
     this.signupFormData.delete("password");

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 
 @Component({
@@ -16,7 +17,7 @@ export class PageSettingsComponent implements OnInit {
   ) {}
 
   userId!: number;
-  connectedUser!: { id: number };
+  connectedUser!: User;
 
   settingsTabs = [
     { title: "Profil" },
@@ -28,7 +29,7 @@ export class PageSettingsComponent implements OnInit {
 
   ngOnInit () {
     this.userId = +this.route.snapshot.params["id"];
-    this.connectedUser = { id: this.authService.getConnectedUserId() };
+    this.connectedUser = this.authService.getConnectedUser();
     if (this.userId !== this.connectedUser.id) {
       this.router.navigateByUrl(`app/users/${this.connectedUser.id}`);
     }
