@@ -1,0 +1,14 @@
+* {
+  display: flex;
+}
+
+.search-box {
+  padding: 24px;
+  border: solid var(--theme-border);
+  border-width: 0 0 2px;
+  transition: border 0.2s;
+}
+
+.search-form {
+  width: 100%;
+}

@@ -291,16 +291,18 @@ button {
     width: 100%
   }
 
-  &.ng-invalid.ng-touched {
-    outline: 2px solid var(--theme-red);
-  }
-
-  &.invalid-pw2.ng-touched {
-    outline: 2px solid var(--theme-red);
-  }
-
-  &.invalid-new-pw.ng-touched {
-    outline: 2px solid var(--theme-red);
+  &.ng-touched:not(.no-warning) {
+    &.ng-invalid {
+      outline: 2px solid var(--theme-red);
+    }
+  
+    &.invalid-pw2 {
+      outline: 2px solid var(--theme-red);
+    }
+  
+    &.invalid-new-pw {
+      outline: 2px solid var(--theme-red);
+    }
   }
 }
 

@@ -36,9 +36,9 @@ export class PageLoginComponent implements OnInit {
 
     this.errorMessage = "";
     if (this.route.snapshot.queryParams["confirm"] === "create") {
-      this.infoMessage = "Account successfully created";
+      this.infoMessage = "Compte Chirper créé";
     } else if (this.route.snapshot.queryParams["confirm"] === "delete") {
-      this.infoMessage = "Account successfully deleted";
+      this.infoMessage = "Compte Chirper supprimé";
     } else {
       this.infoMessage = "";
     }

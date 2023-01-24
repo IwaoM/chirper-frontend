@@ -1,0 +1,7 @@
+<div class="search-box">
+  <form [formGroup]="searchBar" class="search-form" (ngSubmit)="onSearchButton()">
+    <input type="text" class="global__text-input no-warning global__text-normal width-full" formControlName="searchText" placeholder="Votre recherche..." maxlength="40">
+    <div class="global__form-item-separator"></div>
+    <button class="global__accent-button" type="submit" [disabled]="searchBar.invalid">Chercher</button>
+  </form>
+</div>

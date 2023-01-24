@@ -1,0 +1,14 @@
+<div class="global__fixed-block-top">
+  <app-navbar [currentPage]="'search'"></app-navbar>
+  <app-title-banner [currentTitle]="'Recherche'"></app-title-banner>
+</div>
+<div class="global__vertical-container">
+  <div class="global__header-offset-block"></div>
+  <app-search-form></app-search-form>
+  <app-section-tabs [tabs]="searchTabs" [selectedTabIndex]="selectedSearchTabIndex" (tabClicked)="onTabClick($event)"></app-section-tabs>
+  <div class="global__footer-offset-block"></div>
+</div>
+<div class="global__fixed-block-bottom">
+  <app-footer></app-footer>
+</div>
+
