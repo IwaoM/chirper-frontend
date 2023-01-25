@@ -1,0 +1,21 @@
+<div class="user-card">
+  <div *ngIf="viewType === 'focused'" class="global__profile-pic-box-big">
+    <img class="global__profile-pic-big" [src]="profilePicUrl">
+  </div>
+  <div *ngIf="viewType === 'normal'" class="global__profile-pic-box global__clickable" (click)="onUserClick($event)">
+    <img class="global__profile-pic" [src]="profilePicUrl">
+  </div>
+  <div class="info-block">
+    <p class="global__text-highlight" [ngClass]="{ 'global__clickable': viewType === 'normal' }" (click)="onUserClick($event)">
+      {{ user.username }}
+    </p>
+    <p class="global__text-light" [ngClass]="{ 'global__clickable': viewType === 'normal' }" (click)="onUserClick($event)">
+      @{{ user.handle }}
+    </p>
+    <div *ngIf="viewType === 'focused'" class="bio-box global__text-normal">
+      <p class="global__text-normal bio-paragraph">
+        {{ user.bio }}
+      </p>
+    </div>
+  </div>
+</div>

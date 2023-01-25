@@ -3,17 +3,13 @@
   [ngClass]="{ 'chirp--focused': viewType === 'focused' }"
   (click)="onChirpClick()"
 >
-
   <div class="global__profile-pic-box global__clickable" (click)="onAuthorClick($event)" *ngIf="viewType === 'normal'">
     <img class="global__profile-pic" [src]="authorProfilePicUrl" [alt]="chirp.username">
   </div>
 
   <div class="body-block">
-
     <div class="header-block">
-
       <div class="author-block">
-
         <div class="global__profile-pic-box" (click)="onAuthorClick($event)" *ngIf="viewType === 'focused'">
           <img
             class="global__profile-pic"
@@ -23,7 +19,6 @@
         </div>
 
         <div class="name-block" [ngClass]="{ 'name-block--focused': viewType === 'focused' }">
-
           <div class="username" (click)="onAuthorClick($event)">
             <a class="global__text-highlight">{{ chirp.username }}</a>
           </div>
@@ -31,13 +26,11 @@
           <div class="handle" (click)="onAuthorClick($event)">
             <p class="global__text-light">&nbsp;@{{ chirp.handle }}</p>
           </div>
-
         </div>
 
         <div *ngIf="viewType === 'normal'" class="timestamp">
           <p class="global__text-light">&nbsp;-&nbsp;le {{ chirp.timestamp | date: "d MMMM YYYY à HH:mm" }}</p>
         </div>
-
       </div>
 
       <div *ngIf="connectedUser.id === chirp.author_id" class="delete-button">
@@ -51,11 +44,9 @@
           <path [ngClass]="{ 'global__svg-text-light': !deleteHovered, 'global__svg-red': deleteHovered }" d="M 5.00,0.00 C 5.00,0.00 4.36,0.42 4.36,0.42 4.36,0.42 3.54,2.30 3.54,2.30 2.36,2.30 1.18,2.30 0.00,2.30 0.00,2.30 0.00,3.70 0.00,3.70 0.45,3.70 0.90,3.70 1.35,3.70 1.35,3.70 2.30,15.35 2.30,15.35 2.30,15.35 3.00,16.00 3.00,16.00 3.00,16.00 13.00,16.00 13.00,16.00 13.00,16.00 13.70,15.35 13.70,15.35 13.70,15.35 14.64,3.70 14.64,3.70 14.64,3.70 16.00,3.70 16.00,3.70 16.00,3.70 16.00,2.30 16.00,2.30 16.00,2.30 12.46,2.30 12.46,2.30 12.46,2.30 11.64,0.42 11.64,0.42 11.64,0.42 11.00,0.00 11.00,0.00 11.00,0.00 5.00,0.00 5.00,0.00 Z M 5.46,1.40 C 5.46,1.40 10.54,1.40 10.54,1.40 10.54,1.40 10.94,2.30 10.94,2.30 10.94,2.30 5.07,2.30 5.07,2.30 5.07,2.30 5.46,1.40 5.46,1.40 Z M 2.76,3.70 C 2.76,3.70 13.24,3.70 13.24,3.70 13.24,3.70 12.36,14.60 12.36,14.60 12.36,14.60 3.65,14.60 3.65,14.60 3.65,14.60 2.76,3.70 2.76,3.70 Z M 5.30,5.30 C 5.30,7.50 5.30,9.80 5.30,11.70 5.30,11.70 6.70,11.70 6.70,11.70 6.70,9.36 6.70,7.41 6.70,5.30 6.70,5.30 5.30,5.30 5.30,5.30 Z M 10.70,5.30 C 10.70,7.64 10.70,9.59 10.70,11.70 10.70,11.70 9.30,11.70 9.30,11.70 9.30,9.50 9.30,7.20 9.30,5.30 9.30,5.30 10.70,5.30 10.70,5.30 Z"/>
         </svg>
       </div>
-  
     </div>
-  
-    <div class="content-block" [ngClass]="{ 'content-block--focused': viewType === 'focused' }">
 
+    <div class="content-block" [ngClass]="{ 'content-block--focused': viewType === 'focused' }">
       <div class="text-content">
         <p *ngIf="chirp.reply_to_id" class="global__text-light">
           En réponse au&nbsp;
@@ -98,7 +89,6 @@
     </div>
   
     <div class="button-block">
-  
       <div class="star-block">
         <div class="star-button">
           <svg
@@ -136,9 +126,6 @@
           <p class="global__text-small-light">{{ chirp.reply_count }}</p>
         </div>
       </div>
-  
     </div>
-
   </div>
-
 </div>

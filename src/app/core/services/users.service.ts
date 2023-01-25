@@ -38,6 +38,10 @@ export class UsersService {
     return this.http.get<number[]>(`https://localhost:3000/api/users/${userId}/star-ids`);
   }
 
+  searchUsers (searchText: string): Observable<User[]> {
+    return this.http.get<User[]>("https://localhost:3000/api/users/search", { params: { searchText } });
+  }
+
   // POST requests
   updateProfile (userId: number, data: FormData): Observable<number> {
     return this.http.post<number>(`https://localhost:3000/api/users/${userId}/profile`, data);

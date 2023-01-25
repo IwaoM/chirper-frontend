@@ -7,6 +7,7 @@ import { TitleBannerComponent } from "./components/title-banner/title-banner.com
 import { FooterComponent } from "./components/footer/footer.component";
 import { ChirpComponent } from "./components/chirp/chirp.component";
 import { SectionTabsComponent } from "./components/section-tabs/section-tabs.component";
+import { UserCardComponent } from "./components/user-card/user-card.component";
 
 
 
@@ -16,6 +17,7 @@ import { SectionTabsComponent } from "./components/section-tabs/section-tabs.com
     TitleBannerComponent,
     FooterComponent,
     ChirpComponent,
+    UserCardComponent,
     SectionTabsComponent
   ],
   imports: [
@@ -27,6 +29,7 @@ import { SectionTabsComponent } from "./components/section-tabs/section-tabs.com
     TitleBannerComponent,
     FooterComponent,
     ChirpComponent,
+    UserCardComponent,
     SectionTabsComponent
   ]
 })

@@ -14,11 +14,19 @@
       [chirp]="chirp"
       [starred]="starredMap.get(chirp.id) || false"
       [repliedToChirp]="(repliedToChirps.get(chirp.id) | async) || null"
-      [authorProfilePicUrl]="(authorProfilePicUrls.get(chirp.author_id) | async) || null"
+      [authorProfilePicUrl]="(profilePicUrls.get(chirp.author_id) | async) || null"
       [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
       (deleteChirp)="onDeleteChirp()"
       (starChirp)="onStarChirp()"
     ></app-chirp>
+  </div>
+  <div *ngIf="selectedSearchTabIndex === 1">
+    <app-user-card
+      *ngFor="let user of searchUsers$ | async"
+      [user]="user"
+      [profilePicUrl]="(profilePicUrls.get(user.id) | async) || null"
+      [viewType]="'normal'"
+    ></app-user-card>
   </div>
 
   <div class="global__footer-offset-block"></div>
