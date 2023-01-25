@@ -23,7 +23,7 @@ export class PageProfileComponent implements OnInit {
   ) {
     router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        this.onNavigationToProfilePage();
+        this.initPage();
       }
     });
   }
@@ -40,7 +40,6 @@ export class PageProfileComponent implements OnInit {
   repliedToChirps!: Map<number, Observable<Chirp>>;
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
-
   chirpsStarredByConnectedUser$!: Observable<number[]>;
   starredMap!: Map<number, boolean>;
 
@@ -51,10 +50,10 @@ export class PageProfileComponent implements OnInit {
   selectedProfileTabIndex!: number;
 
   ngOnInit () {
-    this.onNavigationToProfilePage();
+    this.initPage();
   }
 
-  onNavigationToProfilePage () {
+  initPage () {
     this.selectedProfileTabIndex = 0;
 
     this.pageUserId = +this.route.snapshot.params["id"];
@@ -100,7 +99,6 @@ export class PageProfileComponent implements OnInit {
         }
       )
     );
-    this.userChirps$.subscribe();
 
     this.userStars$ = this.usersService.getUserStars(this.pageUserId).pipe(
       tap(
@@ -122,7 +120,6 @@ export class PageProfileComponent implements OnInit {
         }
       )
     );
-    this.userStars$.subscribe();
   }
 
   onTabClick (index: number) {
@@ -130,10 +127,10 @@ export class PageProfileComponent implements OnInit {
   }
 
   onDeleteChirp () {
-    this.onNavigationToProfilePage();
+    this.initPage();
   }
 
   onStarChirp () {
-    this.onNavigationToProfilePage();
+    this.initPage();
   }
 }

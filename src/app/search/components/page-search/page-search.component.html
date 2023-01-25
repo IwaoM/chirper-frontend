@@ -4,8 +4,23 @@
 </div>
 <div class="global__vertical-container">
   <div class="global__header-offset-block"></div>
-  <app-search-form></app-search-form>
+
+  <app-search-form (textSearched)="onSearch($event)"></app-search-form>
   <app-section-tabs [tabs]="searchTabs" [selectedTabIndex]="selectedSearchTabIndex" (tabClicked)="onTabClick($event)"></app-section-tabs>
+  <div *ngIf="selectedSearchTabIndex === 0">
+    <app-chirp
+      *ngFor="let chirp of searchChirps$ | async"
+      [viewType]="'normal'"
+      [chirp]="chirp"
+      [starred]="starredMap.get(chirp.id) || false"
+      [repliedToChirp]="(repliedToChirps.get(chirp.id) | async) || null"
+      [authorProfilePicUrl]="(authorProfilePicUrls.get(chirp.author_id) | async) || null"
+      [chirpImageUrl]="(chirpImageUrls.get(chirp.id) | async) || null"
+      (deleteChirp)="onDeleteChirp()"
+      (starChirp)="onStarChirp()"
+    ></app-chirp>
+  </div>
+
   <div class="global__footer-offset-block"></div>
 </div>
 <div class="global__fixed-block-bottom">

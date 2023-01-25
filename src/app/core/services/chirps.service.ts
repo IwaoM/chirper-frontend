@@ -35,6 +35,10 @@ export class ChirpsService {
     );
   }
 
+  searchChirps (searchText: string): Observable<Chirp[]> {
+    return this.http.get<Chirp[]>("https://localhost:3000/api/chirps/search", { params: { searchText } });
+  }
+
   // POST requests
   createChirp (data: FormData): Observable<number> {
     return this.http.post<number>(`https://localhost:3000/api/chirps`, data);

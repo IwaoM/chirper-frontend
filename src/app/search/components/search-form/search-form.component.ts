@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/core/services/auth.service";
 
@@ -14,6 +14,7 @@ export class SearchFormComponent implements OnInit {
   ) {}
 
   searchBar!: FormGroup;
+  @Output() textSearched = new EventEmitter<string>();
 
   ngOnInit (): void {
     this.initForm();
@@ -28,6 +29,6 @@ export class SearchFormComponent implements OnInit {
   }
 
   onSearchButton () {
-    // todo
+    this.textSearched.emit(this.searchBar.value.searchText);
   }
 }

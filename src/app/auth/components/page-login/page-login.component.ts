@@ -49,7 +49,7 @@ export class PageLoginComponent implements OnInit {
       this.loginFormData.append(field, this.loginForm.value[field]);
     }
     this.authService.login(this.loginFormData).pipe(
-      tap(() => this.router.navigateByUrl("app/timeline"))
+      tap(() => this.router.navigateByUrl("/app/timeline"))
     ).subscribe({
       next: () => {
         this.errorMessage = "";
