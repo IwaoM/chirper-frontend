@@ -36,8 +36,14 @@ export class PageTimelineComponent implements OnInit {
     this.repliedToChirps = new Map();
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
-    this.starredMap = new Map();
 
+    this.getChirpsStarredByConnectedUser();
+    this.getChirpList();
+  }
+
+  getChirpsStarredByConnectedUser () {
+    // reset the map & refill it
+    this.starredMap = new Map();
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => {
         for (let i = 0; i < list.length; i++) {
@@ -48,19 +54,29 @@ export class PageTimelineComponent implements OnInit {
       })
     );
     this.chirpsStarredByConnectedUser$.subscribe();
+  }
 
+  getChirpList () {
+    // get a list of all chirps, then populate repliedToChirps, authorProfilePicUrls & chirpImageUrls
     this.chirps$ = this.chirpsService.getAllChirps().pipe(
       tap(
         chirps => {
           for (let i = 0; i < chirps.length; i++) {
             if (chirps[i].reply_to_id) {
+              // if the chirp is a reply, add an entry to the repliedToChirps map
               this.repliedToChirps.set(chirps[i].id, chirps.find(elem => elem.id === chirps[i].reply_to_id) || null);
+            } else if (this.repliedToChirps.has(chirps[i].id)) {
+              // if the map already has an entry but the chirp is not a reply
+              // (ie. it used to be one but is not anymore because the original chirp was deleted), delete the entry
+              this.repliedToChirps.delete(chirps[i].id);
             }
             if (!this.authorProfilePicUrls.has(chirps[i].author_id)) {
+              // if the author's profile pic url is not stored in the map yet, store it
               this.authorProfilePicUrls.set(chirps[i].author_id, this.usersService.getUserProfilePic(chirps[i].author_id));
               this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
             }
-            if (chirps[i].image) {
+            if (!this.chirpImageUrls.has(chirps[i].id) && chirps[i].image) {
+              // if the chirp has an image and its url is not stored in the map yet, store it
               this.chirpImageUrls.set(chirps[i].id, this.chirpsService.getChirpImage(chirps[i].id));
               this.chirpImageUrls.get(chirps[i].id)?.subscribe();
             }
@@ -71,10 +87,12 @@ export class PageTimelineComponent implements OnInit {
   }
 
   onNewChirp () {
-    this.chirps$ = this.chirpsService.getAllChirps();
+    this.getChirpsStarredByConnectedUser();
+    this.getChirpList();
   }
 
   onDeleteChirp () {
-    this.chirps$ = this.chirpsService.getAllChirps();
+    this.getChirpsStarredByConnectedUser();
+    this.getChirpList();
   }
 }

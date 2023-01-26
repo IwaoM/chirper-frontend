@@ -23,19 +23,19 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   ) {
     router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        this.onNavigationToChirpPage();
+        this.initPage();
       }
     });
   }
 
   chirpId!: number;
 
+  chirpsStarredByConnectedUser$!: Observable<number[]>;
+  starredMap!: Map<number, boolean>;
+
   focusedChirp$!: Observable<Chirp>;
   repliedToChirp$!: Observable<Chirp> | null;
   replyChirps$!: Observable<Chirp[]>;
-
-  chirpsStarredByConnectedUser$!: Observable<number[]>;
-  starredMap!: Map<number, boolean>;
 
   authorProfilePicUrls!: Map<number, Observable<SafeUrl>>;
   chirpImageUrls!: Map<number, Observable<SafeUrl>>;
@@ -43,7 +43,7 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   connectedUser!: User;
 
   ngOnInit () {
-    this.onNavigationToChirpPage();
+    this.initPage();
   }
 
   ngAfterContentInit () {
@@ -52,15 +52,21 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
     }
   }
 
-  onNavigationToChirpPage () {
+  initPage () {
     this.connectedUser = this.authService.getConnectedUser();
-
     this.chirpId = +this.route.snapshot.params["id"];
 
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
-    this.starredMap = new Map();
 
+    this.getChirpsStarredByConnectedUser();
+    this.getFocusedChirp();
+    this.getFocusedChirpReplies();
+  }
+
+  getChirpsStarredByConnectedUser () {
+    // reset the map & refill it
+    this.starredMap = new Map();
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => {
         for (let i = 0; i < list.length; i++) {
@@ -71,30 +77,42 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
       })
     );
     this.chirpsStarredByConnectedUser$.subscribe();
+  }
 
+  getFocusedChirp () {
+    // get the focused chirp, the chirp it is a reply of (if any), then begin populating authorProfilePicUrls & chirpImageUrls
     this.focusedChirp$ = this.chirpsService.getChirpById(this.chirpId).pipe(
       tap(chirp => {
+        // get the chirp the focused one replies to
         if (chirp.reply_to_id) {
           this.repliedToChirp$ = this.chirpsService.getChirpById(chirp.reply_to_id);
         }
         if (!this.authorProfilePicUrls.has(chirp.author_id)) {
+          // if the author's profile pic url is not stored in the map yet, store it
           this.authorProfilePicUrls.set(chirp.author_id, this.usersService.getUserProfilePic(chirp.author_id));
           this.authorProfilePicUrls.get(chirp.author_id)?.subscribe();
         }
-        if (chirp.image) {
+        if (!this.chirpImageUrls.has(chirp.id) && chirp.image) {
+          // if the chirp has an image and its url is not stored in the map yet, store it
           this.chirpImageUrls.set(chirp.id, this.chirpsService.getChirpImage(chirp.id));
           this.chirpImageUrls.get(chirp.id)?.subscribe();
         }
       })
     );
+  }
+
+  getFocusedChirpReplies () {
+    // get a list of all replies to the focused chirp, then finish populating authorProfilePicUrls & chirpImageUrls
     this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId).pipe(
       tap(replies => {
         for (let i = 0; i < replies.length; i++) {
           if (!this.authorProfilePicUrls.has(replies[i].author_id)) {
+            // if the author's profile pic url is not stored in the map yet, store it
             this.authorProfilePicUrls.set(replies[i].author_id, this.usersService.getUserProfilePic(replies[i].author_id));
             this.authorProfilePicUrls.get(replies[i].author_id)?.subscribe();
           }
-          if (replies[i].image) {
+          if (!this.chirpImageUrls.has(replies[i].id) && replies[i].image) {
+            // if the chirp has an image and its url is not stored in the map yet, store it
             this.chirpImageUrls.set(replies[i].id, this.chirpsService.getChirpImage(replies[i].id));
             this.chirpImageUrls.get(replies[i].id)?.subscribe();
           }
@@ -104,14 +122,18 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   }
 
   onNewReply () {
-    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
+    this.getChirpsStarredByConnectedUser();
+    this.getFocusedChirp();
+    this.getFocusedChirpReplies();
+  }
+
+  onDeleteReply () {
+    this.getChirpsStarredByConnectedUser();
+    this.getFocusedChirp();
+    this.getFocusedChirpReplies();
   }
 
   onDeleteChirp () {
     this.router.navigateByUrl(`app/chirps`);
-  }
-
-  onDeleteReply () {
-    this.replyChirps$ = this.chirpsService.getRepliesTo(this.chirpId);
   }
 }
