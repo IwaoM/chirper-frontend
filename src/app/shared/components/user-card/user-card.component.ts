@@ -20,7 +20,7 @@ export class UserCardComponent {
   onUserClick (event: Event) {
     if (this.viewType === "normal") {
       event.stopPropagation();
-      this.router.navigateByUrl(`users/${this.user.id}`);
+      this.router.navigateByUrl(`users/${this.user.id}?tab=0`);
     }
   }
 }

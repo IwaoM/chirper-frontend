@@ -37,8 +37,9 @@ export class PageProfileComponent implements OnInit {
   pageUserId!: number;
   connectedUser!: User;
 
-  user$!: Observable<User>;
-  profilePictureUrl$!: Observable<SafeUrl>;
+  user!: User;
+  profilePictureUrl!: SafeUrl;
+
   userChirps$!: Observable<Chirp[]>;
   userStars$!: Observable<Chirp[]>;
 
@@ -75,8 +76,12 @@ export class PageProfileComponent implements OnInit {
 
   initUserCard () {
     // get data for the user card
-    this.user$ = this.usersService.getUserById(this.pageUserId);
-    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.pageUserId);
+    this.usersService.getUserById(this.pageUserId).pipe(
+      tap(value => this.user = value)
+    ).subscribe();
+    this.usersService.getUserProfilePic(this.pageUserId).pipe(
+      tap(value => this.profilePictureUrl = value)
+    ).subscribe();
   }
 
   fillStarredMap () {

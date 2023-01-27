@@ -52,7 +52,7 @@ export class NewChirpComponent implements OnInit {
   // Connected user pp (next to the new tweet / new answer field)
   onConnectedUserClick (event: Event) {
     event.stopPropagation();
-    this.router.navigateByUrl(`users/${this.connectedUser.id}`);
+    this.router.navigateByUrl(`users/${this.connectedUser.id}?tab=0`);
   }
 
   // Remove image button

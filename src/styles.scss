@@ -134,6 +134,13 @@ a {
 
 html, body, app-root {
   min-height: 100vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    width: 0px;
+  }
 }
 
 body {

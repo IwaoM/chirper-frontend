@@ -5,9 +5,9 @@
 <div class="global__vertical-container">
   <div class="global__header-offset-block"></div>
   <app-user-card
-    *ngIf="user$ | async as user"
+    *ngIf="user"
     [user]="user"
-    [profilePicUrl]="profilePictureUrl$ | async"
+    [profilePicUrl]="profilePictureUrl"
     [viewType]="'focused'"
   ></app-user-card>
   <app-section-tabs [tabs]="profileTabs" [selectedTabIndex]="selectedProfileTabIndex" (tabClicked)="onTabClick($event)"></app-section-tabs>

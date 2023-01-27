@@ -55,13 +55,13 @@ export class ChirpComponent implements OnInit {
 
   onRepliedToAuthorClick (event: Event) {
     event.stopPropagation();
-    this.router.navigateByUrl(`users/${this.repliedToChirp?.author_id}`);
+    this.router.navigateByUrl(`users/${this.repliedToChirp?.author_id}?tab=0`);
   }
 
   // Author pp, name or handle events
   onAuthorClick (event: Event) {
     event.stopPropagation();
-    this.router.navigateByUrl(`users/${this.chirp.author_id}`);
+    this.router.navigateByUrl(`users/${this.chirp.author_id}?tab=0`);
   }
 
   // Delete button events
