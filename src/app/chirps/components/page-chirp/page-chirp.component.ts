@@ -23,6 +23,9 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   ) {
     router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
+        this.connectedUser = this.authService.getConnectedUser();
+        this.chirpId = +this.route.snapshot.params["id"];
+
         this.initPage();
       }
     });
@@ -53,9 +56,6 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   }
 
   initPage () {
-    this.connectedUser = this.authService.getConnectedUser();
-    this.chirpId = +this.route.snapshot.params["id"];
-
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
 

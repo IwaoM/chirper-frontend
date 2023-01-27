@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component } from "@angular/core";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 
@@ -8,15 +8,21 @@ import { AuthService } from "src/app/core/services/auth.service";
   templateUrl: "./page-settings.component.html",
   styleUrls: ["./page-settings.component.scss"]
 })
-export class PageSettingsComponent implements OnInit {
+export class PageSettingsComponent {
 
   constructor (
     private router: Router,
     private authService: AuthService,
     private route: ActivatedRoute,
-  ) {}
+  ) {
+    router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        this.connectedUser = this.authService.getConnectedUser();
+        this.selectedSettingsTabIndex = +this.route.snapshot.queryParams["tab"];
+      }
+    });
+  }
 
-  userId!: number;
   connectedUser!: User;
 
   settingsTabs = [
@@ -25,17 +31,9 @@ export class PageSettingsComponent implements OnInit {
     { title: "Thème" },
     { title: "Compte" },
   ];
-  selectedSettingsTabIndex = 0;
-
-  ngOnInit () {
-    this.userId = +this.route.snapshot.params["id"];
-    this.connectedUser = this.authService.getConnectedUser();
-    if (this.userId !== this.connectedUser.id) {
-      this.router.navigateByUrl(`app/users/${this.connectedUser.id}`);
-    }
-  }
+  selectedSettingsTabIndex!: number;
 
   onTabClick (index: number) {
-    this.selectedSettingsTabIndex = index;
+    this.router.navigateByUrl(`/users/${this.connectedUser.id}/settings?tab=${index}`);
   }
 }

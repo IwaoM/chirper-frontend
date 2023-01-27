@@ -23,6 +23,11 @@ export class PageProfileComponent implements OnInit {
   ) {
     router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
+        this.connectedUser = this.authService.getConnectedUser();
+        this.pageUserId = +this.route.snapshot.params["id"];
+        this.pageType = this.pageUserId === this.connectedUser.id ? "ownProfile" : "profile";
+        this.selectedProfileTabIndex = +this.route.snapshot.queryParams["tab"];
+
         this.initPage();
       }
     });
@@ -54,8 +59,6 @@ export class PageProfileComponent implements OnInit {
   }
 
   initPage () {
-    this.selectedProfileTabIndex = 0;
-
     this.connectedUser = this.authService.getConnectedUser();
     this.pageUserId = +this.route.snapshot.params["id"];
     this.pageType = this.pageUserId === this.connectedUser.id ? "ownProfile" : "profile";
@@ -154,7 +157,7 @@ export class PageProfileComponent implements OnInit {
   }
 
   onTabClick (index: number) {
-    this.selectedProfileTabIndex = index;
+    this.router.navigateByUrl(`/users/${this.pageUserId}?tab=${index}`);
   }
 
   onDeleteChirp () {

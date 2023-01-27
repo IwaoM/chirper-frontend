@@ -23,10 +23,10 @@ export class PageSearchComponent implements OnInit {
     private chirpsService: ChirpsService,
   ) {
     router.events.subscribe(val => {
-      if (!this.route.snapshot.queryParams["tab"]) {
-        this.router.navigateByUrl(`/search?tab=0`);
-      } else if (val instanceof NavigationEnd) {
+      if (val instanceof NavigationEnd) {
+        this.connectedUser = this.authService.getConnectedUser();
         this.selectedSearchTabIndex = +this.route.snapshot.queryParams["tab"];
+
         this.initPage();
       }
     });
@@ -53,8 +53,6 @@ export class PageSearchComponent implements OnInit {
   }
 
   initPage () {
-    this.connectedUser = this.authService.getConnectedUser();
-
     this.repliedToChirps = new Map();
     this.profilePicUrls = new Map();
     this.chirpImageUrls = new Map();
@@ -81,7 +79,6 @@ export class PageSearchComponent implements OnInit {
   }
 
   onTabClick (index: number) {
-    this.selectedSearchTabIndex = index;
     if (this.route.snapshot.queryParams["searchText"]) {
       this.router.navigateByUrl(`/search?tab=${index}&searchText=${this.route.snapshot.queryParams["searchText"]}`);
     } else {
