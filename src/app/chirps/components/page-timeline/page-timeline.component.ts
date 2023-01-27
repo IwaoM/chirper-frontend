@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
-import { Observable, tap } from "rxjs";
+import { Observable, take, tap } from "rxjs";
 import { Chirp } from "src/app/core/models/chirp.model";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
@@ -51,7 +51,8 @@ export class PageTimelineComponent implements OnInit {
             this.starredMap.set(list[i], true);
           }
         }
-      })
+      }),
+      take(1)
     );
     this.chirpsStarredByConnectedUser$.subscribe();
   }
@@ -72,12 +73,18 @@ export class PageTimelineComponent implements OnInit {
             }
             if (!this.authorProfilePicUrls.has(chirps[i].author_id)) {
               // if the author's profile pic url is not stored in the map yet, store it
-              this.authorProfilePicUrls.set(chirps[i].author_id, this.usersService.getUserProfilePic(chirps[i].author_id));
+              this.authorProfilePicUrls.set(
+                chirps[i].author_id,
+                this.usersService.getUserProfilePic(chirps[i].author_id).pipe(take(1))
+              );
               this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
             }
             if (!this.chirpImageUrls.has(chirps[i].id) && chirps[i].image) {
               // if the chirp has an image and its url is not stored in the map yet, store it
-              this.chirpImageUrls.set(chirps[i].id, this.chirpsService.getChirpImage(chirps[i].id));
+              this.chirpImageUrls.set(
+                chirps[i].id,
+                this.chirpsService.getChirpImage(chirps[i].id).pipe(take(1))
+              );
               this.chirpImageUrls.get(chirps[i].id)?.subscribe();
             }
           }

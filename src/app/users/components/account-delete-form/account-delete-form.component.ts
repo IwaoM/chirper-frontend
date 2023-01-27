@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { take } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -36,7 +37,7 @@ export class AccountDeleteFormComponent implements OnInit {
 
   onConfirmButton () {
     this.displayConfirm = false;
-    this.usersService.deleteUser(this.connectedUser.id).subscribe();
+    this.usersService.deleteUser(this.connectedUser.id).pipe(take(1)).subscribe();
     this.authService.logout("delete");
   }
 }

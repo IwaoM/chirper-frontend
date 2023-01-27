@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { tap } from "rxjs";
+import { take, tap } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
@@ -76,7 +76,8 @@ export class ChirpComponent implements OnInit {
   onDeleteClick (event: Event) {
     event.stopPropagation();
     this.chirpsService.deleteChirp(this.chirp.id).pipe(
-      tap(() => this.deleteChirp.emit())
+      tap(() => this.deleteChirp.emit()),
+      take(1)
     ).subscribe();
   }
 
@@ -95,7 +96,8 @@ export class ChirpComponent implements OnInit {
     this.starred = !this.starred;
     this.starred ? this.chirp.star_count++ : this.chirp.star_count--;
     this.chirpsService.starChirpById(this.chirp.id, this.connectedUser.id, this.starred).pipe(
-      tap(() => this.starChirp.emit())
+      tap(() => this.starChirp.emit()),
+      take(1)
     ).subscribe();
   }
 

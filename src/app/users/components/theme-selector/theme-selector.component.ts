@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { Observable, take, tap } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -36,7 +36,8 @@ export class ThemeSelectorComponent implements OnInit {
       tap(user => {
         this.selectedBackground = user.theme_bg;
         this.selectedAccent = user.theme_accent;
-      })
+      }),
+      take(1)
     );
     this.user$.subscribe();
   }
@@ -44,8 +45,8 @@ export class ThemeSelectorComponent implements OnInit {
   selectThemeBackground (background: number) {
     if (this.selectedBackground >= 0) {
       this.selectedBackground = background;
-      this.usersService.updateThemeBg(this.connectedUser.id, background).subscribe();
-      this.authService.refreshConnectedUser().subscribe();
+      this.usersService.updateThemeBg(this.connectedUser.id, background).pipe(take(1)).subscribe();
+      this.authService.refreshConnectedUser().pipe(take(1)).subscribe();
       this.authService.updateThemeBackground(background);
     }
   }
@@ -53,8 +54,8 @@ export class ThemeSelectorComponent implements OnInit {
   selectThemeAccent (accent: number) {
     if (this.selectedAccent >= 0) {
       this.selectedAccent = accent;
-      this.usersService.updateThemeAccent(this.connectedUser.id, accent).subscribe();
-      this.authService.refreshConnectedUser().subscribe();
+      this.usersService.updateThemeAccent(this.connectedUser.id, accent).pipe(take(1)).subscribe();
+      this.authService.refreshConnectedUser().pipe(take(1)).subscribe();
       this.authService.updateThemeAccent(accent);
     }
   }

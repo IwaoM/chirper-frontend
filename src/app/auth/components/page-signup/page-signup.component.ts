@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { take } from "rxjs";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ValidatorsService } from "src/app/core/services/validators.service";
 
@@ -23,6 +24,7 @@ export class PageSignupComponent implements OnInit {
 
   //* Init stuff
   ngOnInit (): void {
+
     this.initForm();
     this.signupFormData = new FormData();
     this.profilePicPreview = "";
@@ -69,7 +71,9 @@ export class PageSignupComponent implements OnInit {
     for (const field in this.signupForm.value) {
       this.signupFormData.append(field, this.signupForm.value[field]);
     }
-    this.authService.createAccount(this.signupFormData).subscribe({
+    this.authService.createAccount(this.signupFormData).pipe(
+      take(1)
+    ).subscribe({
       next: () => this.router.navigateByUrl("auth/login?confirm=create")
     });
 

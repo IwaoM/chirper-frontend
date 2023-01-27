@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SafeUrl } from "@angular/platform-browser";
-import { Observable, tap } from "rxjs";
+import { Observable, take, tap } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -77,12 +77,14 @@ export class ProfileUpdateFormComponent implements OnInit {
         this.profileForm.get("username")?.setValue(user.username);
         this.profileForm.get("bio")?.setValue(user.bio);
         this.profileForm.updateValueAndValidity();
-      })
+      }),
+      take(1)
     );
     this.user$.subscribe();
 
     this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.connectedUser.id).pipe(
-      tap(url => this.profilePicturePreview = url)
+      tap(url => this.profilePicturePreview = url),
+      take(1)
     );
     this.profilePictureUrl$.subscribe();
   }
@@ -92,9 +94,10 @@ export class ProfileUpdateFormComponent implements OnInit {
       this.profileFormData.append(field, this.profileForm.value[field]);
     }
     this.usersService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
-      tap(() => this.initPage())
+      tap(() => this.initPage()),
+      take(1)
     ).subscribe({ next: (result) => this.profileUpdateResult = result });
-    this.authService.refreshConnectedUser().subscribe();
+    this.authService.refreshConnectedUser().pipe(take(1)).subscribe();
 
     this.profileFormData.delete("email");
     this.profileFormData.delete("handle");

@@ -239,7 +239,6 @@ body {
   width: 100%;
   height: 0;
   justify-content: center;
-  margin-top: 24px;
   overflow: visible;
 }
 
@@ -252,6 +251,7 @@ body {
 }
 
 .global__request-success {
+  margin-top: 24px;
   font-size: 16px;
   line-height: 24px;
   color: var(--theme-text);
@@ -259,6 +259,7 @@ body {
 }
 
 .global__request-error {
+  margin-top: 24px;
   font-size: 16px;
   line-height: 24px;
   color: var(--theme-red);

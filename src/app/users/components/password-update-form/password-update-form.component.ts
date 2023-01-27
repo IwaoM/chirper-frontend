@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { tap } from "rxjs";
+import { take, tap } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { UsersService } from "src/app/core/services/users.service";
@@ -65,7 +65,8 @@ export class PasswordUpdateFormComponent implements OnInit {
       this.passwordFormData.append(field, this.passwordForm.value[field]);
     }
     this.usersService.updatePassword(this.connectedUser.id, this.passwordFormData).pipe(
-      tap(() => this.initPage())
+      tap(() => this.initPage()),
+      take(1)
     ).subscribe({
       next: (result) => {
         this.passwordUpdateResult = result;

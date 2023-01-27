@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SafeUrl } from "@angular/platform-browser";
 import { Router } from "@angular/router";
-import { Observable, tap } from "rxjs";
+import { Observable, take, tap } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { AuthService } from "src/app/core/services/auth.service";
 import { ChirpsService } from "src/app/core/services/chirps.service";
@@ -91,7 +91,8 @@ export class NewChirpComponent implements OnInit {
     this.newChirpFormData.append("replyToId", this.replyToId?.toString() || "");
 
     this.chirpsService.createChirp(this.newChirpFormData).pipe(
-      tap(() => this.newChirp.emit())
+      tap(() => this.newChirp.emit()),
+      take(1)
     ).subscribe();
 
     this.newChirpFormData.delete("chirpText");
