@@ -58,10 +58,8 @@ export class PageSearchComponent implements OnInit {
     this.repliedToChirps = new Map();
     this.profilePicUrls = new Map();
     this.chirpImageUrls = new Map();
-    this.starredMap = new Map();
 
     this.fillStarredMap();
-
     if (this.route.snapshot.queryParams["searchText"]) {
       this.searchChirps(this.route.snapshot.queryParams["searchText"]);
       this.searchUsers(this.route.snapshot.queryParams["searchText"]);
@@ -69,6 +67,7 @@ export class PageSearchComponent implements OnInit {
   }
 
   fillStarredMap () {
+    this.starredMap = new Map();
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
       tap(list => {
         for (let i = 0; i < list.length; i++) {
@@ -95,18 +94,26 @@ export class PageSearchComponent implements OnInit {
   }
 
   searchChirps (searchText: string) {
+    // get a list of all chirps that contain the searched text, then populate repliedToChirps, profilePicUrls & chirpImageUrls
     this.searchChirps$ = this.chirpsService.searchChirps(searchText).pipe(
       tap(chirps => {
         for (let i = 0; i < chirps.length; i++) {
           if (chirps[i].reply_to_id && !this.repliedToChirps.has(chirps[i].id)) {
+            // if the chirp is a reply, add an entry to the repliedToChirps map
             this.repliedToChirps.set(chirps[i].id, this.chirpsService.getChirpById(chirps[i].reply_to_id || 0));
             this.repliedToChirps.get(chirps[i].id)?.subscribe();
+          } else if (!chirps[i].reply_to_id && this.repliedToChirps.has(chirps[i].id)) {
+            // if the map already has an entry but the chirp is not a reply
+            // (ie. it used to be one but is not anymore because the original chirp was deleted), delete the entry
+            this.repliedToChirps.delete(chirps[i].id);
           }
           if (!this.profilePicUrls.has(chirps[i].author_id)) {
+            // if the author's profile pic url is not stored in the map yet, store it
             this.profilePicUrls.set(chirps[i].author_id, this.usersService.getUserProfilePic(chirps[i].author_id));
             this.profilePicUrls.get(chirps[i].author_id)?.subscribe();
           }
-          if (chirps[i].image && !this.chirpImageUrls.has(chirps[i].id)) {
+          if (!this.chirpImageUrls.has(chirps[i].id) && chirps[i].image) {
+            // if the chirp has an image and its url is not stored in the map yet, store it
             this.chirpImageUrls.set(chirps[i].id, this.chirpsService.getChirpImage(chirps[i].id));
             this.chirpImageUrls.get(chirps[i].id)?.subscribe();
           }
@@ -116,10 +123,12 @@ export class PageSearchComponent implements OnInit {
   }
 
   searchUsers (searchText: string) {
+    // get a list of all users whose username or handle contains the searched text, then populate profilePicUrls
     this.searchUsers$ = this.usersService.searchUsers(searchText).pipe(
       tap(users => {
         for (let i = 0; i < users.length; i++) {
           if (!this.profilePicUrls.has(users[i].id)) {
+            // if the user's profile pic url is not stored in the map yet, store it
             this.profilePicUrls.set(users[i].id, this.usersService.getUserProfilePic(users[i].id));
             this.profilePicUrls.get(users[i].id)?.subscribe();
           }
@@ -129,11 +138,19 @@ export class PageSearchComponent implements OnInit {
   }
 
   onDeleteChirp () {
-    this.initPage();
+    this.fillStarredMap();
+    this.searchChirps(this.route.snapshot.queryParams["searchText"]); // update the search results even if query is unchanged
+    if (this.route.snapshot.queryParams["searchText"]) {
+      this.searchUsers(this.route.snapshot.queryParams["searchText"]);
+    }
   }
 
   onStarChirp () {
-    this.initPage();
+    this.fillStarredMap();
+    if (this.route.snapshot.queryParams["searchText"]) {
+      this.searchChirps(this.route.snapshot.queryParams["searchText"]);
+      this.searchUsers(this.route.snapshot.queryParams["searchText"]);
+    }
   }
 
 }

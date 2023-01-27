@@ -59,12 +59,12 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
 
-    this.getChirpsStarredByConnectedUser();
+    this.fillStarredMap();
     this.getFocusedChirp();
     this.getFocusedChirpReplies();
   }
 
-  getChirpsStarredByConnectedUser () {
+  fillStarredMap () {
     // reset the map & refill it
     this.starredMap = new Map();
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
@@ -122,18 +122,18 @@ export class PageChirpComponent implements OnInit, AfterContentInit {
   }
 
   onNewReply () {
-    this.getChirpsStarredByConnectedUser();
+    this.fillStarredMap();
     this.getFocusedChirp();
     this.getFocusedChirpReplies();
   }
 
   onDeleteReply () {
-    this.getChirpsStarredByConnectedUser();
+    this.fillStarredMap();
     this.getFocusedChirp();
     this.getFocusedChirpReplies();
   }
 
   onDeleteChirp () {
-    this.router.navigateByUrl(`app/chirps`);
+    this.router.navigateByUrl(`app/timeline`);
   }
 }

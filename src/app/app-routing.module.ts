@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: "users", loadChildren: () => import("./users/users.module").then(m => m.UsersModule) },
   { path: "search", loadChildren: () => import("./search/search.module").then(m => m.SearchModule) },
   { path: "auth", loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule) },
-  // { path: "**", redirectTo: "app/timeline" }
+  { path: "**", redirectTo: "app/timeline" }
 ];
 
 @NgModule({

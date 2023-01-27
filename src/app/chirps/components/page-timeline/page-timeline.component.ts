@@ -37,11 +37,11 @@ export class PageTimelineComponent implements OnInit {
     this.authorProfilePicUrls = new Map();
     this.chirpImageUrls = new Map();
 
-    this.getChirpsStarredByConnectedUser();
+    this.fillStarredMap();
     this.getChirpList();
   }
 
-  getChirpsStarredByConnectedUser () {
+  fillStarredMap () {
     // reset the map & refill it
     this.starredMap = new Map();
     this.chirpsStarredByConnectedUser$ = this.usersService.getUserStarIds(this.connectedUser.id).pipe(
@@ -62,10 +62,10 @@ export class PageTimelineComponent implements OnInit {
       tap(
         chirps => {
           for (let i = 0; i < chirps.length; i++) {
-            if (chirps[i].reply_to_id) {
+            if (chirps[i].reply_to_id && !this.repliedToChirps.has(chirps[i].id)) {
               // if the chirp is a reply, add an entry to the repliedToChirps map
               this.repliedToChirps.set(chirps[i].id, chirps.find(elem => elem.id === chirps[i].reply_to_id) || null);
-            } else if (this.repliedToChirps.has(chirps[i].id)) {
+            } else if (!chirps[i].reply_to_id && this.repliedToChirps.has(chirps[i].id)) {
               // if the map already has an entry but the chirp is not a reply
               // (ie. it used to be one but is not anymore because the original chirp was deleted), delete the entry
               this.repliedToChirps.delete(chirps[i].id);
@@ -87,12 +87,12 @@ export class PageTimelineComponent implements OnInit {
   }
 
   onNewChirp () {
-    this.getChirpsStarredByConnectedUser();
+    this.fillStarredMap();
     this.getChirpList();
   }
 
   onDeleteChirp () {
-    this.getChirpsStarredByConnectedUser();
+    this.fillStarredMap();
     this.getChirpList();
   }
 }
