@@ -38,28 +38,22 @@ export class AuthService {
 
   //* API requests
   getEmailUsed (email: string, userId: number) {
-    console.log(`calling getEmailUsed(${email}, ${userId})`);
     return this.http.get<{ email_taken: number }[]>(`https://localhost:3000/api/auth/check-email?email=${email}&userId=${userId}`).pipe(
       map(result => result[0].email_taken)
     );
   }
 
   getHandleUsed (handle: string, userId: number): Observable<number> {
-    console.log(`calling getHandleUsed(${handle}, ${userId})`);
     return this.http.get<{ handle_taken: number }[]>(`https://localhost:3000/api/auth/check-handle?handle=${handle}&userId=${userId}`).pipe(
       map(result => result[0].handle_taken)
     );
   }
 
   createAccount (data: FormData): Observable<number> {
-    console.log(`calling createAccount() with the following FormData:`);
-    console.log(data);
     return this.http.post<number>(`https://localhost:3000/api/auth/signup`, data);
   }
 
   login (data: FormData): Observable<{ user: User, token: string }> {
-    console.log(`calling login() with the following FormData:`);
-    console.log(data);
     return this.http.post<{ user: User, token: string }>(`https://localhost:3000/api/auth/login`, data).pipe(
       tap(result => {
         this.token = result.token;
@@ -71,7 +65,6 @@ export class AuthService {
   }
 
   refreshConnectedUser (): Observable<User> {
-    console.log(`calling refreshConnectedUser()`);
     return this.http.get<User>(`https://localhost:3000/api/users/${this.connectedUser.id}`).pipe(
       tap(user => this.connectedUser = user)
     );
