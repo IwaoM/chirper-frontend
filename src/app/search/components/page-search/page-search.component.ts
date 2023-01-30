@@ -117,7 +117,7 @@ export class PageSearchComponent implements OnDestroy {
             // if the author's profile pic url is not stored in the map yet, store it
             this.profilePicUrls.set(
               chirps[i].author_id,
-              this.usersService.getUserProfilePic(chirps[i].author_id).pipe(take(1))
+              this.usersService.getUserProfilePic(chirps[i].author_id, chirps[i].pic_updated).pipe(take(1))
             );
             this.profilePicUrls.get(chirps[i].author_id)?.subscribe();
           }
@@ -143,7 +143,7 @@ export class PageSearchComponent implements OnDestroy {
             // if the user's profile pic url is not stored in the map yet, store it
             this.profilePicUrls.set(
               users[i].id,
-              this.usersService.getUserProfilePic(users[i].id).pipe(take(1))
+              this.usersService.getUserProfilePic(users[i].id, users[i].pic_updated).pipe(take(1))
             );
             this.profilePicUrls.get(users[i].id)?.subscribe();
           }

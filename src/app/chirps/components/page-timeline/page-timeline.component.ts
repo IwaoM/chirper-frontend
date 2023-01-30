@@ -75,7 +75,7 @@ export class PageTimelineComponent implements OnInit {
               // if the author's profile pic url is not stored in the map yet, store it
               this.authorProfilePicUrls.set(
                 chirps[i].author_id,
-                this.usersService.getUserProfilePic(chirps[i].author_id).pipe(take(1))
+                this.usersService.getUserProfilePic(chirps[i].author_id, chirps[i].pic_updated).pipe(take(1))
               );
               this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
             }

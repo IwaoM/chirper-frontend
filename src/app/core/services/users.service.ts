@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
-import { map, Observable } from "rxjs";
+import { map, Observable, of, tap } from "rxjs";
 import { Chirp } from "../models/chirp.model";
 import { User } from "../models/user.model";
 
@@ -10,10 +10,14 @@ import { User } from "../models/user.model";
 })
 export class UsersService {
 
+  userProfilePics!: Map<number, { cachedTime: Date, url: SafeUrl }>;
+
   constructor (
     private http: HttpClient,
     private sanitizer: DomSanitizer
-  ) {}
+  ) {
+    this.userProfilePics = new Map<number, { cachedTime: Date, url: SafeUrl }>;
+  }
 
   // GET requests
   getUserById (userId: number): Observable<User> {
@@ -21,10 +25,18 @@ export class UsersService {
     return this.http.get<User>(`https://localhost:3000/api/users/${userId}`);
   }
 
-  getUserProfilePic (userId: number): Observable<SafeUrl> {
+  getUserProfilePic (userId: number, picUpdated: Date): Observable<SafeUrl> {
+    if (typeof picUpdated === "string") {
+      picUpdated = new Date(picUpdated);
+    }
+    const cachedUrl = this.userProfilePics.get(userId);
+    if (cachedUrl && picUpdated < cachedUrl.cachedTime) {
+      return of(cachedUrl.url);
+    }
     console.log(`calling getUserProfilePic(${userId})`);
     return this.http.get(`https://localhost:3000/api/users/${userId}/picture`, { responseType: "blob" }).pipe(
-      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
+      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))),
+      tap(picUrl => this.userProfilePics.set(userId, { cachedTime: new Date(), url: picUrl }))
     );
   }
 

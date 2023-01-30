@@ -35,7 +35,7 @@ export class NewChirpComponent implements OnInit {
 
   ngOnInit () {
     this.connectedUser = this.authService.getConnectedUser();
-    this.pictureUrl$ = this.usersService.getUserProfilePic(this.connectedUser.id);
+    this.pictureUrl$ = this.usersService.getUserProfilePic(this.connectedUser.id, this.connectedUser.pic_updated);
 
     this.newChirpForm = this.formBuilder.group({
       chirpText: new FormControl("", [

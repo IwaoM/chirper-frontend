@@ -82,7 +82,7 @@ export class ProfileUpdateFormComponent implements OnInit {
     );
     this.user$.subscribe();
 
-    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.connectedUser.id).pipe(
+    this.profilePictureUrl$ = this.usersService.getUserProfilePic(this.connectedUser.id, this.connectedUser.pic_updated).pipe(
       tap(url => this.profilePicturePreview = url),
       take(1)
     );
@@ -92,6 +92,9 @@ export class ProfileUpdateFormComponent implements OnInit {
   onUpdateButton () {
     for (const field in this.profileForm.value) {
       this.profileFormData.append(field, this.profileForm.value[field]);
+    }
+    if (!this.profileFormData.has("keepOldProfilePic")) {
+      this.profileFormData.append("picUpdated", new Date().toISOString().split(".")[0]);
     }
     this.usersService.updateProfile(this.connectedUser.id, this.profileFormData).pipe(
       tap(() => this.initPage()),
@@ -103,6 +106,7 @@ export class ProfileUpdateFormComponent implements OnInit {
     this.profileFormData.delete("handle");
     this.profileFormData.delete("username");
     this.profileFormData.delete("bio");
+    this.profileFormData.delete("picUpdated");
     this.profileFormData.delete("keepOldProfilePic");
   }
 

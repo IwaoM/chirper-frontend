@@ -7,6 +7,7 @@ export class Chirp {
   reply_to_id?: number;
   username!: string;
   handle!: string;
+  pic_updated!: Date;
   star_count!: number;
   reply_count!: number;
 }

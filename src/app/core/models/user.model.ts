@@ -10,6 +10,7 @@ export class User {
       this.bio = "";
       this.theme_bg = 0;
       this.theme_accent = 0;
+      this.pic_updated = new Date(0);
     }
   }
 
@@ -20,4 +21,5 @@ export class User {
   bio!: string;
   theme_bg!: number;
   theme_accent!: number;
+  pic_updated!: Date;
 }

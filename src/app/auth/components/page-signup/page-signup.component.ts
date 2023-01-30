@@ -71,6 +71,7 @@ export class PageSignupComponent implements OnInit {
     for (const field in this.signupForm.value) {
       this.signupFormData.append(field, this.signupForm.value[field]);
     }
+    this.signupFormData.append("picUpdated", new Date().toISOString().split(".")[0]);
     this.authService.createAccount(this.signupFormData).pipe(
       take(1)
     ).subscribe({

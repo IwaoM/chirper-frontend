@@ -97,7 +97,7 @@ export class PageChirpComponent implements OnDestroy, AfterContentInit {
           // if the author's profile pic url is not stored in the map yet, store it
           this.authorProfilePicUrls.set(
             chirp.author_id,
-            this.usersService.getUserProfilePic(chirp.author_id).pipe(take(1))
+            this.usersService.getUserProfilePic(chirp.author_id, chirp.pic_updated).pipe(take(1))
           );
           this.authorProfilePicUrls.get(chirp.author_id)?.subscribe();
         }
@@ -122,7 +122,7 @@ export class PageChirpComponent implements OnDestroy, AfterContentInit {
             // if the author's profile pic url is not stored in the map yet, store it
             this.authorProfilePicUrls.set(
               replies[i].author_id,
-              this.usersService.getUserProfilePic(replies[i].author_id).pipe(take(1))
+              this.usersService.getUserProfilePic(replies[i].author_id, replies[i].pic_updated).pipe(take(1))
             );
             this.authorProfilePicUrls.get(replies[i].author_id)?.subscribe();
           }

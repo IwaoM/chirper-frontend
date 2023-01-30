@@ -82,11 +82,13 @@ export class PageProfileComponent implements OnDestroy {
   initUserCard () {
     // get data for the user card
     this.usersService.getUserById(this.pageUserId).pipe(
-      tap(value => this.user = value),
-      take(1)
-    ).subscribe();
-    this.usersService.getUserProfilePic(this.pageUserId).pipe(
-      tap(value => this.profilePictureUrl = value),
+      tap(value => {
+        this.user = value;
+        this.usersService.getUserProfilePic(value.id, value.pic_updated).pipe(
+          tap(value => this.profilePictureUrl = value),
+          take(1)
+        ).subscribe();
+      }),
       take(1)
     ).subscribe();
   }
@@ -129,7 +131,7 @@ export class PageProfileComponent implements OnDestroy {
               // if the author's profile pic url is not stored in the map yet, store it
               this.authorProfilePicUrls.set(
                 chirps[i].author_id,
-                this.usersService.getUserProfilePic(chirps[i].author_id).pipe(take(1))
+                this.usersService.getUserProfilePic(chirps[i].author_id, chirps[i].pic_updated).pipe(take(1))
               );
               this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
             }
@@ -169,7 +171,7 @@ export class PageProfileComponent implements OnDestroy {
               // if the author's profile pic url is not stored in the map yet, store it
               this.authorProfilePicUrls.set(
                 chirps[i].author_id,
-                this.usersService.getUserProfilePic(chirps[i].author_id).pipe(take(1))
+                this.usersService.getUserProfilePic(chirps[i].author_id, chirps[i].pic_updated).pipe(take(1))
               );
               this.authorProfilePicUrls.get(chirps[i].author_id)?.subscribe();
             }

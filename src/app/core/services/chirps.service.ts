@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { SafeUrl } from "@angular/platform-browser";
-import { map, Observable } from "rxjs";
+import { map, Observable, of, tap } from "rxjs";
 import { Chirp } from "../models/chirp.model";
 import { DomSanitizer } from "@angular/platform-browser";
 
@@ -10,11 +10,14 @@ import { DomSanitizer } from "@angular/platform-browser";
 })
 export class ChirpsService {
   ppFolder = "../../assets/userPictures";
+  chirpImages!: Map<number, SafeUrl>;
 
   constructor (
     private http: HttpClient,
     private sanitizer: DomSanitizer
-  ) {}
+  ) {
+    this.chirpImages = new Map<number, SafeUrl>;
+  }
 
   // GET requests
   getAllChirps (): Observable<Chirp[]> {
@@ -33,9 +36,14 @@ export class ChirpsService {
   }
 
   getChirpImage (chirpId: number): Observable<SafeUrl> {
+    const cachedUrl = this.chirpImages.get(chirpId);
+    if (cachedUrl) {
+      return of(cachedUrl);
+    }
     console.log(`calling getChirpImage(${chirpId})`);
     return this.http.get(`https://localhost:3000/api/chirps/${chirpId}/image`, { responseType: "blob" }).pipe(
-      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
+      map(blob => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))),
+      tap(imageUrl => this.chirpImages.set(chirpId, imageUrl))
     );
   }
 
