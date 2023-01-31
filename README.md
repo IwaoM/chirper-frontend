@@ -4,9 +4,9 @@
 
 A (very) simple Twitter-like social media app I built to practice fullstack development.
 
-- **Both the front-end (this repo) and the [backend](https://github.com/IwaoM/chirper-backend) are needed to run the app.**
-- Everything can run and is stored locally (on the back-end's side).
-- The entire app is in French / l'intégralité de l'application est en français.
+- **Both the front-end (this repo) and the [back-end](https://github.com/IwaoM/chirper-backend) are needed to run the app.**
+- Everything can run and data is stored locally (on the back-end's side).
+- The entire app's interface is in French / l'intégralité de l'application a une interface en français.
 
 ## Front-end setup
 
