@@ -8,6 +8,10 @@ A (very) simple Twitter-like social media app I built to practice fullstack deve
 - Everything can run and data is stored locally (on the back-end's side).
 - The entire app's interface is in French / l'intégralité de l'application a une interface en français.
 
+## Requirements
+
+- Node.JS 18.12.1 or newer is required - prior versions may work but were not tested.
+
 ## Front-end setup
 
 - Clone the repository.
